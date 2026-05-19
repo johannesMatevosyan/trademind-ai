@@ -2,7 +2,12 @@
   "name": "@org/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "web": "npx nx serve @org/web",
+    "api": "npx nx serve @org/api",
+    "web:dev": "npm run web",
+    "api:dev": "npm run api"
+  },
   "private": true,
   "dependencies": {
     "@nestjs/common": "^11.0.0",

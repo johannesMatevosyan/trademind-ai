@@ -1,0 +1,17 @@
+{
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "name": "@org/web",
+  "projectType": "application",
+  "root": "web",
+  "sourceRoot": "web/src",
+  "targets": {
+    "serve": {
+      "continuous": true,
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "web",
+        "command": "next dev -p 3001"
+      }
+    }
+  }
+}

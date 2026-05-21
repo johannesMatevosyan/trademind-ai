@@ -16,12 +16,12 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@trademind-ai/shared-ui": ["../libs/shared-ui/src/index.ts"]
     },
     "types": ["jest", "node"],
-    "outDir": "dist",
-    "rootDir": "src",
     "tsBuildInfoFile": "dist/tsconfig.tsbuildinfo"
   },
   "include": [

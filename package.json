@@ -6,7 +6,10 @@
     "web": "npx nx serve @org/web",
     "api": "npx nx serve @org/api",
     "web:dev": "npm run web",
-    "api:dev": "npm run api"
+    "api:dev": "npm run api",
+    "web:build": "npx nx build @org/web",
+    "api:build": "npx nx build @org/api",
+    "build": "npx nx run-many --target=build --projects=@org/api,@org/web"
   },
   "private": true,
   "dependencies": {

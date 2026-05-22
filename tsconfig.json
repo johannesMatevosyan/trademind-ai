@@ -10,19 +10,19 @@
       "path": "./libs/shared/test-utils"
     },
     {
-      "path": "./web-e2e"
-    },
-    {
-      "path": "./web"
-    },
-    {
-      "path": "./api-e2e"
-    },
-    {
-      "path": "./api"
-    },
-    {
       "path": "./libs/shared-ui"
+    },
+    {
+      "path": "./apps/api"
+    },
+    {
+      "path": "./apps/api-e2e"
+    },
+    {
+      "path": "./apps/web-e2e"
+    },
+    {
+      "path": "./apps/web"
     }
   ]
 }

@@ -113,12 +113,8 @@
   },
   "workspaces": [
     "apps/*",
-    "libs/api/products",
     "libs/shared/*",
     "libs/shop/*",
-    "web",
-    "api",
-    "api-e2e",
     "libs/*"
   ]
 }

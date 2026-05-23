@@ -52,6 +52,8 @@ test-output
 .nx/polygraph
 .nx/self-healing
 
+.env
+
 # Next.js
 .next
 out

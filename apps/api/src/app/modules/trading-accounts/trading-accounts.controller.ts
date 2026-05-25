@@ -9,8 +9,8 @@ import {
     UseGuards,
 } from '@nestjs/common';
 import { CurrentUser } from '../../common/decorators/current-user.decorator';
+import { AuthUser } from '../../common/types/auth-user.type';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { AuthUser } from '../auth/types/auth-user.type';
 import { CreateTradingAccountDto } from './dto/create-trading-account.dto';
 import { UpdateTradingAccountDto } from './dto/update-trading-account.dto';
 import { TradingAccountsService } from './trading-accounts.service';

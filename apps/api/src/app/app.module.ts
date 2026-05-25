@@ -3,11 +3,13 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrismaModule } from './infrastructure/prisma/prisma.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { TradingAccountsModule } from './modules/trading-accounts/trading-accounts.module';
 
 @Module({
   imports: [
     PrismaModule,
-    AuthModule
+    AuthModule,
+    TradingAccountsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

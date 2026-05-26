@@ -31,7 +31,6 @@ enum AssetClass {
   INDEX
 }
 
-
 model User {
   id           String   @id @default(uuid())
   email        String   @unique

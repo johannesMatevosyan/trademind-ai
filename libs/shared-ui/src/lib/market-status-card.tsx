@@ -20,7 +20,7 @@ const tickers: MarketTicker[] = [
 
 export function MarketStatusCard() {
   return (
-    <div className="rounded-2xl border border-slate-800 bg-slate-900 p-5">
+    <div className="rounded-2xl border border-slate-800 bg-card-bg p-5">
       <div className="mb-4 flex items-center justify-between">
         <div>
           <h3 className="text-lg font-semibold text-white">

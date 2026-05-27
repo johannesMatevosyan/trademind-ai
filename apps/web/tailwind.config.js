@@ -17,7 +17,12 @@ module.exports = {
     '../../libs/shared-ui/src/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'app-bg': '#DAE4EC',
+        'card-bg': '#E0E9EB',
+      },
+    },
   },
   plugins: [],
 };

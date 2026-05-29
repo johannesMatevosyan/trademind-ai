@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Skeleton } from './skeleton/skeleton';
 
 type MarketTicker = {
   symbol: string;
@@ -22,7 +23,7 @@ const tickers: MarketTicker[] = [
 ];
 
 export function MarketStatusCard() {
-
+  const [isLoading, setIsLoading] = useState(true);
   const [updatedAt, setUpdatedAt] = useState(new Date());
 
   useEffect(() => {
@@ -32,6 +33,25 @@ export function MarketStatusCard() {
 
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="skeleton-wrapper rounded-2xl border border-slate-800 bg-card-bg p-5">
+        <Skeleton className="mb-4 h-6 w-40" />
+        <Skeleton className="mb-3 h-12 w-full" />
+        <Skeleton className="mb-3 h-12 w-full" />
+        <Skeleton className="h-12 w-full" />
+      </div>
+    );
+  }
 
   return (
     <div className="rounded-2xl bg-card-bg p-5">

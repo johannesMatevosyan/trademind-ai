@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 
 type MarketTicker = {
   symbol: string;
@@ -19,6 +22,17 @@ const tickers: MarketTicker[] = [
 ];
 
 export function MarketStatusCard() {
+
+  const [updatedAt, setUpdatedAt] = useState(new Date());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setUpdatedAt(new Date());
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="rounded-2xl bg-card-bg p-5">
       <div className="mb-4 flex items-center justify-between">
@@ -28,13 +42,12 @@ export function MarketStatusCard() {
           </h3>
 
           <p className="text-sm text-slate-400">
-            Updated 5s ago
+            Updated {updatedAt.toLocaleTimeString()}s ago
           </p>
         </div>
 
         <div className="flex items-center gap-2 text-emerald-400 text-sm">
           <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-
           Live
         </div>
       </div>

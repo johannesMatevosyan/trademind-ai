@@ -1,13 +1,8 @@
 "use client";
 
+import { MarketTicker } from '@org/shared-types';
 import { useEffect, useState } from "react";
 import { Skeleton } from './skeleton/skeleton';
-
-type MarketTicker = {
-  symbol: string;
-  price: number;
-  direction: 'up' | 'down';
-};
 
 const tickers: MarketTicker[] = [
   {

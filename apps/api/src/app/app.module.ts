@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrismaModule } from './infrastructure/prisma/prisma.module';
+import { AnalyticsModule } from './modules/analytics/analytics.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { TradesModule } from './modules/trades/trades.module';
 import { TradingAccountsModule } from './modules/trading-accounts/trading-accounts.module';
@@ -11,7 +12,8 @@ import { TradingAccountsModule } from './modules/trading-accounts/trading-accoun
     PrismaModule,
     AuthModule,
     TradingAccountsModule,
-    TradesModule
+    TradesModule,
+    AnalyticsModule
   ],
   controllers: [AppController],
   providers: [AppService],

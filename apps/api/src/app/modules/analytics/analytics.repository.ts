@@ -22,9 +22,12 @@ export class AnalyticsRepository {
     findTradesByUser(userId: string, query: AnalyticsQueryDto) {
         return this.prisma.trade.findMany({
             where: this.buildTradeWhere(userId, query),
-            orderBy: {
-                openedAt: 'asc',
-            },
+                include: {
+                    symbol: true,
+                },
+                orderBy: {
+                    openedAt: 'asc',
+                },
         });
     }
 

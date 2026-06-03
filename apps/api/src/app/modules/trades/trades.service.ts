@@ -14,6 +14,15 @@ export class TradesService {
   }
 
   async create(userId: string, dto: CreateTradeDto) {
+
+    const pnl = this.calculatePnl({
+        side: dto.side,
+        entryPrice: Number(dto.entryPrice),
+        exitPrice: dto.exitPrice ? Number(dto.exitPrice) : null,
+        quantity: Number(dto.quantity),
+        status: dto.status ?? 'OPEN',
+    });
+
     const tradingAccount =
       await this.tradesRepository.findTradingAccountByIdAndUserId(
         dto.tradingAccountId,
@@ -35,6 +44,7 @@ export class TradesService {
         connect: { code: dto.symbol },
       },
       side: dto.side,
+      pnl: pnl,
       status: dto.status ?? 'OPEN',
       entryPrice: dto.entryPrice,
       exitPrice: dto.exitPrice,
@@ -83,7 +93,7 @@ export class TradesService {
           }
         : undefined,
       side: dto.side,
-      status: dto.status,
+      status: dto.status ?? undefined,
       entryPrice: dto.entryPrice,
       exitPrice: dto.exitPrice,
       quantity: dto.quantity,
@@ -106,5 +116,27 @@ export class TradesService {
     }
 
     return this.tradesRepository.delete(id);
+  }
+
+  private calculatePnl(params: {
+    side: 'BUY' | 'SELL';
+    entryPrice: number;
+    exitPrice?: number | null;
+    quantity: number;
+    status: string;
+  }): number | null {
+    if (
+      params.status !== 'CLOSED' ||
+      params.exitPrice === null ||
+      params.exitPrice === undefined
+    ) {
+      return null;
+    }
+
+    if (params.side === 'BUY') {
+      return (params.exitPrice - params.entryPrice) * params.quantity;
+    }
+
+    return (params.entryPrice - params.exitPrice) * params.quantity;
   }
 }

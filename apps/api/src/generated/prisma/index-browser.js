@@ -159,6 +159,7 @@ exports.Prisma.TradeScalarFieldEnum = {
   quantity: 'quantity',
   entryPrice: 'entryPrice',
   exitPrice: 'exitPrice',
+  pnl: 'pnl',
   openedAt: 'openedAt',
   closedAt: 'closedAt',
   notes: 'notes',

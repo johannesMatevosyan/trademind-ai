@@ -86,17 +86,23 @@ model Symbol {
 model Trade {
   id String @id @default(uuid())
 
-  side       TradeSide
-  status     TradeStatus @default(OPEN)
-  quantity   Decimal     @db.Decimal(18, 8)
-  entryPrice Decimal     @db.Decimal(18, 8)
-  exitPrice  Decimal?    @db.Decimal(18, 8)
-  openedAt   DateTime
-  closedAt   DateTime?
-  notes      String?
+  side   TradeSide
+  status TradeStatus @default(OPEN)
+
+  quantity   Decimal @db.Decimal(18, 8)
+  entryPrice Decimal @db.Decimal(18, 8)
+  exitPrice  Decimal? @db.Decimal(18, 8)
+
+  /// Realized profit/loss
+  pnl Decimal? @db.Decimal(18, 8)
+
+  openedAt DateTime
+  closedAt DateTime?
+
+  notes String?
 
   userId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   tradingAccountId String
   tradingAccount   TradingAccount @relation(fields: [tradingAccountId], references: [id], onDelete: Cascade)
@@ -110,10 +116,20 @@ model Trade {
   updatedAt DateTime @updatedAt
 
   @@index([userId])
+
   @@index([tradingAccountId])
   @@index([symbolId])
   @@index([status])
+
   @@index([openedAt])
+  @@index([closedAt])
+
+  // Analytics-oriented indexes
+  @@index([userId, tradingAccountId])
+  @@index([userId, symbolId])
+  @@index([userId, status])
+  @@index([userId, openedAt])
+  @@index([userId, closedAt])
 }
 
 model JournalEntry {

@@ -1,8 +1,14 @@
-export function NotificationBell() {
+type NotificationBellProps = {
+  hasUnread?: boolean;
+};
+
+export function NotificationBell({
+  hasUnread = true,
+}: NotificationBellProps) {
   return (
     <button
       type="button"
-      className="relative flex h-10 w-10 items-center justify-center rounded-xl border border-slate-800 bg-slate-900 text-slate-300 transition hover:bg-slate-800"
+      className="relative flex h-10 w-10 items-center justify-center rounded-xl border border-slate-800/60 bg-slate-800/60 text-slate-300 transition hover:bg-slate-800"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -19,7 +25,9 @@ export function NotificationBell() {
         />
       </svg>
 
-      <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-red-500" />
+      {hasUnread && (
+        <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-red-500" />
+      )}
     </button>
   );
 }

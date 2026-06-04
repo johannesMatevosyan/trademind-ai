@@ -1,6 +1,7 @@
-import { MarketStatusCard } from '@org/shared-ui';
+import { MarketStatusCard, NotificationBell } from '@org/shared-ui';
 import { TopNavigation } from './components/top-navigation';
 import { TopbarClock } from './components/topbar-clock';
+
 
 export default function Index() {
   /*
@@ -13,6 +14,7 @@ export default function Index() {
       <div className="mx-auto max-w-4xl flex flex-col gap-8">
         <TopNavigation />
         <TopbarClock />
+        <NotificationBell />
         <MarketStatusCard />
 
       </div>

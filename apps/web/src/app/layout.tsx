@@ -1,4 +1,5 @@
 import './global.css';
+import { QueryProvider } from './providers/query-provider';
 
 export const metadata = {
   title: 'Welcome to web',
@@ -12,7 +13,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body suppressHydrationWarning>{children}</body>
+      <body suppressHydrationWarning>
+        <QueryProvider>
+          {children}
+        </QueryProvider>
+      </body>
     </html>
   );
 }

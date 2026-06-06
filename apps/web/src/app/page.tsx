@@ -1,9 +1,13 @@
+'use client';
+
 import { MarketStatusCard, NotificationBell } from '@org/shared-ui';
+import { AnalyticsOverview } from './components/analytics-overview';
 import { TopNavigation } from './components/top-navigation';
 import { TopbarClock } from './components/topbar-clock';
 
 
 export default function Index() {
+  const accessToken = '';
 
   const notifications = [
     {
@@ -19,7 +23,9 @@ export default function Index() {
         <TopbarClock />
         <NotificationBell  hasUnread={notifications.length > 0} />
         <MarketStatusCard />
-
+        <AnalyticsOverview
+          accessToken={accessToken}
+        />
       </div>
     </main>
   );

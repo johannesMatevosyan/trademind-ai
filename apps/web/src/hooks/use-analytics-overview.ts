@@ -3,11 +3,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { getAnalyticsOverview } from '../app/api/analytics.api';
 
-export function useAnalyticsOverview(
-  accessToken: string
-) {
+export function useAnalyticsOverview() {
   return useQuery({
     queryKey: ['analytics', 'overview'],
-    queryFn: () => getAnalyticsOverview(accessToken),
+    queryFn: getAnalyticsOverview,
+    retry: false,
   });
 }

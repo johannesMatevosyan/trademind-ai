@@ -7,7 +7,6 @@ import { TopbarClock } from './components/topbar-clock';
 
 
 export default function Index() {
-  const accessToken = '';
 
   const notifications = [
     {
@@ -23,9 +22,7 @@ export default function Index() {
         <TopbarClock />
         <NotificationBell  hasUnread={notifications.length > 0} />
         <MarketStatusCard />
-        <AnalyticsOverview
-          accessToken={accessToken}
-        />
+        <AnalyticsOverview />
       </div>
     </main>
   );

@@ -1,22 +1,15 @@
+import { apiFetch } from '@/shared/api/api-client';
 import { AnalyticsOverview } from '../../types/analytics.types';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+export async function getAnalyticsOverview(): Promise<AnalyticsOverview> {
 
-export async function getAnalyticsOverview(
-  accessToken: string
-): Promise<AnalyticsOverview> {
-  const response = await fetch(
-    `${API_URL}/analytics/overview`,
-    {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+    const response = await apiFetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/analytics/overview`
+    );
+
+    if (!response.ok) {
+        throw new Error('Failed to fetch analytics overview');
     }
-  );
 
-  if (!response.ok) {
-    throw new Error('Failed to fetch analytics overview');
-  }
-
-  return response.json();
+    return response.json();
 }

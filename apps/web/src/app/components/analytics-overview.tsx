@@ -3,18 +3,16 @@
 import { useAnalyticsOverview } from '../../hooks/use-analytics-overview';
 import { AnalyticsOverviewCard } from './analytics-overview-card';
 
-interface AnalyticsOverviewProps {
-  accessToken: string;
-}
-
-export function AnalyticsOverview({
-  accessToken,
-}: AnalyticsOverviewProps) {
-  const { data, isLoading } =
-    useAnalyticsOverview(accessToken);
+export function AnalyticsOverview() {
+  const { data, isLoading, isError } =
+    useAnalyticsOverview();
 
   if (isLoading) {
     return <div>Loading analytics...</div>;
+  }
+
+  if (isError) {
+    return <div>Failed to load analytics</div>;
   }
 
   if (!data) {

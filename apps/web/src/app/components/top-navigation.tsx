@@ -1,5 +1,6 @@
 'use client';
 
+import { LogoutButton } from '@/features/auth/components/logout-button';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -31,6 +32,7 @@ export function TopNavigation() {
           </Link>
         );
       })}
+      <LogoutButton />
     </nav>
   );
 }

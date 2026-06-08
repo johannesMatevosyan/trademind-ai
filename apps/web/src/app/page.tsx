@@ -1,5 +1,6 @@
 'use client';
 
+import { useAuthRedirect } from '@/features/auth/hooks/use-auth-redirect';
 import { MarketStatusCard, NotificationBell } from '@org/shared-ui';
 import { AnalyticsOverview } from './components/analytics-overview';
 import { TopNavigation } from './components/top-navigation';
@@ -7,6 +8,8 @@ import { TopbarClock } from './components/topbar-clock';
 
 
 export default function Index() {
+
+  useAuthRedirect();
 
   const notifications = [
     {

@@ -4,7 +4,7 @@ import { AnalyticsOverview } from '../../types/analytics.types';
 export async function getAnalyticsOverview(): Promise<AnalyticsOverview> {
 
     const response = await apiFetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/analytics/overview`
+        '/analytics/overview'
     );
 
     if (!response.ok) {

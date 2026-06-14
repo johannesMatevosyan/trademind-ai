@@ -20,6 +20,24 @@ export default function TradingPage() {
           </p>
         </div>
 
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            disabled
+            className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-500 opacity-70"
+          >
+            Filters
+          </button>
+
+          <button
+            type="button"
+            disabled
+            className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-medium text-white opacity-70"
+          >
+            + Add Trade
+          </button>
+        </div>
+
         {isLoading && (
           <div className="rounded-2xl border border-white/10 bg-white/5 p-6 text-sm text-gray-400">
             Loading trades...

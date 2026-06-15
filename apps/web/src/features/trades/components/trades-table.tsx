@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import type { Trade } from '../types/trade.types';
 import { TradeStatusBadge } from './trade-status-badge';
 
@@ -36,6 +37,8 @@ export function TradesTable({ trades }: TradesTableProps) {
     );
   }
 
+  const router = useRouter();
+
   return (
     <div className="overflow-hidden rounded-2xl border border-slate-300 bg-white shadow-xl shadow-slate-300/40">
       <div className="overflow-x-auto">
@@ -58,7 +61,8 @@ export function TradesTable({ trades }: TradesTableProps) {
             {trades.map((trade) => (
               <tr
                 key={trade.id}
-                className="border-b border-slate-200 transition hover:bg-slate-100 even:bg-slate-50 last:border-b-0"
+                onClick={() => router.push(`/trading/${trade.id}`)}
+                className="cursor-pointer border-b border-slate-200 transition hover:bg-slate-100 even:bg-slate-50 last:border-b-0"
               >
                 <td className="px-4 py-3 font-medium">{getSymbolLabel(trade)}</td>
                 <td className="px-4 py-3">{trade.side}</td>

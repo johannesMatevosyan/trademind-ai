@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import type { Prisma } from '../../../generated/prisma';
+import { AssetClass, type Prisma } from '../../../generated/prisma';
 
 import { CreateTradeDto } from './dto/create-trade.dto';
 import { UpdateTradeDto } from './dto/update-trade.dto';
@@ -41,10 +41,18 @@ export class TradesService {
         connect: { id: dto.tradingAccountId },
       },
       symbol: {
-        connect: { code: dto.symbol },
+        connectOrCreate: {
+          where: {
+            code: dto.symbol,
+          },
+          create: {
+            code: dto.symbol,
+            assetClass: AssetClass.STOCK,
+          },
+        },
       },
       side: dto.side,
-      pnl: pnl,
+      pnl,
       status: dto.status ?? 'OPEN',
       entryPrice: dto.entryPrice,
       exitPrice: dto.exitPrice,

@@ -2,14 +2,16 @@
 
 import { useAuthRedirect } from '@/features/auth/hooks/use-auth-redirect';
 import { TradesTable } from '@/features/trades/components/trades-table';
-
 import { useTrades } from '@/features/trades/hooks/use-trades';
 import { TradingAccountsList } from '@/features/trading-accounts/components/trading-accounts-list';
 import { useTradingAccounts } from '@/features/trading-accounts/hooks/use-trading-accounts';
+import { useRouter } from 'next/navigation';
 
 
 export default function TradingPage() {
   useAuthRedirect();
+
+  const router = useRouter();
 
   const {
     data: trades = [],
@@ -42,7 +44,10 @@ export default function TradingPage() {
               Filters
             </button>
 
-            <button className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-medium text-white shadow-sm">
+            <button
+              onClick={() => router.push('/trading/new')}
+              className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-medium text-white shadow-sm"
+            >
               + Add Trade
             </button>
           </div>

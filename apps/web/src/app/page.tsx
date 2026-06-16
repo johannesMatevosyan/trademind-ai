@@ -1,7 +1,7 @@
 'use client';
 
 import { useAuthRedirect } from '@/features/auth/hooks/use-auth-redirect';
-import { MarketBadge, MarketStatusCard, NotificationBell, UserAvatar } from '@org/shared-ui';
+import { DashboardLayout, MarketBadge, MarketStatusCard, NotificationBell, UserAvatar } from '@org/shared-ui';
 import { AnalyticsOverview } from './components/analytics-overview';
 import { TopNavigation } from './components/top-navigation';
 import { TopbarClock } from './components/topbar-clock';
@@ -19,8 +19,7 @@ export default function Index() {
   ];
 
   return (
-    <main className="min-h-screen bg-app-bg p-8">
-      <div className="mx-auto flex max-w-4xl flex-col gap-8">
+    <DashboardLayout>
         <div className="flex items-center justify-between">
           <TopNavigation />
 
@@ -37,7 +36,6 @@ export default function Index() {
         <MarketStatusCard />
 
         <AnalyticsOverview />
-      </div>
-    </main>
+    </DashboardLayout>
   );
 }

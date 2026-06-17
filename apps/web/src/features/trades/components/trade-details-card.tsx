@@ -1,6 +1,5 @@
 import type { Trade } from '../types/trade.types';
-import { TradeSideBadge } from './trade-side-badge';
-import { TradeStatusBadge } from './trade-status-badge';
+import { TradeHeader } from './trade-header';
 
 interface TradeDetailsCardProps {
   trade: Trade;
@@ -8,10 +7,6 @@ interface TradeDetailsCardProps {
 
 function fallback(value?: string | number | null) {
   return value === null || value === undefined || value === '' ? '—' : value;
-}
-
-function getTradeSymbolLabel(trade: Trade) {
-  return trade.symbol?.code ?? trade.symbolId;
 }
 
 function formatDate(value?: string | null) {
@@ -27,22 +22,13 @@ function formatDate(value?: string | null) {
 export function TradeDetailsCard({ trade }: TradeDetailsCardProps) {
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-semibold text-slate-900">
-            {getTradeSymbolLabel(trade)}
-          </h1>
-
-          <p className="mt-1 text-sm text-slate-500">
-            Trade details and execution summary.
-          </p>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <TradeSideBadge side={trade.side} />
-          <TradeStatusBadge status={trade.status} />
-        </div>
-      </div>
+      <TradeHeader
+        symbol={trade.symbol?.code ?? null}
+        accountName={trade.tradingAccountId ?? null}
+        tradeId={trade.id}
+        side={trade.side}
+        status={trade.status}
+      />
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <DetailItem label="Entry" value={fallback(trade.entryPrice)} />

@@ -1,7 +1,7 @@
 import type { TradeStatus } from '../types/trade.types';
 
 interface TradeStatusBadgeProps {
-  status: TradeStatus;
+  status: TradeStatus | null;
 }
 
 export function TradeStatusBadge({ status }: TradeStatusBadgeProps) {

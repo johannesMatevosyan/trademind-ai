@@ -1,4 +1,5 @@
 import type { Trade } from '../types/trade.types';
+import { TradeAccountInfo } from './trade-account-info';
 import { TradeHeader } from './trade-header';
 import { TradeMetrics } from './trade-metrics';
 
@@ -20,6 +21,8 @@ export function TradeDetailsCard({ trade }: TradeDetailsCardProps) {
       <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-2 3xl:grid-cols-3">
         <TradeMetrics trade={trade} />
       </div>
+
+      <TradeAccountInfo trade={trade} />
     </section>
   );
 }

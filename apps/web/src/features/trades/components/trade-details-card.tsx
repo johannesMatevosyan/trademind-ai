@@ -1,22 +1,9 @@
 import type { Trade } from '../types/trade.types';
 import { TradeHeader } from './trade-header';
+import { TradeMetrics } from './trade-metrics';
 
 interface TradeDetailsCardProps {
   trade: Trade;
-}
-
-function fallback(value?: string | number | null) {
-  return value === null || value === undefined || value === '' ? '—' : value;
-}
-
-function formatDate(value?: string | null) {
-  if (!value) return '—';
-
-  const date = new Date(value);
-
-  if (Number.isNaN(date.getTime())) return '—';
-
-  return date.toLocaleDateString();
 }
 
 export function TradeDetailsCard({ trade }: TradeDetailsCardProps) {
@@ -30,29 +17,9 @@ export function TradeDetailsCard({ trade }: TradeDetailsCardProps) {
         status={trade.status}
       />
 
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <DetailItem label="Entry" value={fallback(trade.entryPrice)} />
-        <DetailItem label="Exit" value={fallback(trade.exitPrice)} />
-        <DetailItem label="Quantity" value={fallback(trade.quantity)} />
-        <DetailItem label="PNL" value={fallback(trade.pnl)} />
-        <DetailItem label="Opened" value={formatDate(trade.openedAt)} />
-        <DetailItem label="Closed" value={formatDate(trade.closedAt)} />
+      <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-2 3xl:grid-cols-3">
+        <TradeMetrics trade={trade} />
       </div>
     </section>
-  );
-}
-
-function DetailItem({
-  label,
-  value,
-}: {
-  label: string;
-  value: string | number;
-}) {
-  return (
-    <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-      <p className="text-sm text-slate-500">{label}</p>
-      <p className="mt-1 font-medium text-slate-900">{value}</p>
-    </div>
   );
 }

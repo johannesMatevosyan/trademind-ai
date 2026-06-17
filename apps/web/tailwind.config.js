@@ -18,6 +18,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        '3xl': '1600px', // => @media (min-width: 1600px) { ... }
+      },
       colors: {
         'app-bg': '#DAE4EC',
         'card-bg': '#E0E9EB',

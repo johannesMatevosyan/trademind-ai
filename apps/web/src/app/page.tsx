@@ -1,7 +1,7 @@
 'use client';
 
 import { useAuthRedirect } from '@/features/auth/hooks/use-auth-redirect';
-import { DashboardLayout, DashboardWelcome, MarketBadge, MarketStatusCard, NotificationBell, StatCard, UserAvatar } from '@org/shared-ui';
+import { DashboardLayout, DashboardWelcome, MarketBadge, MarketStatusCard, MarketStatusIndicator, NotificationBell, StatCard, UserAvatar } from '@org/shared-ui';
 import { AnalyticsOverview } from './components/analytics-overview';
 import { TopNavigation } from './components/top-navigation';
 import { TopbarClock } from './components/topbar-clock';
@@ -18,6 +18,10 @@ export default function Index() {
     },
   ];
 
+  const hourUtc = new Date().getUTCHours();
+
+  const isOpen = hourUtc >= 13 && hourUtc < 20;
+
   return (
     <DashboardLayout>
         <div className="flex items-center justify-between">
@@ -26,7 +30,11 @@ export default function Index() {
 
           <div className="flex items-center gap-3">
             <MarketBadge symbol="BTC/USDT" />
+
+            <MarketStatusIndicator  isOpen={isOpen} />
+
             <TopbarClock />
+
             <NotificationBell
               hasUnread={notifications.length > 0}
             />

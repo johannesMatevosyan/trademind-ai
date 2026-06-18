@@ -1,4 +1,5 @@
 export * from './lib/dashboard-layout/dashboard-layout';
+export * from './lib/dashboard-welcome/dashboard-welcome';
 export * from './lib/market-badge/market-badge';
 export * from './lib/market-status-card';
 export * from './lib/notification-bell/notification-bell';

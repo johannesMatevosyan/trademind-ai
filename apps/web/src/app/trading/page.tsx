@@ -2,8 +2,10 @@
 
 import { useAuthRedirect } from '@/features/auth/hooks/use-auth-redirect';
 import { TradeFilters } from '@/features/trades/components/trade-filters';
+import { TradePagination } from '@/features/trades/components/trade-pagination';
 import { TradesTable } from '@/features/trades/components/trades-table';
 import { useTradeFilters } from '@/features/trades/hooks/use-trade-filters';
+import { useTradePagination } from '@/features/trades/hooks/use-trade-pagination';
 import { useTrades } from '@/features/trades/hooks/use-trades';
 import { TradingAccountsList } from '@/features/trading-accounts/components/trading-accounts-list';
 import { useTradingAccounts } from '@/features/trading-accounts/hooks/use-trading-accounts';
@@ -33,6 +35,9 @@ export default function TradingPage() {
     updateFilter,
     resetFilters,
   } = useTradeFilters(trades);
+
+  const pagination =
+    useTradePagination(filteredTrades);
 
   return (
     <main className="min-h-screen bg-app-bg p-8">
@@ -89,7 +94,19 @@ export default function TradingPage() {
           onReset={resetFilters}
         />
 
-        {!isLoading && !isError && <TradesTable trades={filteredTrades} />}
+        {!isLoading && !isError && <TradesTable trades={pagination.paginatedItems} />}
+
+        <TradePagination
+          currentPage={pagination.currentPage}
+          totalPages={pagination.totalPages}
+          pageSize={pagination.pageSize}
+          totalItems={pagination.totalItems}
+          startItem={pagination.startItem}
+          endItem={pagination.endItem}
+          onNext={pagination.nextPage}
+          onPrevious={pagination.previousPage}
+          onPageSizeChange={pagination.setPageSize}
+        />
       </div>
     </main>
   );

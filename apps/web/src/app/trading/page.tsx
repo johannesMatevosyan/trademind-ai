@@ -1,7 +1,9 @@
 'use client';
 
 import { useAuthRedirect } from '@/features/auth/hooks/use-auth-redirect';
+import { TradeFilters } from '@/features/trades/components/trade-filters';
 import { TradesTable } from '@/features/trades/components/trades-table';
+import { useTradeFilters } from '@/features/trades/hooks/use-trade-filters';
 import { useTrades } from '@/features/trades/hooks/use-trades';
 import { TradingAccountsList } from '@/features/trading-accounts/components/trading-accounts-list';
 import { useTradingAccounts } from '@/features/trading-accounts/hooks/use-trading-accounts';
@@ -24,6 +26,13 @@ export default function TradingPage() {
     isLoading: isAccountsLoading,
     isError: isAccountsError,
   } = useTradingAccounts();
+
+  const {
+    filters,
+    filteredTrades,
+    updateFilter,
+    resetFilters,
+  } = useTradeFilters(trades);
 
   return (
     <main className="min-h-screen bg-app-bg p-8">
@@ -73,7 +82,14 @@ export default function TradingPage() {
           </div>
         }
 
-        {!isLoading && !isError && <TradesTable trades={trades} />}
+        <TradeFilters
+          filters={filters}
+          tradingAccounts={tradingAccounts}
+          onFilterChange={updateFilter}
+          onReset={resetFilters}
+        />
+
+        {!isLoading && !isError && <TradesTable trades={filteredTrades} />}
       </div>
     </main>
   );

@@ -45,6 +45,7 @@ export function TradesTable({ trades }: TradesTableProps) {
         <table className="w-full min-w-[900px] text-left text-sm text-slate-800">
           <thead className="border-b border-slate-200 bg-slate-100 text-xs uppercase text-slate-600">
             <tr>
+              <th className="px-4 py-3 font-semibold tracking-wide">ID</th>
               <th className="px-4 py-3 font-semibold tracking-wide">Symbol</th>
               <th className="px-4 py-3 font-semibold tracking-wide">Side</th>
               <th className="px-4 py-3 font-semibold tracking-wide">Status</th>
@@ -64,6 +65,7 @@ export function TradesTable({ trades }: TradesTableProps) {
                 onClick={() => router.push(`/trading/${trade.id}`)}
                 className="cursor-pointer border-b border-slate-200 transition hover:bg-slate-100 even:bg-slate-50 last:border-b-0"
               >
+                <td className="px-4 py-3 font-medium">{trade.id}</td>
                 <td className="px-4 py-3 font-medium">{getSymbolLabel(trade)}</td>
                 <td className="px-4 py-3">{trade.side}</td>
                 <td className="px-4 py-3">

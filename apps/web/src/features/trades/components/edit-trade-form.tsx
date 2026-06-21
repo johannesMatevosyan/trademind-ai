@@ -31,9 +31,9 @@ export function EditTradeForm({ trade }: EditTradeFormProps) {
       {
         side,
         status,
-        entryPrice: Number(entryPrice),
-        exitPrice: exitPrice ? Number(exitPrice) : null,
-        quantity: Number(quantity),
+        entryPrice,
+        exitPrice: exitPrice || null,
+        quantity,
         openedAt: openedAt ? new Date(openedAt).toISOString() : trade.openedAt,
         closedAt: closedAt ? new Date(closedAt).toISOString() : null,
         notes: notes || null,

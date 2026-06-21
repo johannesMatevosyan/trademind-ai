@@ -4,9 +4,9 @@ import type { Trade } from '../types/trade.types';
 export interface UpdateTradePayload {
   side?: string;
   status?: string;
-  entryPrice?: number;
-  exitPrice?: number | null;
-  quantity?: number;
+  entryPrice?: string;
+  exitPrice?: string | null;
+  quantity?: string;
   openedAt?: string;
   closedAt?: string | null;
   notes?: string | null;

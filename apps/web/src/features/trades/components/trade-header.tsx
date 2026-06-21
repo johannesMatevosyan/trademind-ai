@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { TradeStatus } from '../types/trade.types';
 import { TradeSideBadge } from './trade-side-badge';
 import { TradeStatusBadge } from './trade-status-badge';
@@ -54,6 +55,12 @@ export function TradeHeader({
         <div className="flex items-center gap-2">
           <TradeSideBadge side={side} />
           <TradeStatusBadge status={(status ?? 'OPEN') as TradeStatus} />
+          <Link
+            href={`/trading/${tradeId}/edit`}
+            className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
+          >
+            Edit
+          </Link>
         </div>
       </div>
     </section>

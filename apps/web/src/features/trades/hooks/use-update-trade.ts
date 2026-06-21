@@ -11,15 +11,17 @@ interface UseUpdateTradeParams {
 }
 
 export function useUpdateTrade({ tradeId }: UseUpdateTradeParams) {
-  const queryClient = useQueryClient();
+    const queryClient = useQueryClient();
 
-  return useMutation({
+    return useMutation({
     mutationFn: (payload: UpdateTradePayload) =>
-      updateTrade(tradeId, payload),
+        updateTrade(tradeId, payload),
 
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['trades'] });
-      queryClient.invalidateQueries({ queryKey: ['trade', tradeId] });
+    onSuccess: (updatedTrade) => {
+        queryClient.setQueryData(['trade-details', tradeId], updatedTrade);
+
+        queryClient.invalidateQueries({ queryKey: ['trades'] });
+        queryClient.invalidateQueries({ queryKey: ['trade-details', tradeId] });
     },
-  });
+    });
 }

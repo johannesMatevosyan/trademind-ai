@@ -1,6 +1,6 @@
 'use client';
 
-import { useAnalyticsOverview } from '../../hooks/use-analytics-overview';
+import { useAnalyticsOverview } from '../../features/analytics/hooks/use-analytics-overview';
 import { AnalyticsOverviewCard } from './analytics-overview-card';
 
 export function AnalyticsOverview() {

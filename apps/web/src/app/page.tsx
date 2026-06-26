@@ -1,6 +1,7 @@
 'use client';
 
 import { useAuthRedirect } from '@/features/auth/hooks/use-auth-redirect';
+import { PerformanceDashboard } from '@/features/performance-dashboard/components/performance-dashboard';
 import { DashboardLayout, DashboardWelcome, MarketBadge, MarketStatusCard, MarketStatusIndicator, NotificationBell, StatCard, UserAvatar } from '@org/shared-ui';
 import { AnalyticsOverview } from './components/analytics-overview';
 import { TopNavigation } from './components/top-navigation';
@@ -70,6 +71,7 @@ export default function Index() {
           </div>
 
         <AnalyticsOverview />
+        <PerformanceDashboard />
     </DashboardLayout>
   );
 }

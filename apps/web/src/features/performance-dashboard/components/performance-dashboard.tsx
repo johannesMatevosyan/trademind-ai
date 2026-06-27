@@ -42,7 +42,12 @@ export function PerformanceDashboard() {
           data={symbolPerformance.data ?? []}
           isLoading={symbolPerformance.isLoading}
           isError={symbolPerformance.isError} />
-        <TradingActivityPlaceholder />
+
+        <TradingActivityPlaceholder
+          data={tradingActivity.data ?? []}
+          isLoading={tradingActivity.isLoading}
+          isError={tradingActivity.isError}
+        />
       </div>
     </section>
   );

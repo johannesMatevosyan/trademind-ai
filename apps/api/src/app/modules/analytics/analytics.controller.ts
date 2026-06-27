@@ -38,4 +38,24 @@ export class AnalyticsController {
     ) {
         return this.analyticsService.getActivity(user.id, query);
     }
+
+    @Get('pnl-history')
+    getPnlHistory(@CurrentUser() user: AuthUser) {
+        return this.analyticsService.getPnlHistory(user.id);
+    }
+
+    @Get('symbol-performance')
+    getSymbolPerformance(@CurrentUser() user: AuthUser) {
+        return this.analyticsService.getSymbolPerformance(user.id);
+    }
+
+    @Get('win-loss')
+    getWinLoss(@CurrentUser() user: AuthUser) {
+        return this.analyticsService.getWinLoss(user.id);
+    }
+
+    @Get('trading-activity')
+    getTradingActivity(@CurrentUser() user: AuthUser) {
+        return this.analyticsService.getTradingActivity(user.id);
+    }
 }

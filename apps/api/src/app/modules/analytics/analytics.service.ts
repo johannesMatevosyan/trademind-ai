@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma, TradeStatus } from '../../../generated/prisma/client';
+import { PrismaService } from '../../infrastructure/prisma/prisma.service';
 import { AnalyticsRepository } from './analytics.repository';
 import { AnalyticsQueryDto } from './dto/analytics-query.dto';
 
@@ -12,7 +13,10 @@ export type AnalyticsTrade =
 
 @Injectable()
 export class AnalyticsService {
-  constructor(private readonly analyticsRepository: AnalyticsRepository) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly analyticsRepository: AnalyticsRepository
+  ) {}
 
   async getOverview(userId: string, query: AnalyticsQueryDto) {
     await this.validateAccountOwnershipIfNeeded(userId, query);
@@ -95,6 +99,30 @@ export class AnalyticsService {
     }));
   }
 
+  async getPnlHistory(userId: string) {
+    const trades = await this.prisma.trade.findMany({
+      where: {
+        userId,
+        status: 'CLOSED',
+        pnl: {
+          not: null,
+        },
+      },
+      orderBy: {
+        closedAt: 'asc',
+      },
+      select: {
+        closedAt: true,
+        pnl: true,
+      },
+    });
+
+    return trades.map((trade) => ({
+      date: trade.closedAt?.toISOString().slice(0, 10),
+      pnl: Number(trade.pnl ?? 0),
+    }));
+  }
+
   async getSymbols(userId: string, query: AnalyticsQueryDto) {
     await this.validateAccountOwnershipIfNeeded(userId, query);
 
@@ -144,6 +172,63 @@ export class AnalyticsService {
       .map(({ sortValue, ...item }) => item);
   }
 
+  async getSymbolPerformance(userId: string) {
+    const trades = await this.prisma.trade.findMany({
+      where: {
+        userId,
+        status: 'CLOSED',
+      },
+      include: {
+        symbol: true,
+      },
+    });
+
+    const grouped = new Map<string, { symbol: string; trades: number; pnl: number }>();
+
+    for (const trade of trades) {
+      const symbol = trade.symbol?.code ?? trade.symbolId;
+
+      const current = grouped.get(symbol) ?? {
+        symbol,
+        trades: 0,
+        pnl: 0,
+      };
+
+      current.trades += 1;
+      current.pnl += Number(trade.pnl ?? 0);
+
+      grouped.set(symbol, current);
+    }
+
+    return Array.from(grouped.values());
+  }
+
+  async getWinLoss(userId: string) {
+    const trades = await this.prisma.trade.findMany({
+      where: {
+        userId,
+        status: 'CLOSED',
+        pnl: {
+          not: null,
+        },
+      },
+      select: {
+        pnl: true,
+      },
+    });
+
+    const winningTrades = trades.filter((trade) => Number(trade.pnl) > 0).length;
+    const losingTrades = trades.filter((trade) => Number(trade.pnl) < 0).length;
+    const breakevenTrades = trades.filter((trade) => Number(trade.pnl) === 0).length;
+
+    return {
+      winningTrades,
+      losingTrades,
+      breakevenTrades,
+      totalClosedTrades: trades.length,
+    };
+  }
+
   async getActivity(userId: string, query: AnalyticsQueryDto) {
     await this.validateAccountOwnershipIfNeeded(userId, query);
 
@@ -170,7 +255,7 @@ export class AnalyticsService {
       };
 
       current.openedTrades += 1;
-      current.symbols.add(trade.symbol);
+      current.symbols.add(trade?.symbol?.name ?? trade.symbol.code);
 
       if (trade.status === TradeStatus.CLOSED) {
         current.closedTrades += 1;
@@ -184,6 +269,30 @@ export class AnalyticsService {
       openedTrades: value.openedTrades,
       closedTrades: value.closedTrades,
       symbolsTraded: Array.from(value.symbols),
+    }));
+  }
+
+  async getTradingActivity(userId: string) {
+    const trades = await this.prisma.trade.findMany({
+      where: {
+        userId,
+      },
+      select: {
+        openedAt: true,
+      },
+    });
+
+    const grouped = new Map<string, number>();
+
+    for (const trade of trades) {
+      const date = trade.openedAt.toISOString().slice(0, 10);
+
+      grouped.set(date, (grouped.get(date) ?? 0) + 1);
+    }
+
+    return Array.from(grouped.entries()).map(([date, trades]) => ({
+      date,
+      trades,
     }));
   }
 

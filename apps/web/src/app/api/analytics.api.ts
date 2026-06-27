@@ -1,5 +1,5 @@
 import { apiFetch } from '@/shared/api/api-client';
-import { AnalyticsOverview } from '../../types/analytics.types';
+import { AnalyticsOverview } from '../../features/analytics/types/analytics.types';
 
 export async function getAnalyticsOverview(): Promise<AnalyticsOverview> {
 

@@ -8,7 +8,7 @@ import { TradingActivityPlaceholder } from './trading-activity-placeholder';
 import { WinLossChartPlaceholder } from './win-loss-chart-placeholder';
 
 export function PerformanceDashboard() {
-  const { data, isLoading, isError } = usePerformanceDashboard();
+  const { overview, pnlHistory, symbolPerformance, winLoss, tradingActivity } = usePerformanceDashboard();
 
   return (
     <section className="flex flex-col gap-6">
@@ -22,10 +22,15 @@ export function PerformanceDashboard() {
         </p>
       </div>
 
-      <PerformanceSummary data={data} isLoading={isLoading} isError={isError} />
+      <PerformanceSummary data={overview.data} isLoading={overview.isLoading} isError={overview.isError} />
 
       <div className="grid gap-6 xl:grid-cols-2">
-        <PnlChartPlaceholder />
+        <PnlChartPlaceholder
+          data={pnlHistory.data ?? []}
+          isLoading={pnlHistory.isLoading}
+          isError={pnlHistory.isError}
+        />
+
         <WinLossChartPlaceholder />
       </div>
 

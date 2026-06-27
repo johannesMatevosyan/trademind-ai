@@ -31,7 +31,7 @@ function StatCard({
   );
 }
 
-export function WinLossChartPlaceholder({
+export function WinLossOverview({
   data,
   isLoading,
   isError,

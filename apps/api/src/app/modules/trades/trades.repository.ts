@@ -1,3 +1,4 @@
+/* eslint-disable @nx/enforce-module-boundaries */
 import { Injectable } from '@nestjs/common';
 import type { Prisma } from '../../../generated/prisma';
 

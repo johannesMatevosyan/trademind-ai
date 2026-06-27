@@ -1,10 +1,7 @@
 //@ts-check
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { composePlugins, withNx } = require('@nx/next');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const fs = require('fs');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path');
 
 /**
@@ -21,7 +18,9 @@ function findLocalPackages(dir) {
       const { name } = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
       if (name) results.push(name);
       return results; // don't recurse further into this package
-    } catch {}
+    } catch {
+      // Ignore invalid package.json and continue traversing.
+    }
   }
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     if (entry.isDirectory() && entry.name !== 'node_modules' && entry.name !== 'dist') {

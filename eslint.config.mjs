@@ -11,6 +11,10 @@ export default [
       '**/vitest.config.*.timestamp*',
       '**/test-output',
       '**/out-tsc',
+      '**/generated/**',
+      '**/src/generated/**',
+      '**/.next/**',
+      '**/node_modules/**',
     ],
   },
   {

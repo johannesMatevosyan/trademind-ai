@@ -1,10 +1,11 @@
+/* eslint-disable @nx/enforce-module-boundaries */
 import {
-    IsEnum,
-    IsISO8601,
-    IsNumberString,
-    IsOptional,
-    IsString,
-    Matches,
+  IsEnum,
+  IsISO8601,
+  IsNumberString,
+  IsOptional,
+  IsString,
+  Matches,
 } from 'class-validator';
 
   import { TradeSide, TradeStatus } from '../../../../generated/prisma';

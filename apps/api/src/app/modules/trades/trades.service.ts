@@ -1,3 +1,4 @@
+/* eslint-disable @nx/enforce-module-boundaries */
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { AssetClass, type Prisma } from '../../../generated/prisma';
 

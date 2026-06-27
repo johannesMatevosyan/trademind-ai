@@ -52,9 +52,9 @@ export function PnlChartPlaceholder({
         </div>
       ) : (
         <div className="mt-6 space-y-3">
-          {data.slice(-5).map((item) => (
+          {data.slice(-5).map((item, index) => (
             <div
-              key={`${item.date}-${item.pnl}`}
+              key={`${item.date}-${item.pnl}-${index}`}
               className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm"
             >
               <span className="text-slate-500">{item.date ?? '—'}</span>

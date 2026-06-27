@@ -31,7 +31,10 @@ export function PerformanceDashboard() {
           isError={pnlHistory.isError}
         />
 
-        <WinLossChartPlaceholder />
+        <WinLossChartPlaceholder
+          data={winLoss.data ?? []}
+          isLoading={winLoss.isLoading}
+          isError={winLoss.isError}/>
       </div>
 
       <div className="grid gap-6 xl:grid-cols-2">

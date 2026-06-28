@@ -9,11 +9,8 @@ import {
     XAxis,
     YAxis,
 } from 'recharts';
+import { PnlHistoryItem } from '../types/performance-dashboard.types';
 
-interface PnlHistoryItem {
-  date: string | null;
-  pnl: number;
-}
 
 interface PnlHistoryChartProps {
   data: PnlHistoryItem[];

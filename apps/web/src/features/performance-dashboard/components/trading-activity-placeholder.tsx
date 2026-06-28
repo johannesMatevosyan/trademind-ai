@@ -1,7 +1,4 @@
-interface TradingActivityItem {
-  date: string;
-  trades: number;
-}
+import { TradingActivityItem } from "../types/performance-dashboard.types";
 
 interface TradingActivityPlaceholderProps {
   data: TradingActivityItem[];

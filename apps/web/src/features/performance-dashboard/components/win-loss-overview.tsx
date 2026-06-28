@@ -1,12 +1,7 @@
-export interface WinLossData {
-  winningTrades: number;
-  losingTrades: number;
-  breakevenTrades: number;
-  totalClosedTrades: number;
-}
+import { WinLossData } from "../types/performance-dashboard.types";
 
 interface WinLossChartProps {
-  data: WinLossData;
+  data?: WinLossData;
   isLoading?: boolean;
   isError?: boolean;
 }
@@ -36,6 +31,11 @@ export function WinLossOverview({
   isLoading,
   isError,
 }: WinLossChartProps) {
+
+  if (!data) {
+    return null;
+  }
+
   if (isLoading) {
     return (
       <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

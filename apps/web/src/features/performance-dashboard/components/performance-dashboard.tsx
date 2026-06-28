@@ -5,6 +5,7 @@ import { PerformanceSummary } from './performance-summary';
 import { PnlHistoryChart } from './pnl-history-chart';
 import { SymbolBreakdownPlaceholder } from './symbol-breakdown-placeholder';
 import { TradingActivityPlaceholder } from './trading-activity-placeholder';
+import { WinLossChart } from './win-loss-chart';
 import { WinLossOverview } from './win-loss-overview';
 
 export function PerformanceDashboard() {
@@ -24,18 +25,25 @@ export function PerformanceDashboard() {
 
       <PerformanceSummary data={overview.data} isLoading={overview.isLoading} isError={overview.isError} />
 
-      <div className="grid gap-6 xl:grid-cols-2">
 
-        <PnlHistoryChart
-          data={pnlHistory.data ?? []}
-          isLoading={pnlHistory.isLoading}
-          isError={pnlHistory.isError}
+      <PnlHistoryChart
+        data={pnlHistory.data ?? []}
+        isLoading={pnlHistory.isLoading}
+        isError={pnlHistory.isError}
+      />
+
+      <div className="grid gap-6 xl:grid-cols-2">
+        <WinLossOverview
+          data={winLoss.data}
+          isLoading={winLoss.isLoading}
+          isError={winLoss.isError}
         />
 
-        <WinLossOverview
-          data={winLoss.data ?? []}
+        <WinLossChart
+          data={winLoss.data}
           isLoading={winLoss.isLoading}
-          isError={winLoss.isError}/>
+          isError={winLoss.isError}
+        />
       </div>
 
       <div className="grid gap-6 xl:grid-cols-2">

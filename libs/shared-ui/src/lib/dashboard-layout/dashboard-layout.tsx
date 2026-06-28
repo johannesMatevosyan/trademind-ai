@@ -7,7 +7,7 @@ export function DashboardLayout({
 }: DashboardLayoutProps) {
   return (
     <main className="min-h-screen bg-app-bg">
-      <div className="mx-auto py-8 flex max-w-4xl flex-col gap-8">
+      <div className="bg-wrapper-bg mx-auto py-8 px-4 flex max-w-6xl flex-col gap-8">
         {children}
       </div>
     </main>

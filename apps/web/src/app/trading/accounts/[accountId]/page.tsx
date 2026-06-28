@@ -26,7 +26,7 @@ export default function TradingAccountDetailsPage() {
 
     if (isLoading) {
         return (
-        <main className="min-h-screen bg-app-bg p-8">
+        <main className="min-h-screen bg-app-bg px-4 py-6 md:px-8">
             <div className="mx-auto max-w-6xl text-sm text-slate-500">
             Loading account...
             </div>
@@ -36,7 +36,7 @@ export default function TradingAccountDetailsPage() {
 
     if (isError || !account) {
         return (
-        <main className="min-h-screen bg-app-bg p-8">
+        <main className="min-h-screen bg-app-bg px-4 py-6 md:px-8">
             <div className="mx-auto max-w-6xl rounded-2xl border border-red-200 bg-red-50 p-6 text-sm text-red-700">
             Could not load trading account.
             </div>
@@ -45,7 +45,7 @@ export default function TradingAccountDetailsPage() {
     }
 
     return (
-        <main className="min-h-screen bg-app-bg p-8">
+        <main className="min-h-screen bg-app-bg px-4 py-6 md:px-8">
         <div className="mx-auto flex max-w-6xl flex-col gap-6">
             <TradingAccountHeader account={account} />
             <TradingAccountSummary account={account} />

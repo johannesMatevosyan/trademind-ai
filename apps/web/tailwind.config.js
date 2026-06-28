@@ -22,7 +22,9 @@ module.exports = {
         '3xl': '1600px', // => @media (min-width: 1600px) { ... }
       },
       colors: {
-        'app-bg': '#DAE4EC',
+        'app-bg': '#C2CAD0',
+        'wrapper-bg': '#DAE4EC',
+        'section-bg': '#F1F5F9',
         'card-bg': '#E0E9EB',
       },
     },

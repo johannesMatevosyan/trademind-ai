@@ -19,7 +19,7 @@ export default function EditTradePage() {
 
   if (isLoading) {
     return (
-      <main className="min-h-screen bg-app-bg p-8">
+      <main className="min-h-screen bg-app-bg px-4 py-6 md:px-8">
         <div className="mx-auto max-w-4xl">
           <p className="text-sm text-slate-500">Loading trade...</p>
         </div>
@@ -29,7 +29,7 @@ export default function EditTradePage() {
 
   if (isError || !trade) {
     return (
-      <main className="min-h-screen bg-app-bg p-8">
+      <main className="min-h-screen bg-app-bg px-4 py-6 md:px-8">
         <div className="mx-auto max-w-4xl rounded-2xl border border-red-200 bg-red-50 p-6">
           <p className="text-sm text-red-700">
             Could not load trade for editing.
@@ -40,7 +40,7 @@ export default function EditTradePage() {
   }
 
   return (
-    <main className="min-h-screen bg-app-bg p-8">
+    <main className="min-h-screen bg-app-bg px-4 py-6 md:px-8">
       <div className="mx-auto max-w-4xl">
         <EditTradeForm trade={trade} />
       </div>

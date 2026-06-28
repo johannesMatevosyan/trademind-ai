@@ -25,7 +25,7 @@ export default function Index() {
 
   return (
     <DashboardLayout>
-        <div className="flex items-center justify-between">
+        <header className="bg-section-bg flex items-center justify-between p-5 rounded-2xl">
 
           <TopNavigation />
 
@@ -41,7 +41,7 @@ export default function Index() {
             />
             <UserAvatar initials="HM" />
           </div>
-        </div>
+        </header>
 
         <MarketStatusCard />
 

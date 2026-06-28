@@ -16,7 +16,7 @@ export default function NewTradePage() {
   } = useTradingAccounts();
 
   return (
-    <main className="min-h-screen bg-app-bg p-8">
+    <main className="min-h-screen bg-app-bg px-4 py-6 md:px-8">
       <div className="mx-auto flex max-w-4xl flex-col gap-6">
         <Link
           href="/trading"

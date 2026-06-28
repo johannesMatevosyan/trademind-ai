@@ -8,7 +8,7 @@ export function AnalyticsOverviewCard({
   value,
 }: AnalyticsOverviewCardProps) {
   return (
-    <div className="rounded-lg border p-4">
+    <div className="rounded-lg border p-4 bg-card-bg">
       <p className="text-sm text-muted-foreground">
         {title}
       </p>

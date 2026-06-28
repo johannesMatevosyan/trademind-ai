@@ -40,7 +40,7 @@ export default function TradingPage() {
     useTradePagination(filteredTrades);
 
   return (
-    <main className="min-h-screen bg-app-bg p-8">
+    <main className="min-h-screen bg-app-bg px-4 py-6 md:px-8">
       <div className="mx-auto flex max-w-6xl flex-col gap-6">
         {/* Existing page header/actions — keep your current markup here */}
         <section className="flex items-center justify-between gap-4">

@@ -14,7 +14,7 @@ export function TopNavigation() {
   const pathname = usePathname();
 
   return (
-    <nav className="flex items-center gap-1 rounded-2xl bg-white/40 p-1">
+    <nav className="bg-section-bg flex items-center gap-1 rounded-2xl p-1">
       {navItems.map((item) => {
         const isActive = pathname === item.href;
 

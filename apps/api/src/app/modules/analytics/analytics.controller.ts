@@ -58,4 +58,9 @@ export class AnalyticsController {
     getTradingActivity(@CurrentUser() user: AuthUser) {
         return this.analyticsService.getTradingActivity(user.id);
     }
+
+    @Get('risk-metrics')
+    getRiskMetrics(@CurrentUser() user: AuthUser) {
+        return this.analyticsService.getRiskMetrics(user.id);
+    }
 }

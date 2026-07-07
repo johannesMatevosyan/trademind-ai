@@ -297,6 +297,48 @@ export class AnalyticsService {
     }));
   }
 
+  async getRiskMetrics(userId: string) {
+    const trades = await this.prisma.trade.findMany({
+      where: {
+        userId,
+        status: 'CLOSED',
+        pnl: {
+          not: null,
+        },
+      },
+      select: {
+        pnl: true,
+      },
+    });
+
+    const pnlValues = trades.map((trade) => Number(trade.pnl ?? 0));
+
+    const wins = pnlValues.filter((pnl) => pnl > 0);
+    const losses = pnlValues.filter((pnl) => pnl < 0);
+
+    const grossProfit = wins.reduce((sum, pnl) => sum + pnl, 0);
+    const grossLoss = Math.abs(losses.reduce((sum, pnl) => sum + pnl, 0));
+
+    const averageWin = wins.length > 0 ? grossProfit / wins.length : 0;
+    const averageLoss = losses.length > 0 ? grossLoss / losses.length : 0;
+
+    const winRate = pnlValues.length > 0 ? wins.length / pnlValues.length : 0;
+    const lossRate = pnlValues.length > 0 ? losses.length / pnlValues.length : 0;
+
+    const expectancy = winRate * averageWin - lossRate * averageLoss;
+
+    const profitFactor = grossLoss > 0 ? grossProfit / grossLoss : null;
+
+    return {
+      expectancy: Number(expectancy.toFixed(2)),
+      averageWin: Number(averageWin.toFixed(2)),
+      averageLoss: Number(averageLoss.toFixed(2)),
+      profitFactor:
+        profitFactor === null ? null : Number(profitFactor.toFixed(2)),
+      averageRMultiple: null,
+    };
+  }
+
   private async validateAccountOwnershipIfNeeded(
     userId: string,
     query: AnalyticsQueryDto

@@ -2,7 +2,7 @@
 
 import { useAnalyticsOverview } from '@/features/analytics/hooks/use-analytics-overview';
 import { useQuery } from '@tanstack/react-query';
-import { getPnlHistory, getSymbolPerformance, getTradingActivity, getWinLoss } from '../api/performance-dashboard.api';
+import { getPnlHistory, getRiskMetrics, getSymbolPerformance, getTradingActivity, getWinLoss } from '../api/performance-dashboard.api';
 import type { PerformanceDashboardData } from '../types/performance-dashboard.types';
 
 export function usePerformanceDashboard() {
@@ -29,6 +29,11 @@ export function usePerformanceDashboard() {
     queryFn: getTradingActivity,
   });
 
+  const riskMetrics = useQuery({
+    queryKey: ['analytics', 'risk-metrics'],
+    queryFn: getRiskMetrics,
+  });
+
   const dashboardData: PerformanceDashboardData | undefined = overview.data
     ? {
         totalTrades: overview.data.totalTrades ?? 0,
@@ -50,5 +55,6 @@ export function usePerformanceDashboard() {
     symbolPerformance,
     winLoss,
     tradingActivity,
+    riskMetrics,
   };
 }

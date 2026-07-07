@@ -30,3 +30,11 @@ export interface WinLossData {
   breakevenTrades: number;
   totalClosedTrades: number;
 }
+
+export interface RiskMetricsData {
+  expectancy: number;
+  averageWin: number;
+  averageLoss: number;
+  profitFactor: number | null;
+  averageRMultiple: number | null;
+}

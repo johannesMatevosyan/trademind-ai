@@ -1,6 +1,6 @@
 import { apiFetch } from "@/shared/api/api-client";
 import { SymbolPerformanceItem } from "../components/symbol-breakdown-placeholder";
-import { PnlHistoryItem, TradingActivityItem, WinLossData } from "../types/performance-dashboard.types";
+import { PnlHistoryItem, RiskMetricsData, TradingActivityItem, WinLossData } from "../types/performance-dashboard.types";
 
 
 export async function getPnlHistory(): Promise<PnlHistoryItem[]> {
@@ -41,4 +41,14 @@ export async function getTradingActivity(): Promise<TradingActivityItem[]> {
   }
 
   return response.json() as Promise<TradingActivityItem[]>;
+}
+
+export async function getRiskMetrics(): Promise<RiskMetricsData> {
+  const response = await apiFetch('/analytics/risk-metrics');
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch risk metrics');
+  }
+
+  return response.json() as Promise<RiskMetricsData>;
 }

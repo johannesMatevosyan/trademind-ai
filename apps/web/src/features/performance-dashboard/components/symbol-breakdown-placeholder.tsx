@@ -1,3 +1,5 @@
+import { formatCurrency } from '@org/shared-ui';
+
 export interface SymbolPerformanceItem {
   symbol: string;
   trades: number;
@@ -7,13 +9,6 @@ interface SymbolBreakdownProps {
   data: SymbolPerformanceItem[];
   isLoading?: boolean;
   isError?: boolean;
-}
-
-function formatMoney(value: number) {
-  return value.toLocaleString(undefined, {
-    style: 'currency',
-    currency: 'USD',
-  });
 }
 
 export function SymbolBreakdownPlaceholder({
@@ -66,7 +61,7 @@ export function SymbolBreakdownPlaceholder({
               </div>
 
               <p className="font-semibold text-slate-900">
-                {formatMoney(item.pnl)}
+                {formatCurrency(item.pnl)}
               </p>
             </div>
           ))}

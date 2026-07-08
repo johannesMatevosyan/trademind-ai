@@ -1,5 +1,6 @@
 'use client';
 
+import { formatCompactCurrency } from '@org/shared-ui';
 import {
     CartesianGrid,
     Line,
@@ -11,6 +12,12 @@ import {
 } from 'recharts';
 import { PnlHistoryItem } from '../types/performance-dashboard.types';
 
+const SHORT_DATE_FORMATTER = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'UTC',
+    month: 'short',
+    day: 'numeric',
+});
+
 
 interface PnlHistoryChartProps {
   data: PnlHistoryItem[];
@@ -18,18 +25,24 @@ interface PnlHistoryChartProps {
   isError?: boolean;
 }
 
-function formatMoney(value: number) {
-  return new Intl.NumberFormat(undefined, {
-    notation: 'compact',
-    maximumFractionDigits: 1,
-  }).format(value);
-}
-
-
 function isValidDate(value: string | null) {
   if (!value) return false;
 
   return !Number.isNaN(new Date(value).getTime());
+}
+
+function formatShortDateLabel(value: string | null): string {
+    if (!value) {
+        return '—';
+    }
+
+    const parsedDate = new Date(value);
+
+    if (Number.isNaN(parsedDate.getTime())) {
+        return value;
+    }
+
+    return SHORT_DATE_FORMATTER.format(parsedDate);
 }
 
 export function PnlHistoryChart({
@@ -42,10 +55,7 @@ export function PnlHistoryChart({
         .filter((item) => isValidDate(item.date))
         .map((item) => ({
             ...item,
-            displayDate: new Date(item.date as string).toLocaleDateString(undefined, {
-                month: 'short',
-                day: 'numeric',
-            }),
+            displayDate: formatShortDateLabel(item.date),
         }));
 
     if (chartData.length === 0) {
@@ -122,12 +132,6 @@ export function PnlHistoryChart({
                         <XAxis
                             dataKey="displayDate"
                             padding={{ left: 0, right: 0 }}
-                            tickFormatter={(value) =>
-                                new Date(value).toLocaleDateString(undefined, {
-                                    month: 'short',
-                                    day: 'numeric',
-                                })
-                            }
                             tick={{
                                 fontSize: 12,
                                 fill: '#64748b',
@@ -135,10 +139,10 @@ export function PnlHistoryChart({
                         />
                         <YAxis
                             width={38}
-                            tickFormatter={formatMoney}
-                            tick={{
-                            fontSize: 12,
-                            fill: '#64748b',
+                                tickFormatter={formatCompactCurrency}
+                                tick={{
+                                fontSize: 12,
+                                fill: '#64748b',
                             }}
                         />
                         <Tooltip />

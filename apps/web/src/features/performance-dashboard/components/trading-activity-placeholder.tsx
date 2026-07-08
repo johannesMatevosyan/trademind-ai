@@ -1,5 +1,12 @@
 import { TradingActivityItem } from "../types/performance-dashboard.types";
 
+const TRADING_ACTIVITY_DATE_FORMATTER = new Intl.DateTimeFormat('en-US', {
+  timeZone: 'UTC',
+  year: 'numeric',
+  month: 'numeric',
+  day: 'numeric',
+});
+
 interface TradingActivityPlaceholderProps {
   data: TradingActivityItem[];
   isLoading?: boolean;
@@ -13,7 +20,7 @@ function formatDate(date: string) {
     return date;
   }
 
-  return parsedDate.toLocaleDateString();
+  return TRADING_ACTIVITY_DATE_FORMATTER.format(parsedDate);
 }
 
 export function TradingActivityPlaceholder({

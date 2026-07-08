@@ -1,3 +1,4 @@
+import { formatCurrency } from '@org/shared-ui';
 import type { PerformanceDashboardData } from '../types/performance-dashboard.types';
 import { PerformanceKpiCard } from './performance-kpi-card';
 
@@ -5,15 +6,6 @@ interface PerformanceSummaryProps {
   data?: PerformanceDashboardData;
   isLoading?: boolean;
   isError?: boolean;
-}
-
-function formatMoney(value?: number) {
-  if (value === undefined) return '—';
-
-  return value.toLocaleString(undefined, {
-    style: 'currency',
-    currency: 'USD',
-  });
 }
 
 function formatPercent(value?: number) {
@@ -29,14 +21,14 @@ export function PerformanceSummary({
 }: PerformanceSummaryProps) {
   if (isLoading) {
     return (
-      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {[1, 2, 3, 4].map((item) => (
           <div
             key={item}
             className="h-32 animate-pulse rounded-2xl bg-slate-100"
           />
         ))}
-      </section>
+      </div>
     );
   }
 
@@ -49,10 +41,10 @@ export function PerformanceSummary({
   }
 
   return (
-    <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
       <PerformanceKpiCard
         title="Net P&L"
-        value={formatMoney(data?.totalPnl)}
+        value={formatCurrency(data?.totalPnl)}
         subtitle="Total realized performance"
       />
 
@@ -73,6 +65,6 @@ export function PerformanceSummary({
         value={data?.profitFactor ? data.profitFactor.toFixed(2) : '—'}
         subtitle="Coming soon"
       />
-    </section>
+    </div>
   );
 }

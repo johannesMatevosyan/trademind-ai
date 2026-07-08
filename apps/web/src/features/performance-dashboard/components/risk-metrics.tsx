@@ -1,3 +1,4 @@
+import { formatCurrency } from '@org/shared-ui';
 import type { RiskMetricsData } from '../types/performance-dashboard.types';
 import { PerformanceKpiCard } from './performance-kpi-card';
 
@@ -5,15 +6,6 @@ interface RiskMetricsProps {
   data?: RiskMetricsData;
   isLoading?: boolean;
   isError?: boolean;
-}
-
-function formatMoney(value?: number) {
-  if (value === undefined) return '—';
-
-  return value.toLocaleString(undefined, {
-    style: 'currency',
-    currency: 'USD',
-  });
 }
 
 function formatRatio(value: number | null | undefined) {
@@ -25,14 +17,14 @@ function formatRatio(value: number | null | undefined) {
 export function RiskMetrics({ data, isLoading, isError }: RiskMetricsProps) {
   if (isLoading) {
     return (
-      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {[1, 2, 3, 4].map((item) => (
           <div
             key={item}
             className="h-32 animate-pulse rounded-2xl bg-slate-100"
           />
         ))}
-      </section>
+      </div>
     );
   }
 
@@ -46,30 +38,23 @@ export function RiskMetrics({ data, isLoading, isError }: RiskMetricsProps) {
 
   return (
     <section>
-      <div className="mb-4">
-        <h2 className="text-lg font-semibold text-slate-950">Risk Metrics</h2>
-
-        <p className="mt-1 text-sm text-slate-500">
-          Strategy quality and risk-adjusted performance.
-        </p>
-      </div>
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <PerformanceKpiCard
           title="Expectancy"
-          value={formatMoney(data?.expectancy)}
+          value={formatCurrency(data?.expectancy)}
           subtitle="Expected value per trade"
         />
 
         <PerformanceKpiCard
           title="Average Win"
-          value={formatMoney(data?.averageWin)}
+          value={formatCurrency(data?.averageWin)}
           subtitle="Average winning trade"
         />
 
         <PerformanceKpiCard
           title="Average Loss"
-          value={formatMoney(data?.averageLoss)}
+          value={formatCurrency(data?.averageLoss)}
           subtitle="Average losing trade"
         />
 

@@ -8,4 +8,5 @@ export * from './lib/shared-ui';
 export * from './lib/skeleton/skeleton';
 export * from './lib/stat-card/stat-card';
 export * from './lib/user-avatar/user-avatar';
+export * from './lib/utils/formatters';
 

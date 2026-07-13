@@ -8,7 +8,7 @@ export function NotificationBell({
   return (
     <button
       type="button"
-      className="relative flex h-10 w-10 items-center justify-center rounded-xl border border-slate-800/60 bg-slate-800/60 text-slate-300 transition hover:bg-slate-800"
+      className="relative flex h-10 w-10 items-center justify-center rounded-xl border border-slate-300/60 bg-slate-800/60 text-slate-300 transition hover:bg-slate-800"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

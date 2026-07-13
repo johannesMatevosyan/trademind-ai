@@ -2,7 +2,6 @@
 
 import { usePerformanceDashboard } from '../hooks/use-performance-dashboard';
 import { DashboardSection } from './dashboard-section';
-import { PerformanceSummary } from './performance-summary';
 import { PnlHistoryChart } from './pnl-history-chart';
 import { RiskMetrics } from './risk-metrics';
 import { SymbolBreakdownPlaceholder } from './symbol-breakdown-placeholder';
@@ -11,17 +10,10 @@ import { WinLossChart } from './win-loss-chart';
 import { WinLossOverview } from './win-loss-overview';
 
 export function PerformanceDashboard() {
-  const { overview, pnlHistory, symbolPerformance, winLoss, tradingActivity, riskMetrics } = usePerformanceDashboard();
+  const { pnlHistory, symbolPerformance, winLoss, tradingActivity, riskMetrics } = usePerformanceDashboard();
 
   return (
     <section className="flex flex-col gap-6">
-
-      <DashboardSection
-        title="Performance"
-        description="Overall trading performance."
-      >
-        <PerformanceSummary data={overview.data} isLoading={overview.isLoading} isError={overview.isError} />
-      </DashboardSection>
 
       <DashboardSection
         title="Risk"

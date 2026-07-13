@@ -12,7 +12,7 @@ export function DashboardSection({
   children,
 }: DashboardSectionProps) {
   return (
-    <section className="space-y-5">
+    <section className="space-y-8">
       <div>
         <h2 className="text-xl font-semibold text-slate-950">
           {title}

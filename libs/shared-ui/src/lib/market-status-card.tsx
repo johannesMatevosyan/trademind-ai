@@ -52,11 +52,11 @@ export function MarketStatusCard() {
     <div className="rounded-2xl bg-card-bg p-5">
       <div className="mb-4 flex items-center justify-between">
         <div>
-          <h3 className="text-lg font-semibold text-white">
+          <h2 className="text-xl font-semibold text-slate-950">
             Market Status
-          </h3>
+          </h2>
 
-          <p className="text-sm text-slate-400">
+          <p className="mt-1 text-sm text-slate-500">
             Updated {updatedAt.toLocaleTimeString()}s ago
           </p>
         </div>

@@ -1,12 +1,12 @@
 import {
-    Body,
-    Controller,
-    Delete,
-    Get,
-    Param,
-    Patch,
-    Post,
-    UseGuards,
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  UseGuards,
 } from '@nestjs/common';
 
 import type { AuthUser } from '../../common/types/auth-user.type';
@@ -14,6 +14,7 @@ import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 import { CreateTradeDto } from './dto/create-trade.dto';
+import { ImportTradesDto } from './dto/import-trades.dto';
 import { UpdateTradeDto } from './dto/update-trade.dto';
 import { TradesService } from './trades.service';
 
@@ -49,5 +50,14 @@ export class TradesController {
   @Delete(':id')
   remove(@CurrentUser() user: AuthUser, @Param('id') id: string) {
     return this.tradesService.remove(id, user.id);
+  }
+
+  @Post('import')
+  @UseGuards(JwtAuthGuard)
+  importTrades(
+    @CurrentUser() user: AuthUser,
+    @Body() dto: ImportTradesDto,
+  ) {
+    return this.tradesService.importTrades(user.id, dto);
   }
 }

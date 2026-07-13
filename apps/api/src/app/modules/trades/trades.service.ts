@@ -3,6 +3,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { AssetClass, type Prisma } from '../../../generated/prisma';
 
 import { CreateTradeDto } from './dto/create-trade.dto';
+import { ImportTradesDto } from './dto/import-trades.dto';
 import { UpdateTradeDto } from './dto/update-trade.dto';
 import { TradesRepository } from './trades.repository';
 
@@ -147,5 +148,20 @@ export class TradesService {
     }
 
     return (params.entryPrice - params.exitPrice) * params.quantity;
+  }
+
+  async importTrades(
+    userId: string,
+    dto: ImportTradesDto,
+  ) {
+    return {
+      importedCount: 0,
+
+      rejectedCount: dto.rows.length,
+
+      importedTradeIds: [],
+
+      errors: [],
+    };
   }
 }

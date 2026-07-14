@@ -2,7 +2,7 @@ export type TradingAccountStatus = 'ACTIVE' | 'INACTIVE' | 'ARCHIVED' | string;
 
 export interface TradingAccount {
   id: string;
-  name?: string | null;
+  name: string;
   broker?: string | null;
   currency?: string | null;
   balance?: number | string | null;

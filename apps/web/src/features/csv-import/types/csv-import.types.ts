@@ -25,6 +25,17 @@ export const TRADE_CSV_HEADERS = [
 export type TradeCsvHeader =
   (typeof TRADE_CSV_HEADERS)[number];
 
+export interface CsvImportRequest {
+  tradingAccountId: string;
+  rows: CsvTradeImportRow[];
+}
+
+export interface CsvImportResult {
+  importedCount: number;
+  rejectedCount: number;
+  importedTradeIds: string[];
+  errors: CsvImportRowError[];
+}
 export interface RawCsvTradeRow {
   symbol?: string;
   side?: string;

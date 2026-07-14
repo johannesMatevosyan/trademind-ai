@@ -24,13 +24,50 @@ export class TradesRepository {
     });
   }
 
-  findTradingAccountByIdAndUserId(id: string, userId: string) {
+  findTradingAccountByIdAndUserId(
+    tradingAccountId: string,
+    userId: string,
+  ) {
     return this.prisma.tradingAccount.findFirst({
       where: {
-        id,
+        id: tradingAccountId,
         userId,
       },
+      select: {
+        id: true,
+        userId: true,
+      },
     });
+  }
+
+  findSymbolsByCodes(codes: string[]) {
+    return this.prisma.symbol.findMany({
+      where: {
+        code: {
+          in: codes,
+        },
+        isActive: true,
+      },
+      select: {
+        id: true,
+        code: true,
+      },
+    });
+  }
+
+  createManyImportedTrades(
+    trades: Prisma.TradeUncheckedCreateInput[],
+  ) {
+    return this.prisma.$transaction(
+      trades.map((trade) =>
+        this.prisma.trade.create({
+          data: trade,
+          select: {
+            id: true,
+          },
+        }),
+      ),
+    );
   }
 
   create(data: Prisma.TradeCreateInput) {

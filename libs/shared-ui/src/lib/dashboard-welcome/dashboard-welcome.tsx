@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 type DashboardWelcomeProps = {
   name: string;
 };
@@ -5,14 +7,19 @@ type DashboardWelcomeProps = {
 export function DashboardWelcome({
   name,
 }: DashboardWelcomeProps) {
-  const hour = new Date().getHours();
+  const [greeting, setGreeting] = useState('Welcome back');
 
-  const greeting =
-    hour < 12
-      ? 'Good morning'
-      : hour < 18
-      ? 'Good afternoon'
-      : 'Good evening';
+  useEffect(() => {
+    const hour = new Date().getHours();
+
+    setGreeting(
+      hour < 12
+        ? 'Good morning'
+        : hour < 18
+        ? 'Good afternoon'
+        : 'Good evening'
+    );
+  }, []);
 
   return (
     <div>

@@ -11,9 +11,11 @@ function formatUtcTime(date: Date) {
 }
 
 export function TopbarClock() {
-  const [now, setNow] = useState(() => new Date());
+  const [now, setNow] = useState<Date | null>(null);
 
   useEffect(() => {
+    setNow(new Date());
+
     const intervalId = window.setInterval(() => {
       setNow(new Date());
     }, 1000 * 30);
@@ -24,7 +26,9 @@ export function TopbarClock() {
   return (
     <div className="rounded-xl bg-card-bg px-4 py-2 text-sm text-slate-300">
       <span className="text-slate-500">NYSE</span>{' '}
-      <span className="font-medium text-white">{formatUtcTime(now)}</span>{' '}
+      <span className="font-medium text-white">
+        {now ? formatUtcTime(now) : '--:--'}
+      </span>{' '}
       <span className="text-slate-500">UTC</span>
     </div>
   );

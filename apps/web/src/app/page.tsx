@@ -3,6 +3,7 @@
 import { useAuthRedirect } from '@/features/auth/hooks/use-auth-redirect';
 import { PerformanceDashboard } from '@/features/performance-dashboard/components/performance-dashboard';
 import { DashboardLayout, DashboardWelcome, MarketBadge, MarketStatusCard, MarketStatusIndicator, NotificationBell, StatCard, UserAvatar } from '@org/shared-ui';
+import { useEffect, useState } from 'react';
 import { AnalyticsOverview } from './components/analytics-overview';
 import { TopNavigation } from './components/top-navigation';
 import { TopbarClock } from './components/topbar-clock';
@@ -12,6 +13,12 @@ export default function Index() {
 
   useAuthRedirect();
 
+  const [hourUtc, setHourUtc] = useState<number | null>(null);
+
+  useEffect(() => {
+    setHourUtc(new Date().getUTCHours());
+  }, []);
+
   const notifications = [
     {
       id: 1,
@@ -19,9 +26,7 @@ export default function Index() {
     },
   ];
 
-  const hourUtc = new Date().getUTCHours();
-
-  const isOpen = hourUtc >= 13 && hourUtc < 20;
+  const isOpen = hourUtc !== null && hourUtc >= 13 && hourUtc < 20;
 
   return (
     <DashboardLayout>

@@ -3,11 +3,14 @@ import {
     ArrayMinSize,
     IsArray,
     IsEnum,
+    IsInt,
     IsISO8601,
     IsOptional,
     IsString,
     IsUUID,
     Matches,
+    Min,
+    ValidateIf,
     ValidateNested,
 } from 'class-validator';
 
@@ -15,7 +18,13 @@ import { Type } from 'class-transformer';
 
 import { TradeSide, TradeStatus } from '../../../../generated/prisma';
 
+const POSITIVE_NUMBER_STRING_PATTERN =
+  /^(?:0*[1-9]\d*(?:\.\d+)?|0*\.\d*[1-9]\d*)$/;
+
 export class ImportTradeRowDto {
+  @IsInt()
+  @Min(2)
+  rowNumber!: number;
   @IsString()
   symbol!: string;
 
@@ -25,20 +34,36 @@ export class ImportTradeRowDto {
   @IsEnum(TradeStatus)
   status!: TradeStatus;
 
-  @Matches(/^\d+(\.\d+)?$/)
+  @Matches(POSITIVE_NUMBER_STRING_PATTERN, {
+    message: 'quantity must be a positive number string',
+  })
   quantity!: string;
 
-  @Matches(/^\d+(\.\d+)?$/)
+  @Matches(POSITIVE_NUMBER_STRING_PATTERN, {
+    message: 'entryPrice must be a positive number string',
+  })
   entryPrice!: string;
 
-  @IsOptional()
-  @Matches(/^\d+(\.\d+)?$/)
+  @ValidateIf(
+  (_object, value) =>
+        value !== null &&
+        value !== undefined &&
+        value !== '',
+  )
+  @Matches(POSITIVE_NUMBER_STRING_PATTERN, {
+    message: 'exitPrice must be a positive number string',
+  })
   exitPrice?: string | null;
 
   @IsISO8601()
   openedAt!: string;
 
-  @IsOptional()
+  @ValidateIf(
+  (_object, value) =>
+    value !== null &&
+    value !== undefined &&
+    value !== '',
+  )
   @IsISO8601()
   closedAt?: string | null;
 

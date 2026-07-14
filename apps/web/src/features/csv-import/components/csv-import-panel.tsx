@@ -3,14 +3,16 @@
 import { useState } from 'react';
 
 import type {
+    CsvImportResult,
     CsvParseResult,
     TradingAccountOption,
 } from '../types/csv-import.types';
 
+import { useImportTrades } from '../hooks/use-import-trades';
 import { parseTradesCsv } from '../utils/parse-trades-csv';
-
 import { CsvFileDropzone } from './csv-file-dropzone';
 import { CsvImportPreview } from './csv-import-preview';
+import { CsvImportSummary } from './csv-import-summary';
 
 interface CsvImportPanelProps {
   tradingAccounts: TradingAccountOption[];
@@ -23,46 +25,74 @@ export function CsvImportPanel({
   isLoadingAccounts = false,
   accountsError = null,
 }: CsvImportPanelProps) {
-  const [selectedAccountId, setSelectedAccountId] =
-    useState('');
+    const importMutation = useImportTrades();
+    const [importResult, setImportResult] =
+        useState<CsvImportResult | null>(null);
+    const [selectedAccountId, setSelectedAccountId] =
+        useState('');
 
-  const [parseResult, setParseResult] =
-    useState<CsvParseResult | null>(null);
+    const [parseResult, setParseResult] =
+        useState<CsvParseResult | null>(null);
 
-  const [isParsing, setIsParsing] =
-    useState(false);
+    const [isParsing, setIsParsing] =
+        useState(false);
 
-  const [parseError, setParseError] = useState<
-    string | null
-  >(null);
+    const [parseError, setParseError] = useState<
+        string | null
+    >(null);
 
-  async function handleFileSelected(file: File) {
-    setIsParsing(true);
-    setParseError(null);
-    setParseResult(null);
+    async function handleImport() {
+        if (
+            !selectedAccountId ||
+            !parseResult ||
+            parseResult.validRows.length === 0
+        ) {
+            return;
+        }
 
-    try {
-      const result = await parseTradesCsv(file);
+        setImportResult(null);
 
-      setParseResult(result);
-    } catch (error) {
-      setParseError(
-        error instanceof Error
-          ? error.message
-          : 'The CSV file could not be parsed',
-      );
-    } finally {
-      setIsParsing(false);
+        try {
+            const result = await importMutation.mutateAsync({
+            tradingAccountId: selectedAccountId,
+            rows: parseResult.validRows,
+            });
+
+            setImportResult(result);
+        } catch {
+            // The mutation error is rendered below.
+        }
     }
-  }
 
-  const validRowsCount =
-    parseResult?.validRows.length ?? 0;
+    async function handleFileSelected(file: File) {
+        setIsParsing(true);
+        setParseError(null);
+        setParseResult(null);
 
-  const canContinue =
-    selectedAccountId.length > 0 &&
-    validRowsCount > 0 &&
-    !isParsing;
+        try {
+            const result = await parseTradesCsv(file);
+
+            setParseResult(result);
+        } catch (error) {
+            setParseError(
+                error instanceof Error
+                ? error.message
+                : 'The CSV file could not be parsed',
+            );
+        } finally {
+            setIsParsing(false);
+        }
+    }
+
+    const validRowsCount =
+        parseResult?.validRows.length ?? 0;
+
+    const canContinue =
+        selectedAccountId.length > 0 &&
+        validRowsCount > 0 &&
+        !isParsing &&
+        !importMutation.isPending &&
+        importResult === null;
 
   return (
     <div className="space-y-6">
@@ -188,6 +218,14 @@ export function CsvImportPanel({
               Confirm import
             </h2>
 
+            {importMutation.isError && (
+                <div className="rounded-xl border border-red-200 bg-red-50 p-4">
+                    <p className="text-sm text-red-700">
+                    {importMutation.error.message}
+                    </p>
+                </div>
+            )}
+
             <p className="mt-1 text-sm text-slate-500">
               {validRowsCount > 0
                 ? `${validRowsCount} valid row${
@@ -199,13 +237,25 @@ export function CsvImportPanel({
             </p>
           </div>
 
-          <button
-            type="button"
-            disabled={!canContinue}
-            className="rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            Import valid rows
-          </button>
+            <button
+                type="button"
+                disabled={!canContinue}
+                onClick={handleImport}
+                className="rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                {importMutation.isPending
+                    ? 'Importing…'
+                    : 'Import valid rows'}
+            </button>
+
+            {importResult && (
+                <CsvImportSummary result={importResult} onImportAnother={() => {
+                    setParseResult(null);
+                    setParseError(null);
+                    setImportResult(null);
+                    importMutation.reset();
+                }} />
+            )}
         </div>
 
         <p className="mt-3 text-xs text-slate-400">

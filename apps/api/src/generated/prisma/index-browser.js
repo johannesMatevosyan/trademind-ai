@@ -163,6 +163,8 @@ exports.Prisma.TradeScalarFieldEnum = {
   openedAt: 'openedAt',
   closedAt: 'closedAt',
   notes: 'notes',
+  psychology: 'psychology',
+  lessonsLearned: 'lessonsLearned',
   userId: 'userId',
   tradingAccountId: 'tradingAccountId',
   symbolId: 'symbolId',

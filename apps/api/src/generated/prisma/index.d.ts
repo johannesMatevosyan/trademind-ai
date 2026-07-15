@@ -4868,6 +4868,8 @@ export namespace Prisma {
     openedAt: Date | null
     closedAt: Date | null
     notes: string | null
+    psychology: string | null
+    lessonsLearned: string | null
     userId: string | null
     tradingAccountId: string | null
     symbolId: string | null
@@ -4886,6 +4888,8 @@ export namespace Prisma {
     openedAt: Date | null
     closedAt: Date | null
     notes: string | null
+    psychology: string | null
+    lessonsLearned: string | null
     userId: string | null
     tradingAccountId: string | null
     symbolId: string | null
@@ -4904,6 +4908,8 @@ export namespace Prisma {
     openedAt: number
     closedAt: number
     notes: number
+    psychology: number
+    lessonsLearned: number
     userId: number
     tradingAccountId: number
     symbolId: number
@@ -4938,6 +4944,8 @@ export namespace Prisma {
     openedAt?: true
     closedAt?: true
     notes?: true
+    psychology?: true
+    lessonsLearned?: true
     userId?: true
     tradingAccountId?: true
     symbolId?: true
@@ -4956,6 +4964,8 @@ export namespace Prisma {
     openedAt?: true
     closedAt?: true
     notes?: true
+    psychology?: true
+    lessonsLearned?: true
     userId?: true
     tradingAccountId?: true
     symbolId?: true
@@ -4974,6 +4984,8 @@ export namespace Prisma {
     openedAt?: true
     closedAt?: true
     notes?: true
+    psychology?: true
+    lessonsLearned?: true
     userId?: true
     tradingAccountId?: true
     symbolId?: true
@@ -5079,6 +5091,8 @@ export namespace Prisma {
     openedAt: Date
     closedAt: Date | null
     notes: string | null
+    psychology: string | null
+    lessonsLearned: string | null
     userId: string
     tradingAccountId: string
     symbolId: string
@@ -5116,6 +5130,8 @@ export namespace Prisma {
     openedAt?: boolean
     closedAt?: boolean
     notes?: boolean
+    psychology?: boolean
+    lessonsLearned?: boolean
     userId?: boolean
     tradingAccountId?: boolean
     symbolId?: boolean
@@ -5139,6 +5155,8 @@ export namespace Prisma {
     openedAt?: boolean
     closedAt?: boolean
     notes?: boolean
+    psychology?: boolean
+    lessonsLearned?: boolean
     userId?: boolean
     tradingAccountId?: boolean
     symbolId?: boolean
@@ -5160,6 +5178,8 @@ export namespace Prisma {
     openedAt?: boolean
     closedAt?: boolean
     notes?: boolean
+    psychology?: boolean
+    lessonsLearned?: boolean
     userId?: boolean
     tradingAccountId?: boolean
     symbolId?: boolean
@@ -5181,6 +5201,8 @@ export namespace Prisma {
     openedAt?: boolean
     closedAt?: boolean
     notes?: boolean
+    psychology?: boolean
+    lessonsLearned?: boolean
     userId?: boolean
     tradingAccountId?: boolean
     symbolId?: boolean
@@ -5188,7 +5210,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type TradeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "side" | "status" | "quantity" | "entryPrice" | "exitPrice" | "pnl" | "openedAt" | "closedAt" | "notes" | "userId" | "tradingAccountId" | "symbolId" | "createdAt" | "updatedAt", ExtArgs["result"]["trade"]>
+  export type TradeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "side" | "status" | "quantity" | "entryPrice" | "exitPrice" | "pnl" | "openedAt" | "closedAt" | "notes" | "psychology" | "lessonsLearned" | "userId" | "tradingAccountId" | "symbolId" | "createdAt" | "updatedAt", ExtArgs["result"]["trade"]>
   export type TradeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     tradingAccount?: boolean | TradingAccountDefaultArgs<ExtArgs>
@@ -5229,6 +5251,8 @@ export namespace Prisma {
       openedAt: Date
       closedAt: Date | null
       notes: string | null
+      psychology: string | null
+      lessonsLearned: string | null
       userId: string
       tradingAccountId: string
       symbolId: string
@@ -5671,6 +5695,8 @@ export namespace Prisma {
     readonly openedAt: FieldRef<"Trade", 'DateTime'>
     readonly closedAt: FieldRef<"Trade", 'DateTime'>
     readonly notes: FieldRef<"Trade", 'String'>
+    readonly psychology: FieldRef<"Trade", 'String'>
+    readonly lessonsLearned: FieldRef<"Trade", 'String'>
     readonly userId: FieldRef<"Trade", 'String'>
     readonly tradingAccountId: FieldRef<"Trade", 'String'>
     readonly symbolId: FieldRef<"Trade", 'String'>
@@ -7323,6 +7349,8 @@ export namespace Prisma {
     openedAt: 'openedAt',
     closedAt: 'closedAt',
     notes: 'notes',
+    psychology: 'psychology',
+    lessonsLearned: 'lessonsLearned',
     userId: 'userId',
     tradingAccountId: 'tradingAccountId',
     symbolId: 'symbolId',
@@ -7727,6 +7755,8 @@ export namespace Prisma {
     openedAt?: DateTimeFilter<"Trade"> | Date | string
     closedAt?: DateTimeNullableFilter<"Trade"> | Date | string | null
     notes?: StringNullableFilter<"Trade"> | string | null
+    psychology?: StringNullableFilter<"Trade"> | string | null
+    lessonsLearned?: StringNullableFilter<"Trade"> | string | null
     userId?: StringFilter<"Trade"> | string
     tradingAccountId?: StringFilter<"Trade"> | string
     symbolId?: StringFilter<"Trade"> | string
@@ -7749,6 +7779,8 @@ export namespace Prisma {
     openedAt?: SortOrder
     closedAt?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
+    psychology?: SortOrderInput | SortOrder
+    lessonsLearned?: SortOrderInput | SortOrder
     userId?: SortOrder
     tradingAccountId?: SortOrder
     symbolId?: SortOrder
@@ -7774,6 +7806,8 @@ export namespace Prisma {
     openedAt?: DateTimeFilter<"Trade"> | Date | string
     closedAt?: DateTimeNullableFilter<"Trade"> | Date | string | null
     notes?: StringNullableFilter<"Trade"> | string | null
+    psychology?: StringNullableFilter<"Trade"> | string | null
+    lessonsLearned?: StringNullableFilter<"Trade"> | string | null
     userId?: StringFilter<"Trade"> | string
     tradingAccountId?: StringFilter<"Trade"> | string
     symbolId?: StringFilter<"Trade"> | string
@@ -7796,6 +7830,8 @@ export namespace Prisma {
     openedAt?: SortOrder
     closedAt?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
+    psychology?: SortOrderInput | SortOrder
+    lessonsLearned?: SortOrderInput | SortOrder
     userId?: SortOrder
     tradingAccountId?: SortOrder
     symbolId?: SortOrder
@@ -7822,6 +7858,8 @@ export namespace Prisma {
     openedAt?: DateTimeWithAggregatesFilter<"Trade"> | Date | string
     closedAt?: DateTimeNullableWithAggregatesFilter<"Trade"> | Date | string | null
     notes?: StringNullableWithAggregatesFilter<"Trade"> | string | null
+    psychology?: StringNullableWithAggregatesFilter<"Trade"> | string | null
+    lessonsLearned?: StringNullableWithAggregatesFilter<"Trade"> | string | null
     userId?: StringWithAggregatesFilter<"Trade"> | string
     tradingAccountId?: StringWithAggregatesFilter<"Trade"> | string
     symbolId?: StringWithAggregatesFilter<"Trade"> | string
@@ -8161,6 +8199,8 @@ export namespace Prisma {
     openedAt: Date | string
     closedAt?: Date | string | null
     notes?: string | null
+    psychology?: string | null
+    lessonsLearned?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutTradesInput
@@ -8180,6 +8220,8 @@ export namespace Prisma {
     openedAt: Date | string
     closedAt?: Date | string | null
     notes?: string | null
+    psychology?: string | null
+    lessonsLearned?: string | null
     userId: string
     tradingAccountId: string
     symbolId: string
@@ -8199,6 +8241,8 @@ export namespace Prisma {
     openedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    psychology?: NullableStringFieldUpdateOperationsInput | string | null
+    lessonsLearned?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutTradesNestedInput
@@ -8218,6 +8262,8 @@ export namespace Prisma {
     openedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    psychology?: NullableStringFieldUpdateOperationsInput | string | null
+    lessonsLearned?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     tradingAccountId?: StringFieldUpdateOperationsInput | string
     symbolId?: StringFieldUpdateOperationsInput | string
@@ -8237,6 +8283,8 @@ export namespace Prisma {
     openedAt: Date | string
     closedAt?: Date | string | null
     notes?: string | null
+    psychology?: string | null
+    lessonsLearned?: string | null
     userId: string
     tradingAccountId: string
     symbolId: string
@@ -8255,6 +8303,8 @@ export namespace Prisma {
     openedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    psychology?: NullableStringFieldUpdateOperationsInput | string | null
+    lessonsLearned?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -8270,6 +8320,8 @@ export namespace Prisma {
     openedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    psychology?: NullableStringFieldUpdateOperationsInput | string | null
+    lessonsLearned?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     tradingAccountId?: StringFieldUpdateOperationsInput | string
     symbolId?: StringFieldUpdateOperationsInput | string
@@ -8701,6 +8753,8 @@ export namespace Prisma {
     openedAt?: SortOrder
     closedAt?: SortOrder
     notes?: SortOrder
+    psychology?: SortOrder
+    lessonsLearned?: SortOrder
     userId?: SortOrder
     tradingAccountId?: SortOrder
     symbolId?: SortOrder
@@ -8726,6 +8780,8 @@ export namespace Prisma {
     openedAt?: SortOrder
     closedAt?: SortOrder
     notes?: SortOrder
+    psychology?: SortOrder
+    lessonsLearned?: SortOrder
     userId?: SortOrder
     tradingAccountId?: SortOrder
     symbolId?: SortOrder
@@ -8744,6 +8800,8 @@ export namespace Prisma {
     openedAt?: SortOrder
     closedAt?: SortOrder
     notes?: SortOrder
+    psychology?: SortOrder
+    lessonsLearned?: SortOrder
     userId?: SortOrder
     tradingAccountId?: SortOrder
     symbolId?: SortOrder
@@ -9580,6 +9638,8 @@ export namespace Prisma {
     openedAt: Date | string
     closedAt?: Date | string | null
     notes?: string | null
+    psychology?: string | null
+    lessonsLearned?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tradingAccount: TradingAccountCreateNestedOneWithoutTradesInput
@@ -9598,6 +9658,8 @@ export namespace Prisma {
     openedAt: Date | string
     closedAt?: Date | string | null
     notes?: string | null
+    psychology?: string | null
+    lessonsLearned?: string | null
     tradingAccountId: string
     symbolId: string
     createdAt?: Date | string
@@ -9706,6 +9768,8 @@ export namespace Prisma {
     openedAt?: DateTimeFilter<"Trade"> | Date | string
     closedAt?: DateTimeNullableFilter<"Trade"> | Date | string | null
     notes?: StringNullableFilter<"Trade"> | string | null
+    psychology?: StringNullableFilter<"Trade"> | string | null
+    lessonsLearned?: StringNullableFilter<"Trade"> | string | null
     userId?: StringFilter<"Trade"> | string
     tradingAccountId?: StringFilter<"Trade"> | string
     symbolId?: StringFilter<"Trade"> | string
@@ -9786,6 +9850,8 @@ export namespace Prisma {
     openedAt: Date | string
     closedAt?: Date | string | null
     notes?: string | null
+    psychology?: string | null
+    lessonsLearned?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutTradesInput
@@ -9804,6 +9870,8 @@ export namespace Prisma {
     openedAt: Date | string
     closedAt?: Date | string | null
     notes?: string | null
+    psychology?: string | null
+    lessonsLearned?: string | null
     userId: string
     symbolId: string
     createdAt?: Date | string
@@ -9885,6 +9953,8 @@ export namespace Prisma {
     openedAt: Date | string
     closedAt?: Date | string | null
     notes?: string | null
+    psychology?: string | null
+    lessonsLearned?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutTradesInput
@@ -9903,6 +9973,8 @@ export namespace Prisma {
     openedAt: Date | string
     closedAt?: Date | string | null
     notes?: string | null
+    psychology?: string | null
+    lessonsLearned?: string | null
     userId: string
     tradingAccountId: string
     createdAt?: Date | string
@@ -10210,6 +10282,8 @@ export namespace Prisma {
     openedAt: Date | string
     closedAt?: Date | string | null
     notes?: string | null
+    psychology?: string | null
+    lessonsLearned?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutTradesInput
@@ -10228,6 +10302,8 @@ export namespace Prisma {
     openedAt: Date | string
     closedAt?: Date | string | null
     notes?: string | null
+    psychology?: string | null
+    lessonsLearned?: string | null
     userId: string
     tradingAccountId: string
     symbolId: string
@@ -10299,6 +10375,8 @@ export namespace Prisma {
     openedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    psychology?: NullableStringFieldUpdateOperationsInput | string | null
+    lessonsLearned?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutTradesNestedInput
@@ -10317,6 +10395,8 @@ export namespace Prisma {
     openedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    psychology?: NullableStringFieldUpdateOperationsInput | string | null
+    lessonsLearned?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     tradingAccountId?: StringFieldUpdateOperationsInput | string
     symbolId?: StringFieldUpdateOperationsInput | string
@@ -10344,6 +10424,8 @@ export namespace Prisma {
     openedAt: Date | string
     closedAt?: Date | string | null
     notes?: string | null
+    psychology?: string | null
+    lessonsLearned?: string | null
     tradingAccountId: string
     symbolId: string
     createdAt?: Date | string
@@ -10401,6 +10483,8 @@ export namespace Prisma {
     openedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    psychology?: NullableStringFieldUpdateOperationsInput | string | null
+    lessonsLearned?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tradingAccount?: TradingAccountUpdateOneRequiredWithoutTradesNestedInput
@@ -10419,6 +10503,8 @@ export namespace Prisma {
     openedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    psychology?: NullableStringFieldUpdateOperationsInput | string | null
+    lessonsLearned?: NullableStringFieldUpdateOperationsInput | string | null
     tradingAccountId?: StringFieldUpdateOperationsInput | string
     symbolId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10437,6 +10523,8 @@ export namespace Prisma {
     openedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    psychology?: NullableStringFieldUpdateOperationsInput | string | null
+    lessonsLearned?: NullableStringFieldUpdateOperationsInput | string | null
     tradingAccountId?: StringFieldUpdateOperationsInput | string
     symbolId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10487,6 +10575,8 @@ export namespace Prisma {
     openedAt: Date | string
     closedAt?: Date | string | null
     notes?: string | null
+    psychology?: string | null
+    lessonsLearned?: string | null
     userId: string
     symbolId: string
     createdAt?: Date | string
@@ -10504,6 +10594,8 @@ export namespace Prisma {
     openedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    psychology?: NullableStringFieldUpdateOperationsInput | string | null
+    lessonsLearned?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutTradesNestedInput
@@ -10522,6 +10614,8 @@ export namespace Prisma {
     openedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    psychology?: NullableStringFieldUpdateOperationsInput | string | null
+    lessonsLearned?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     symbolId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10540,6 +10634,8 @@ export namespace Prisma {
     openedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    psychology?: NullableStringFieldUpdateOperationsInput | string | null
+    lessonsLearned?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     symbolId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10557,6 +10653,8 @@ export namespace Prisma {
     openedAt: Date | string
     closedAt?: Date | string | null
     notes?: string | null
+    psychology?: string | null
+    lessonsLearned?: string | null
     userId: string
     tradingAccountId: string
     createdAt?: Date | string
@@ -10574,6 +10672,8 @@ export namespace Prisma {
     openedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    psychology?: NullableStringFieldUpdateOperationsInput | string | null
+    lessonsLearned?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutTradesNestedInput
@@ -10592,6 +10692,8 @@ export namespace Prisma {
     openedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    psychology?: NullableStringFieldUpdateOperationsInput | string | null
+    lessonsLearned?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     tradingAccountId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10610,6 +10712,8 @@ export namespace Prisma {
     openedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    psychology?: NullableStringFieldUpdateOperationsInput | string | null
+    lessonsLearned?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     tradingAccountId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

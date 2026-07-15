@@ -99,7 +99,9 @@ model Trade {
   openedAt DateTime
   closedAt DateTime?
 
-  notes String?
+  notes          String?
+  psychology     String?
+  lessonsLearned String?
 
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)

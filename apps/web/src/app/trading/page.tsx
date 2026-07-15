@@ -9,13 +9,11 @@ import { useTradePagination } from '@/features/trades/hooks/use-trade-pagination
 import { useTrades } from '@/features/trades/hooks/use-trades';
 import { TradingAccountsList } from '@/features/trading-accounts/components/trading-accounts-list';
 import { useTradingAccounts } from '@/features/trading-accounts/hooks/use-trading-accounts';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 
 export default function TradingPage() {
   useAuthRedirect();
-
-  const router = useRouter();
 
   const {
     data: trades = [],
@@ -54,16 +52,20 @@ export default function TradingPage() {
           </div>
 
           <div className="flex items-center gap-3">
-            <button className="rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm">
-              Filters
-            </button>
 
-            <button
-              onClick={() => router.push('/trading/new')}
-              className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-medium text-white shadow-sm"
+            <Link
+                href="/trading/import"
+                className="inline-flex items-center rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50"
+              >
+                Import CSV
+            </Link>
+
+            <Link
+              href="/trading/new"
+              className="inline-flex items-center rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-slate-800"
             >
-              + Add Trade
-            </button>
+              Add Trade
+            </Link>
           </div>
         </section>
 

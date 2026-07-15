@@ -1,10 +1,26 @@
 import type {
-    CsvImportPreviewRow,
-    CsvParseResult,
+  CsvImportPreviewRow,
+  CsvParseResult,
 } from '../types/csv-import.types';
 
 interface CsvImportPreviewProps {
   result: CsvParseResult;
+}
+
+function formatDateValue(value: string): string {
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return value;
+  }
+
+  return new Intl.DateTimeFormat(undefined, {
+    year: 'numeric',
+    month: 'short',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+  }).format(date);
 }
 
 function getDisplayValue(
@@ -25,7 +41,16 @@ function getDisplayValue(
     return '—';
   }
 
-  return rawValue.trim();
+  const normalizedValue = rawValue.trim();
+
+  if (
+    field === 'openedAt' ||
+    field === 'closedAt'
+  ) {
+    return formatDateValue(normalizedValue);
+  }
+
+  return normalizedValue;
 }
 
 export function CsvImportPreview({

@@ -6,6 +6,18 @@ export interface TradeSymbol {
   code?: string | null;
 }
 
+export interface TradeReflection {
+  notes: string | null;
+  psychology: string | null;
+  lessonsLearned: string | null;
+}
+
+export interface UpdateTradeReflectionInput {
+  notes?: string;
+  psychology?: string;
+  lessonsLearned?: string;
+}
+
 export interface Trade {
   id: string;
   side: TradeSide;
@@ -16,7 +28,11 @@ export interface Trade {
   pnl: number | null;
   openedAt: string;
   closedAt: string | null;
-  notes?: string | null;
+
+  notes: string | null;
+  psychology: string | null;
+  lessonsLearned: string | null;
+
   tradingAccountId: string;
   symbolId: string;
   symbol?: TradeSymbol | null;
@@ -40,6 +56,11 @@ export interface TradeDetails {
   pnl?: string | number | null;
   openedAt?: string | null;
   closedAt?: string | null;
+
+  notes?: string | null;
+  psychology?: string | null;
+  lessonsLearned?: string | null;
+
   createdAt?: string | null;
   updatedAt?: string | null;
 }

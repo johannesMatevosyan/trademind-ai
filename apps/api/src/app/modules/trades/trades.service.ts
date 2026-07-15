@@ -7,6 +7,7 @@ import {
   ImportTradeRowDto,
   ImportTradesDto,
 } from './dto/import-trades.dto';
+import { UpdateTradeReflectionDto } from './dto/update-trade-reflection.dto';
 import { UpdateTradeDto } from './dto/update-trade.dto';
 import { TradesRepository } from './trades.repository';
 import {
@@ -104,22 +105,51 @@ export class TradesService {
     }
 
     const data: Prisma.TradeUpdateInput = {
-      symbol: dto.symbol
-        ? {
-            connect: { code: dto.symbol },
-          }
-        : undefined,
-      side: dto.side,
-      status: dto.status ?? undefined,
-      entryPrice: dto.entryPrice,
-      exitPrice: dto.exitPrice,
-      quantity: dto.quantity,
+        symbol: dto.symbol
+          ? {
+              connect: { code: dto.symbol },
+            }
+          : undefined,
+        side: dto.side,
+        status: dto.status ?? undefined,
+        entryPrice: dto.entryPrice,
+        exitPrice: dto.exitPrice,
+        quantity: dto.quantity,
+        notes: dto.notes,
+        openedAt: dto.openedAt
+          ? new Date(dto.openedAt)
+          : undefined,
+        closedAt: dto.closedAt
+          ? new Date(dto.closedAt)
+          : undefined,
+        tradingAccount: dto.tradingAccountId
+          ? {
+              connect: { id: dto.tradingAccountId },
+            }
+          : undefined,
+    };
+
+    return this.tradesRepository.update(id, data);
+  }
+
+  async updateReflection(
+    id: string,
+    userId: string,
+    dto: UpdateTradeReflectionDto,
+  ) {
+    const trade = await this.tradesRepository.findByIdAndUserId(
+      id,
+      userId,
+    );
+
+    if (!trade) {
+      throw new NotFoundException('Trade not found');
+    }
+
+    const data: Prisma.TradeUpdateInput = {
       notes: dto.notes,
-      openedAt: dto.openedAt ? new Date(dto.openedAt) : undefined,
-      closedAt: dto.closedAt ? new Date(dto.closedAt) : undefined,
-      tradingAccount: dto.tradingAccountId
-        ? { connect: { id: dto.tradingAccountId } }
-        : undefined,
+      psychology: dto.psychology,
+      lessonsLearned: dto.lessonsLearned,
     };
 
     return this.tradesRepository.update(id, data);

@@ -15,6 +15,7 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 import { CreateTradeDto } from './dto/create-trade.dto';
 import { ImportTradesDto } from './dto/import-trades.dto';
+import { UpdateTradeReflectionDto } from './dto/update-trade-reflection.dto';
 import { UpdateTradeDto } from './dto/update-trade.dto';
 import { TradesService } from './trades.service';
 
@@ -45,6 +46,19 @@ export class TradesController {
     @Body() dto: UpdateTradeDto,
   ) {
     return this.tradesService.update(id, user.id, dto);
+  }
+
+  @Patch(':id/reflection')
+  updateReflection(
+    @Param('id') id: string,
+    @CurrentUser() user: AuthUser,
+    @Body() dto: UpdateTradeReflectionDto,
+  ) {
+    return this.tradesService.updateReflection(
+      id,
+      user.id,
+      dto,
+    );
   }
 
   @Delete(':id')

@@ -1,17 +1,19 @@
-import type { Trade } from '../types/trade.types';
-import { TradeAccountInfo } from './trade-account-info';
-import { TradeHeader } from './trade-header';
-import { TradeMetrics } from './trade-metrics';
-import { TradeReflection } from './trade-reflection/trade-reflection';
-import { TradeTimeline } from './trade-timeline';
+import type { Trade } from '../../types/trade.types';
+import { TradeAccountInfo } from '../trade-account-info';
+import { TradeHeader } from '../trade-header';
+import { TradeMetrics } from '../trade-metrics';
+import { TradeTimeline } from '../trade-timeline';
+import { TradeReflection } from './trade-reflection';
 
 interface TradeDetailsCardProps {
   trade: Trade;
 }
 
-export function TradeDetailsCard({ trade }: TradeDetailsCardProps) {
+export function TradeDetailsCard({
+  trade,
+}: TradeDetailsCardProps) {
   return (
-    <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm flex flex-col gap-6">
+    <section className="flex flex-col gap-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
       <TradeHeader
         symbol={trade.symbol?.code ?? null}
         accountName={trade.tradingAccountId ?? null}

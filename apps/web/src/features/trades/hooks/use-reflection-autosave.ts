@@ -7,12 +7,8 @@ import {
     useState,
 } from 'react';
 
-import type {
-    ReflectionSaveStatus,
-} from '../components/trade-reflection/autosave-status';
-import type {
-    UpdateTradeReflectionInput,
-} from '../types/trade.types';
+import type { ReflectionSaveStatus } from '../components/trade-reflection/autosave-status';
+import type { UpdateTradeReflectionInput } from '../types/trade.types';
 import { useUpdateTradeReflection } from './use-update-trade-reflection';
 
 type ReflectionField =
@@ -26,6 +22,8 @@ interface UseReflectionAutosaveParams {
   initialValue?: string | null;
   delay?: number;
 }
+
+const SAVED_STATUS_DURATION = 2_500;
 
 export function useReflectionAutosave({
   tradeId,
@@ -53,7 +51,19 @@ export function useReflectionAutosave({
 
   const latestValueRef = useRef(value);
   const requestIdRef = useRef(0);
-  const isInitialRenderRef = useRef(true);
+  const skipInitialAutosaveRef = useRef(true);
+  const savedStatusTimeoutRef =
+    useRef<number | null>(null);
+
+  const clearSavedStatusTimeout = useCallback(() => {
+    if (savedStatusTimeoutRef.current !== null) {
+      window.clearTimeout(
+        savedStatusTimeoutRef.current,
+      );
+
+      savedStatusTimeoutRef.current = null;
+    }
+  }, []);
 
   useEffect(() => {
     latestValueRef.current = value;
@@ -62,14 +72,22 @@ export function useReflectionAutosave({
   useEffect(() => {
     const nextValue = initialValue ?? '';
 
+    clearSavedStatusTimeout();
+
     setValue(nextValue);
     setSavedValue(nextValue);
     setStatus('idle');
 
     latestValueRef.current = nextValue;
-    isInitialRenderRef.current = true;
+    skipInitialAutosaveRef.current = true;
+
+    // Invalidates responses belonging to the previous trade.
     requestIdRef.current += 1;
-  }, [initialValue, tradeId]);
+  }, [
+    clearSavedStatusTimeout,
+    initialValue,
+    tradeId,
+  ]);
 
   const save = useCallback(
     (valueToSave: string) => {
@@ -78,7 +96,11 @@ export function useReflectionAutosave({
         return;
       }
 
-      const requestId = requestIdRef.current + 1;
+      clearSavedStatusTimeout();
+
+      const requestId =
+        requestIdRef.current + 1;
+
       requestIdRef.current = requestId;
 
       setStatus('saving');
@@ -96,12 +118,25 @@ export function useReflectionAutosave({
           setSavedValue(valueToSave);
 
           if (
-            latestValueRef.current === valueToSave
+            latestValueRef.current !== valueToSave
           ) {
-            setStatus('saved');
-          } else {
             setStatus('unsaved');
+            return;
           }
+
+          setStatus('saved');
+
+          savedStatusTimeoutRef.current =
+            window.setTimeout(() => {
+              if (
+                requestId ===
+                  requestIdRef.current &&
+                latestValueRef.current ===
+                  valueToSave
+              ) {
+                setStatus('idle');
+              }
+            }, SAVED_STATUS_DURATION);
         },
 
         onError: () => {
@@ -114,6 +149,7 @@ export function useReflectionAutosave({
       });
     },
     [
+      clearSavedStatusTimeout,
       field,
       savedValue,
       updateReflection,
@@ -121,10 +157,12 @@ export function useReflectionAutosave({
   );
 
   useEffect(() => {
-    if (isInitialRenderRef.current) {
-      isInitialRenderRef.current = false;
+    if (skipInitialAutosaveRef.current) {
+      skipInitialAutosaveRef.current = false;
       return;
     }
+
+    clearSavedStatusTimeout();
 
     if (value === savedValue) {
       setStatus('idle');
@@ -141,11 +179,52 @@ export function useReflectionAutosave({
       window.clearTimeout(timeoutId);
     };
   }, [
+    clearSavedStatusTimeout,
     delay,
     save,
     savedValue,
     value,
   ]);
+
+  const hasUnsavedChanges =
+    value !== savedValue;
+
+  useEffect(() => {
+    const handleBeforeUnload = (
+      event: BeforeUnloadEvent,
+    ) => {
+      if (
+        !hasUnsavedChanges &&
+        status !== 'saving'
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+      event.returnValue = '';
+    };
+
+    window.addEventListener(
+      'beforeunload',
+      handleBeforeUnload,
+    );
+
+    return () => {
+      window.removeEventListener(
+        'beforeunload',
+        handleBeforeUnload,
+      );
+    };
+  }, [
+    hasUnsavedChanges,
+    status,
+  ]);
+
+  useEffect(() => {
+    return () => {
+      clearSavedStatusTimeout();
+    };
+  }, [clearSavedStatusTimeout]);
 
   const retry = useCallback(() => {
     save(latestValueRef.current);
@@ -156,7 +235,7 @@ export function useReflectionAutosave({
     setValue,
     status,
     retry,
+    hasUnsavedChanges,
     isSaving: status === 'saving',
-    hasUnsavedChanges: value !== savedValue,
   };
 }

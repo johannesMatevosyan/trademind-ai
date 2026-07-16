@@ -21,13 +21,18 @@ export function AutosaveStatus({
       aria-live="polite"
     >
       {status === 'unsaved' && (
-        <span className="text-amber-600">
+        <span className="font-medium text-amber-600">
           Unsaved changes
         </span>
       )}
 
       {status === 'saving' && (
-        <span className="text-slate-500">
+        <span className="inline-flex items-center gap-2 text-slate-500">
+          <span
+            aria-hidden="true"
+            className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-slate-300 border-t-slate-600"
+          />
+
           Saving...
         </span>
       )}
@@ -48,7 +53,7 @@ export function AutosaveStatus({
             <button
               type="button"
               onClick={onRetry}
-              className="font-medium text-red-700 underline underline-offset-2 hover:text-red-900"
+              className="font-medium text-red-700 underline underline-offset-2 transition hover:text-red-900 focus:outline-none focus:ring-2 focus:ring-red-300"
             >
               Retry
             </button>

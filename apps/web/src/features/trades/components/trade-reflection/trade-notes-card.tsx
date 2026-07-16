@@ -14,16 +14,35 @@ export function TradeNotesCard({
   tradeId,
   initialValue,
 }: TradeNotesCardProps) {
-  const {
-    value: notes,
-    setValue: setNotes,
-    status,
-    retry,
-  } = useReflectionAutosave({
-    tradeId,
-    field: 'notes',
-    initialValue,
-  });
+
+    const {
+        value: notes,
+        setValue: setNotes,
+        status,
+        retry,
+    } = useReflectionAutosave({
+        tradeId,
+        field: 'notes',
+        initialValue,
+    });
+
+    const characterCountClass =
+        notes.length >= MAX_NOTES_LENGTH
+            ? 'text-red-600'
+            : notes.length >= MAX_NOTES_LENGTH * 0.9
+            ? 'text-amber-600'
+            : 'text-slate-500';
+
+    const textareaStateClass =
+        status === 'error'
+            ? 'border-red-400 focus:border-red-500 focus:ring-red-100'
+            : status === 'unsaved'
+            ? 'border-amber-400 focus:border-amber-500 focus:ring-amber-100'
+            : status === 'saving'
+                ? 'border-sky-400 focus:border-sky-500 focus:ring-sky-100'
+                : status === 'saved'
+                ? 'border-emerald-400 focus:border-emerald-500 focus:ring-emerald-100'
+                : 'border-slate-300 focus:border-slate-500 focus:ring-slate-200';
 
   return (
     <section className="w-full rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -54,25 +73,24 @@ export function TradeNotesCard({
         </label>
 
         <textarea
-          id={`trade-notes-${tradeId}`}
-          value={notes}
-          maxLength={MAX_NOTES_LENGTH}
-          onChange={(event) =>
-            setNotes(event.target.value)
-          }
-          placeholder="Document your setup, market context, entry reason, trade management, and what happened during the trade."
-          className="mt-2 min-h-48 w-full resize-y rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm leading-6 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
+            id={`trade-notes-${tradeId}`}
+            value={notes}
+            maxLength={MAX_NOTES_LENGTH}
+            onChange={(event) =>
+                setNotes(event.target.value)
+            }
+            placeholder="Document your setup, market context, entry reason, trade management, and what happened during the trade."
+            className={`mt-2 min-h-48 w-full resize-y rounded-xl border bg-white px-4 py-3 text-sm leading-6 text-slate-900 outline-none transition placeholder:text-slate-400 focus:ring-2 ${textareaStateClass}`}
         />
-
         <div className="mt-3 flex items-center justify-between">
-          <span className="text-xs text-slate-500">
-            {notes.length.toLocaleString()} /{' '}
-            {MAX_NOTES_LENGTH.toLocaleString()}
-          </span>
+            <span className={`text-xs font-medium ${characterCountClass}`}>
+                {notes.length.toLocaleString()} /{' '}
+                {MAX_NOTES_LENGTH.toLocaleString()}
+            </span>
 
-          <span className="text-xs text-slate-400">
-            Autosaves after you stop typing
-          </span>
+            <span className="text-xs text-slate-400">
+                Autosaves after you stop typing
+            </span>
         </div>
       </div>
     </section>

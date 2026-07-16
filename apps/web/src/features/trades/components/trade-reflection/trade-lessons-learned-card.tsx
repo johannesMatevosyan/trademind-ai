@@ -82,7 +82,10 @@ export function TradeLessonsLearnedCard({
           </p>
         </div>
 
-        <AutosaveStatus status={saveStatus} />
+        <AutosaveStatus
+            status={saveStatus}
+            onRetry={handleSave}
+        />
       </div>
 
       <div className="mt-5">

@@ -1,15 +1,7 @@
 'use client';
 
-import {
-    useEffect,
-    useState,
-} from 'react';
-
-import { useUpdateTradeReflection } from '../../hooks/use-update-trade-reflection';
-import {
-    AutosaveStatus,
-    type ReflectionSaveStatus,
-} from './autosave-status';
+import { useReflectionAutosave } from '../../hooks/use-reflection-autosave';
+import { AutosaveStatus } from './autosave-status';
 
 interface TradePsychologyCardProps {
   tradeId: string;
@@ -33,29 +25,16 @@ export function TradePsychologyCard({
   tradeId,
   initialValue,
 }: TradePsychologyCardProps) {
-  const [psychology, setPsychology] = useState(
-    initialValue ?? '',
-  );
-  const [savedValue, setSavedValue] = useState(
-    initialValue ?? '',
-  );
-  const [saveStatus, setSaveStatus] =
-    useState<ReflectionSaveStatus>('idle');
-
-  const updateReflection =
-    useUpdateTradeReflection({
-      tradeId,
-    });
-
-  useEffect(() => {
-    const nextValue = initialValue ?? '';
-
-    setPsychology(nextValue);
-    setSavedValue(nextValue);
-    setSaveStatus('idle');
-  }, [initialValue, tradeId]);
-
-  const hasChanges = psychology !== savedValue;
+  const {
+    value: psychology,
+    setValue: setPsychology,
+    status,
+    retry,
+  } = useReflectionAutosave({
+    tradeId,
+    field: 'psychology',
+    initialValue,
+  });
 
   const addEmotionalState = (state: string) => {
     const prefix = `Emotional state: ${state}`;
@@ -71,31 +50,6 @@ export function TradePsychologyCard({
 
       return `${prefix}\n\n${currentValue}`;
     });
-
-    setSaveStatus('idle');
-  };
-
-  const handleSave = () => {
-    if (!hasChanges || updateReflection.isPending) {
-      return;
-    }
-
-    setSaveStatus('saving');
-
-    updateReflection.mutate(
-      {
-        psychology,
-      },
-      {
-        onSuccess: () => {
-          setSavedValue(psychology);
-          setSaveStatus('saved');
-        },
-        onError: () => {
-          setSaveStatus('error');
-        },
-      },
-    );
   };
 
   return (
@@ -111,7 +65,10 @@ export function TradePsychologyCard({
           </p>
         </div>
 
-        <AutosaveStatus status={saveStatus} />
+        <AutosaveStatus
+          status={status}
+          onRetry={retry}
+        />
       </div>
 
       <fieldset className="mt-5">
@@ -145,13 +102,9 @@ export function TradePsychologyCard({
           id={`trade-psychology-${tradeId}`}
           value={psychology}
           maxLength={MAX_PSYCHOLOGY_LENGTH}
-          onChange={(event) => {
-            setPsychology(event.target.value);
-
-            if (saveStatus !== 'idle') {
-              setSaveStatus('idle');
-            }
-          }}
+          onChange={(event) =>
+            setPsychology(event.target.value)
+          }
           placeholder="How did emotions affect this trade? Did you follow the plan or act impulsively?"
           className="mt-2 min-h-40 w-full resize-y rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm leading-6 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
         />
@@ -162,28 +115,19 @@ export function TradePsychologyCard({
             {MAX_PSYCHOLOGY_LENGTH.toLocaleString()}
           </span>
 
-          <button
-            type="button"
-            onClick={handleSave}
-            disabled={
-              !hasChanges ||
-              updateReflection.isPending
-            }
-            className="inline-flex min-h-10 items-center justify-center rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-slate-700 disabled:cursor-not-allowed disabled:bg-slate-300"
-          >
-            {updateReflection.isPending
-              ? 'Saving...'
-              : 'Save psychology'}
-          </button>
+          <span className="text-xs text-slate-400">
+            Autosaves after you stop typing
+          </span>
         </div>
 
-        {saveStatus === 'error' && (
+        {status === 'error' && (
           <p className="mt-3 text-sm text-red-600">
             Your reflection is still available in the
-            textarea. Try saving it again.
+            textarea. Use Retry to save it again.
           </p>
         )}
       </div>
     </section>
   );
 }
+

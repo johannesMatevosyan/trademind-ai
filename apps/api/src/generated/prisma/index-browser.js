@@ -172,6 +172,16 @@ exports.Prisma.TradeScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.TradeAttachmentScalarFieldEnum = {
+  id: 'id',
+  tradeId: 'tradeId',
+  filename: 'filename',
+  mimeType: 'mimeType',
+  size: 'size',
+  storageKey: 'storageKey',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.JournalEntryScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -227,6 +237,7 @@ exports.Prisma.ModelName = {
   TradingAccount: 'TradingAccount',
   Symbol: 'Symbol',
   Trade: 'Trade',
+  TradeAttachment: 'TradeAttachment',
   JournalEntry: 'JournalEntry'
 };
 

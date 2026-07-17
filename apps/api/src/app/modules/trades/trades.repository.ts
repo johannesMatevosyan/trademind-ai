@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import type { Prisma } from '../../../generated/prisma';
 
 import { PrismaService } from '../../infrastructure/prisma/prisma.service';
+import { CreateTradeAttachmentRecord } from './types/create-trade-attachment-record.type';
 
 @Injectable()
 export class TradesRepository {
@@ -68,6 +69,77 @@ export class TradesRepository {
         }),
       ),
     );
+  }
+
+  findTradeAttachmentOwnerRecord(
+    tradeId: string,
+    userId: string,
+  ) {
+    return this.prisma.trade.findFirst({
+      where: {
+        id: tradeId,
+        userId,
+      },
+      select: {
+        id: true,
+        _count: {
+          select: {
+            attachments: true,
+          },
+        },
+      },
+    });
+  }
+
+  findTradeAttachments(
+    tradeId: string,
+    userId: string,
+  ) {
+    return this.prisma.tradeAttachment.findMany({
+      where: {
+        tradeId,
+        trade: {
+          userId,
+        },
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+  }
+
+  findTradeAttachmentById(
+    tradeId: string,
+    attachmentId: string,
+    userId: string,
+  ) {
+    return this.prisma.tradeAttachment.findFirst({
+      where: {
+        id: attachmentId,
+        tradeId,
+        trade: {
+          userId,
+        },
+      },
+    });
+  }
+
+  createTradeAttachment(
+    data: CreateTradeAttachmentRecord,
+  ) {
+    return this.prisma.tradeAttachment.create({
+      data,
+    });
+  }
+
+  deleteTradeAttachment(
+    attachmentId: string,
+  ) {
+    return this.prisma.tradeAttachment.delete({
+      where: {
+        id: attachmentId,
+      },
+    });
   }
 
   create(data: Prisma.TradeCreateInput) {

@@ -34,6 +34,11 @@ export type Symbol = $Result.DefaultSelection<Prisma.$SymbolPayload>
  */
 export type Trade = $Result.DefaultSelection<Prisma.$TradePayload>
 /**
+ * Model TradeAttachment
+ * 
+ */
+export type TradeAttachment = $Result.DefaultSelection<Prisma.$TradeAttachmentPayload>
+/**
  * Model JournalEntry
  * 
  */
@@ -256,6 +261,16 @@ export class PrismaClient<
     * ```
     */
   get trade(): Prisma.TradeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.tradeAttachment`: Exposes CRUD operations for the **TradeAttachment** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TradeAttachments
+    * const tradeAttachments = await prisma.tradeAttachment.findMany()
+    * ```
+    */
+  get tradeAttachment(): Prisma.TradeAttachmentDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.journalEntry`: Exposes CRUD operations for the **JournalEntry** model.
@@ -704,6 +719,7 @@ export namespace Prisma {
     TradingAccount: 'TradingAccount',
     Symbol: 'Symbol',
     Trade: 'Trade',
+    TradeAttachment: 'TradeAttachment',
     JournalEntry: 'JournalEntry'
   };
 
@@ -720,7 +736,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "tradingAccount" | "symbol" | "trade" | "journalEntry"
+      modelProps: "user" | "tradingAccount" | "symbol" | "trade" | "tradeAttachment" | "journalEntry"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1020,6 +1036,80 @@ export namespace Prisma {
           }
         }
       }
+      TradeAttachment: {
+        payload: Prisma.$TradeAttachmentPayload<ExtArgs>
+        fields: Prisma.TradeAttachmentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TradeAttachmentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TradeAttachmentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TradeAttachmentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TradeAttachmentPayload>
+          }
+          findFirst: {
+            args: Prisma.TradeAttachmentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TradeAttachmentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TradeAttachmentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TradeAttachmentPayload>
+          }
+          findMany: {
+            args: Prisma.TradeAttachmentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TradeAttachmentPayload>[]
+          }
+          create: {
+            args: Prisma.TradeAttachmentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TradeAttachmentPayload>
+          }
+          createMany: {
+            args: Prisma.TradeAttachmentCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TradeAttachmentCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TradeAttachmentPayload>[]
+          }
+          delete: {
+            args: Prisma.TradeAttachmentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TradeAttachmentPayload>
+          }
+          update: {
+            args: Prisma.TradeAttachmentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TradeAttachmentPayload>
+          }
+          deleteMany: {
+            args: Prisma.TradeAttachmentDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TradeAttachmentUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TradeAttachmentUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TradeAttachmentPayload>[]
+          }
+          upsert: {
+            args: Prisma.TradeAttachmentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TradeAttachmentPayload>
+          }
+          aggregate: {
+            args: Prisma.TradeAttachmentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTradeAttachment>
+          }
+          groupBy: {
+            args: Prisma.TradeAttachmentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TradeAttachmentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TradeAttachmentCountArgs<ExtArgs>
+            result: $Utils.Optional<TradeAttachmentCountAggregateOutputType> | number
+          }
+        }
+      }
       JournalEntry: {
         payload: Prisma.$JournalEntryPayload<ExtArgs>
         fields: Prisma.JournalEntryFieldRefs
@@ -1206,6 +1296,7 @@ export namespace Prisma {
     tradingAccount?: TradingAccountOmit
     symbol?: SymbolOmit
     trade?: TradeOmit
+    tradeAttachment?: TradeAttachmentOmit
     journalEntry?: JournalEntryOmit
   }
 
@@ -1399,10 +1490,12 @@ export namespace Prisma {
 
   export type TradeCountOutputType = {
     journalEntries: number
+    attachments: number
   }
 
   export type TradeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     journalEntries?: boolean | TradeCountOutputTypeCountJournalEntriesArgs
+    attachments?: boolean | TradeCountOutputTypeCountAttachmentsArgs
   }
 
   // Custom InputTypes
@@ -1421,6 +1514,13 @@ export namespace Prisma {
    */
   export type TradeCountOutputTypeCountJournalEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: JournalEntryWhereInput
+  }
+
+  /**
+   * TradeCountOutputType without action
+   */
+  export type TradeCountOutputTypeCountAttachmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TradeAttachmentWhereInput
   }
 
 
@@ -5141,6 +5241,7 @@ export namespace Prisma {
     tradingAccount?: boolean | TradingAccountDefaultArgs<ExtArgs>
     symbol?: boolean | SymbolDefaultArgs<ExtArgs>
     journalEntries?: boolean | Trade$journalEntriesArgs<ExtArgs>
+    attachments?: boolean | Trade$attachmentsArgs<ExtArgs>
     _count?: boolean | TradeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["trade"]>
 
@@ -5216,6 +5317,7 @@ export namespace Prisma {
     tradingAccount?: boolean | TradingAccountDefaultArgs<ExtArgs>
     symbol?: boolean | SymbolDefaultArgs<ExtArgs>
     journalEntries?: boolean | Trade$journalEntriesArgs<ExtArgs>
+    attachments?: boolean | Trade$attachmentsArgs<ExtArgs>
     _count?: boolean | TradeCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TradeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5236,6 +5338,7 @@ export namespace Prisma {
       tradingAccount: Prisma.$TradingAccountPayload<ExtArgs>
       symbol: Prisma.$SymbolPayload<ExtArgs>
       journalEntries: Prisma.$JournalEntryPayload<ExtArgs>[]
+      attachments: Prisma.$TradeAttachmentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5656,6 +5759,7 @@ export namespace Prisma {
     tradingAccount<T extends TradingAccountDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TradingAccountDefaultArgs<ExtArgs>>): Prisma__TradingAccountClient<$Result.GetResult<Prisma.$TradingAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     symbol<T extends SymbolDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SymbolDefaultArgs<ExtArgs>>): Prisma__SymbolClient<$Result.GetResult<Prisma.$SymbolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     journalEntries<T extends Trade$journalEntriesArgs<ExtArgs> = {}>(args?: Subset<T, Trade$journalEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$JournalEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    attachments<T extends Trade$attachmentsArgs<ExtArgs> = {}>(args?: Subset<T, Trade$attachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TradeAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6127,6 +6231,30 @@ export namespace Prisma {
   }
 
   /**
+   * Trade.attachments
+   */
+  export type Trade$attachmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TradeAttachment
+     */
+    select?: TradeAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TradeAttachment
+     */
+    omit?: TradeAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TradeAttachmentInclude<ExtArgs> | null
+    where?: TradeAttachmentWhereInput
+    orderBy?: TradeAttachmentOrderByWithRelationInput | TradeAttachmentOrderByWithRelationInput[]
+    cursor?: TradeAttachmentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TradeAttachmentScalarFieldEnum | TradeAttachmentScalarFieldEnum[]
+  }
+
+  /**
    * Trade without action
    */
   export type TradeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6142,6 +6270,1129 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: TradeInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model TradeAttachment
+   */
+
+  export type AggregateTradeAttachment = {
+    _count: TradeAttachmentCountAggregateOutputType | null
+    _avg: TradeAttachmentAvgAggregateOutputType | null
+    _sum: TradeAttachmentSumAggregateOutputType | null
+    _min: TradeAttachmentMinAggregateOutputType | null
+    _max: TradeAttachmentMaxAggregateOutputType | null
+  }
+
+  export type TradeAttachmentAvgAggregateOutputType = {
+    size: number | null
+  }
+
+  export type TradeAttachmentSumAggregateOutputType = {
+    size: number | null
+  }
+
+  export type TradeAttachmentMinAggregateOutputType = {
+    id: string | null
+    tradeId: string | null
+    filename: string | null
+    mimeType: string | null
+    size: number | null
+    storageKey: string | null
+    createdAt: Date | null
+  }
+
+  export type TradeAttachmentMaxAggregateOutputType = {
+    id: string | null
+    tradeId: string | null
+    filename: string | null
+    mimeType: string | null
+    size: number | null
+    storageKey: string | null
+    createdAt: Date | null
+  }
+
+  export type TradeAttachmentCountAggregateOutputType = {
+    id: number
+    tradeId: number
+    filename: number
+    mimeType: number
+    size: number
+    storageKey: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type TradeAttachmentAvgAggregateInputType = {
+    size?: true
+  }
+
+  export type TradeAttachmentSumAggregateInputType = {
+    size?: true
+  }
+
+  export type TradeAttachmentMinAggregateInputType = {
+    id?: true
+    tradeId?: true
+    filename?: true
+    mimeType?: true
+    size?: true
+    storageKey?: true
+    createdAt?: true
+  }
+
+  export type TradeAttachmentMaxAggregateInputType = {
+    id?: true
+    tradeId?: true
+    filename?: true
+    mimeType?: true
+    size?: true
+    storageKey?: true
+    createdAt?: true
+  }
+
+  export type TradeAttachmentCountAggregateInputType = {
+    id?: true
+    tradeId?: true
+    filename?: true
+    mimeType?: true
+    size?: true
+    storageKey?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type TradeAttachmentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TradeAttachment to aggregate.
+     */
+    where?: TradeAttachmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TradeAttachments to fetch.
+     */
+    orderBy?: TradeAttachmentOrderByWithRelationInput | TradeAttachmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TradeAttachmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TradeAttachments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TradeAttachments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TradeAttachments
+    **/
+    _count?: true | TradeAttachmentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: TradeAttachmentAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: TradeAttachmentSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TradeAttachmentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TradeAttachmentMaxAggregateInputType
+  }
+
+  export type GetTradeAttachmentAggregateType<T extends TradeAttachmentAggregateArgs> = {
+        [P in keyof T & keyof AggregateTradeAttachment]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTradeAttachment[P]>
+      : GetScalarType<T[P], AggregateTradeAttachment[P]>
+  }
+
+
+
+
+  export type TradeAttachmentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TradeAttachmentWhereInput
+    orderBy?: TradeAttachmentOrderByWithAggregationInput | TradeAttachmentOrderByWithAggregationInput[]
+    by: TradeAttachmentScalarFieldEnum[] | TradeAttachmentScalarFieldEnum
+    having?: TradeAttachmentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TradeAttachmentCountAggregateInputType | true
+    _avg?: TradeAttachmentAvgAggregateInputType
+    _sum?: TradeAttachmentSumAggregateInputType
+    _min?: TradeAttachmentMinAggregateInputType
+    _max?: TradeAttachmentMaxAggregateInputType
+  }
+
+  export type TradeAttachmentGroupByOutputType = {
+    id: string
+    tradeId: string
+    filename: string
+    mimeType: string
+    size: number
+    storageKey: string
+    createdAt: Date
+    _count: TradeAttachmentCountAggregateOutputType | null
+    _avg: TradeAttachmentAvgAggregateOutputType | null
+    _sum: TradeAttachmentSumAggregateOutputType | null
+    _min: TradeAttachmentMinAggregateOutputType | null
+    _max: TradeAttachmentMaxAggregateOutputType | null
+  }
+
+  type GetTradeAttachmentGroupByPayload<T extends TradeAttachmentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TradeAttachmentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TradeAttachmentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TradeAttachmentGroupByOutputType[P]>
+            : GetScalarType<T[P], TradeAttachmentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TradeAttachmentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tradeId?: boolean
+    filename?: boolean
+    mimeType?: boolean
+    size?: boolean
+    storageKey?: boolean
+    createdAt?: boolean
+    trade?: boolean | TradeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tradeAttachment"]>
+
+  export type TradeAttachmentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tradeId?: boolean
+    filename?: boolean
+    mimeType?: boolean
+    size?: boolean
+    storageKey?: boolean
+    createdAt?: boolean
+    trade?: boolean | TradeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tradeAttachment"]>
+
+  export type TradeAttachmentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tradeId?: boolean
+    filename?: boolean
+    mimeType?: boolean
+    size?: boolean
+    storageKey?: boolean
+    createdAt?: boolean
+    trade?: boolean | TradeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tradeAttachment"]>
+
+  export type TradeAttachmentSelectScalar = {
+    id?: boolean
+    tradeId?: boolean
+    filename?: boolean
+    mimeType?: boolean
+    size?: boolean
+    storageKey?: boolean
+    createdAt?: boolean
+  }
+
+  export type TradeAttachmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tradeId" | "filename" | "mimeType" | "size" | "storageKey" | "createdAt", ExtArgs["result"]["tradeAttachment"]>
+  export type TradeAttachmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    trade?: boolean | TradeDefaultArgs<ExtArgs>
+  }
+  export type TradeAttachmentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    trade?: boolean | TradeDefaultArgs<ExtArgs>
+  }
+  export type TradeAttachmentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    trade?: boolean | TradeDefaultArgs<ExtArgs>
+  }
+
+  export type $TradeAttachmentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TradeAttachment"
+    objects: {
+      trade: Prisma.$TradePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tradeId: string
+      filename: string
+      mimeType: string
+      size: number
+      storageKey: string
+      createdAt: Date
+    }, ExtArgs["result"]["tradeAttachment"]>
+    composites: {}
+  }
+
+  type TradeAttachmentGetPayload<S extends boolean | null | undefined | TradeAttachmentDefaultArgs> = $Result.GetResult<Prisma.$TradeAttachmentPayload, S>
+
+  type TradeAttachmentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TradeAttachmentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TradeAttachmentCountAggregateInputType | true
+    }
+
+  export interface TradeAttachmentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TradeAttachment'], meta: { name: 'TradeAttachment' } }
+    /**
+     * Find zero or one TradeAttachment that matches the filter.
+     * @param {TradeAttachmentFindUniqueArgs} args - Arguments to find a TradeAttachment
+     * @example
+     * // Get one TradeAttachment
+     * const tradeAttachment = await prisma.tradeAttachment.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TradeAttachmentFindUniqueArgs>(args: SelectSubset<T, TradeAttachmentFindUniqueArgs<ExtArgs>>): Prisma__TradeAttachmentClient<$Result.GetResult<Prisma.$TradeAttachmentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one TradeAttachment that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TradeAttachmentFindUniqueOrThrowArgs} args - Arguments to find a TradeAttachment
+     * @example
+     * // Get one TradeAttachment
+     * const tradeAttachment = await prisma.tradeAttachment.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TradeAttachmentFindUniqueOrThrowArgs>(args: SelectSubset<T, TradeAttachmentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TradeAttachmentClient<$Result.GetResult<Prisma.$TradeAttachmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TradeAttachment that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TradeAttachmentFindFirstArgs} args - Arguments to find a TradeAttachment
+     * @example
+     * // Get one TradeAttachment
+     * const tradeAttachment = await prisma.tradeAttachment.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TradeAttachmentFindFirstArgs>(args?: SelectSubset<T, TradeAttachmentFindFirstArgs<ExtArgs>>): Prisma__TradeAttachmentClient<$Result.GetResult<Prisma.$TradeAttachmentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TradeAttachment that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TradeAttachmentFindFirstOrThrowArgs} args - Arguments to find a TradeAttachment
+     * @example
+     * // Get one TradeAttachment
+     * const tradeAttachment = await prisma.tradeAttachment.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TradeAttachmentFindFirstOrThrowArgs>(args?: SelectSubset<T, TradeAttachmentFindFirstOrThrowArgs<ExtArgs>>): Prisma__TradeAttachmentClient<$Result.GetResult<Prisma.$TradeAttachmentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TradeAttachments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TradeAttachmentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TradeAttachments
+     * const tradeAttachments = await prisma.tradeAttachment.findMany()
+     * 
+     * // Get first 10 TradeAttachments
+     * const tradeAttachments = await prisma.tradeAttachment.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const tradeAttachmentWithIdOnly = await prisma.tradeAttachment.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TradeAttachmentFindManyArgs>(args?: SelectSubset<T, TradeAttachmentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TradeAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a TradeAttachment.
+     * @param {TradeAttachmentCreateArgs} args - Arguments to create a TradeAttachment.
+     * @example
+     * // Create one TradeAttachment
+     * const TradeAttachment = await prisma.tradeAttachment.create({
+     *   data: {
+     *     // ... data to create a TradeAttachment
+     *   }
+     * })
+     * 
+     */
+    create<T extends TradeAttachmentCreateArgs>(args: SelectSubset<T, TradeAttachmentCreateArgs<ExtArgs>>): Prisma__TradeAttachmentClient<$Result.GetResult<Prisma.$TradeAttachmentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many TradeAttachments.
+     * @param {TradeAttachmentCreateManyArgs} args - Arguments to create many TradeAttachments.
+     * @example
+     * // Create many TradeAttachments
+     * const tradeAttachment = await prisma.tradeAttachment.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TradeAttachmentCreateManyArgs>(args?: SelectSubset<T, TradeAttachmentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many TradeAttachments and returns the data saved in the database.
+     * @param {TradeAttachmentCreateManyAndReturnArgs} args - Arguments to create many TradeAttachments.
+     * @example
+     * // Create many TradeAttachments
+     * const tradeAttachment = await prisma.tradeAttachment.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many TradeAttachments and only return the `id`
+     * const tradeAttachmentWithIdOnly = await prisma.tradeAttachment.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TradeAttachmentCreateManyAndReturnArgs>(args?: SelectSubset<T, TradeAttachmentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TradeAttachmentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a TradeAttachment.
+     * @param {TradeAttachmentDeleteArgs} args - Arguments to delete one TradeAttachment.
+     * @example
+     * // Delete one TradeAttachment
+     * const TradeAttachment = await prisma.tradeAttachment.delete({
+     *   where: {
+     *     // ... filter to delete one TradeAttachment
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TradeAttachmentDeleteArgs>(args: SelectSubset<T, TradeAttachmentDeleteArgs<ExtArgs>>): Prisma__TradeAttachmentClient<$Result.GetResult<Prisma.$TradeAttachmentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one TradeAttachment.
+     * @param {TradeAttachmentUpdateArgs} args - Arguments to update one TradeAttachment.
+     * @example
+     * // Update one TradeAttachment
+     * const tradeAttachment = await prisma.tradeAttachment.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TradeAttachmentUpdateArgs>(args: SelectSubset<T, TradeAttachmentUpdateArgs<ExtArgs>>): Prisma__TradeAttachmentClient<$Result.GetResult<Prisma.$TradeAttachmentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more TradeAttachments.
+     * @param {TradeAttachmentDeleteManyArgs} args - Arguments to filter TradeAttachments to delete.
+     * @example
+     * // Delete a few TradeAttachments
+     * const { count } = await prisma.tradeAttachment.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TradeAttachmentDeleteManyArgs>(args?: SelectSubset<T, TradeAttachmentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TradeAttachments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TradeAttachmentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TradeAttachments
+     * const tradeAttachment = await prisma.tradeAttachment.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TradeAttachmentUpdateManyArgs>(args: SelectSubset<T, TradeAttachmentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TradeAttachments and returns the data updated in the database.
+     * @param {TradeAttachmentUpdateManyAndReturnArgs} args - Arguments to update many TradeAttachments.
+     * @example
+     * // Update many TradeAttachments
+     * const tradeAttachment = await prisma.tradeAttachment.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more TradeAttachments and only return the `id`
+     * const tradeAttachmentWithIdOnly = await prisma.tradeAttachment.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TradeAttachmentUpdateManyAndReturnArgs>(args: SelectSubset<T, TradeAttachmentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TradeAttachmentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one TradeAttachment.
+     * @param {TradeAttachmentUpsertArgs} args - Arguments to update or create a TradeAttachment.
+     * @example
+     * // Update or create a TradeAttachment
+     * const tradeAttachment = await prisma.tradeAttachment.upsert({
+     *   create: {
+     *     // ... data to create a TradeAttachment
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TradeAttachment we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TradeAttachmentUpsertArgs>(args: SelectSubset<T, TradeAttachmentUpsertArgs<ExtArgs>>): Prisma__TradeAttachmentClient<$Result.GetResult<Prisma.$TradeAttachmentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of TradeAttachments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TradeAttachmentCountArgs} args - Arguments to filter TradeAttachments to count.
+     * @example
+     * // Count the number of TradeAttachments
+     * const count = await prisma.tradeAttachment.count({
+     *   where: {
+     *     // ... the filter for the TradeAttachments we want to count
+     *   }
+     * })
+    **/
+    count<T extends TradeAttachmentCountArgs>(
+      args?: Subset<T, TradeAttachmentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TradeAttachmentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TradeAttachment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TradeAttachmentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TradeAttachmentAggregateArgs>(args: Subset<T, TradeAttachmentAggregateArgs>): Prisma.PrismaPromise<GetTradeAttachmentAggregateType<T>>
+
+    /**
+     * Group by TradeAttachment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TradeAttachmentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TradeAttachmentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TradeAttachmentGroupByArgs['orderBy'] }
+        : { orderBy?: TradeAttachmentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TradeAttachmentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTradeAttachmentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TradeAttachment model
+   */
+  readonly fields: TradeAttachmentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TradeAttachment.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TradeAttachmentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    trade<T extends TradeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TradeDefaultArgs<ExtArgs>>): Prisma__TradeClient<$Result.GetResult<Prisma.$TradePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TradeAttachment model
+   */
+  interface TradeAttachmentFieldRefs {
+    readonly id: FieldRef<"TradeAttachment", 'String'>
+    readonly tradeId: FieldRef<"TradeAttachment", 'String'>
+    readonly filename: FieldRef<"TradeAttachment", 'String'>
+    readonly mimeType: FieldRef<"TradeAttachment", 'String'>
+    readonly size: FieldRef<"TradeAttachment", 'Int'>
+    readonly storageKey: FieldRef<"TradeAttachment", 'String'>
+    readonly createdAt: FieldRef<"TradeAttachment", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TradeAttachment findUnique
+   */
+  export type TradeAttachmentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TradeAttachment
+     */
+    select?: TradeAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TradeAttachment
+     */
+    omit?: TradeAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TradeAttachmentInclude<ExtArgs> | null
+    /**
+     * Filter, which TradeAttachment to fetch.
+     */
+    where: TradeAttachmentWhereUniqueInput
+  }
+
+  /**
+   * TradeAttachment findUniqueOrThrow
+   */
+  export type TradeAttachmentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TradeAttachment
+     */
+    select?: TradeAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TradeAttachment
+     */
+    omit?: TradeAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TradeAttachmentInclude<ExtArgs> | null
+    /**
+     * Filter, which TradeAttachment to fetch.
+     */
+    where: TradeAttachmentWhereUniqueInput
+  }
+
+  /**
+   * TradeAttachment findFirst
+   */
+  export type TradeAttachmentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TradeAttachment
+     */
+    select?: TradeAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TradeAttachment
+     */
+    omit?: TradeAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TradeAttachmentInclude<ExtArgs> | null
+    /**
+     * Filter, which TradeAttachment to fetch.
+     */
+    where?: TradeAttachmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TradeAttachments to fetch.
+     */
+    orderBy?: TradeAttachmentOrderByWithRelationInput | TradeAttachmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TradeAttachments.
+     */
+    cursor?: TradeAttachmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TradeAttachments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TradeAttachments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TradeAttachments.
+     */
+    distinct?: TradeAttachmentScalarFieldEnum | TradeAttachmentScalarFieldEnum[]
+  }
+
+  /**
+   * TradeAttachment findFirstOrThrow
+   */
+  export type TradeAttachmentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TradeAttachment
+     */
+    select?: TradeAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TradeAttachment
+     */
+    omit?: TradeAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TradeAttachmentInclude<ExtArgs> | null
+    /**
+     * Filter, which TradeAttachment to fetch.
+     */
+    where?: TradeAttachmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TradeAttachments to fetch.
+     */
+    orderBy?: TradeAttachmentOrderByWithRelationInput | TradeAttachmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TradeAttachments.
+     */
+    cursor?: TradeAttachmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TradeAttachments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TradeAttachments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TradeAttachments.
+     */
+    distinct?: TradeAttachmentScalarFieldEnum | TradeAttachmentScalarFieldEnum[]
+  }
+
+  /**
+   * TradeAttachment findMany
+   */
+  export type TradeAttachmentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TradeAttachment
+     */
+    select?: TradeAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TradeAttachment
+     */
+    omit?: TradeAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TradeAttachmentInclude<ExtArgs> | null
+    /**
+     * Filter, which TradeAttachments to fetch.
+     */
+    where?: TradeAttachmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TradeAttachments to fetch.
+     */
+    orderBy?: TradeAttachmentOrderByWithRelationInput | TradeAttachmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TradeAttachments.
+     */
+    cursor?: TradeAttachmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TradeAttachments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TradeAttachments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TradeAttachments.
+     */
+    distinct?: TradeAttachmentScalarFieldEnum | TradeAttachmentScalarFieldEnum[]
+  }
+
+  /**
+   * TradeAttachment create
+   */
+  export type TradeAttachmentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TradeAttachment
+     */
+    select?: TradeAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TradeAttachment
+     */
+    omit?: TradeAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TradeAttachmentInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TradeAttachment.
+     */
+    data: XOR<TradeAttachmentCreateInput, TradeAttachmentUncheckedCreateInput>
+  }
+
+  /**
+   * TradeAttachment createMany
+   */
+  export type TradeAttachmentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TradeAttachments.
+     */
+    data: TradeAttachmentCreateManyInput | TradeAttachmentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * TradeAttachment createManyAndReturn
+   */
+  export type TradeAttachmentCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TradeAttachment
+     */
+    select?: TradeAttachmentSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TradeAttachment
+     */
+    omit?: TradeAttachmentOmit<ExtArgs> | null
+    /**
+     * The data used to create many TradeAttachments.
+     */
+    data: TradeAttachmentCreateManyInput | TradeAttachmentCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TradeAttachmentIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TradeAttachment update
+   */
+  export type TradeAttachmentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TradeAttachment
+     */
+    select?: TradeAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TradeAttachment
+     */
+    omit?: TradeAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TradeAttachmentInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TradeAttachment.
+     */
+    data: XOR<TradeAttachmentUpdateInput, TradeAttachmentUncheckedUpdateInput>
+    /**
+     * Choose, which TradeAttachment to update.
+     */
+    where: TradeAttachmentWhereUniqueInput
+  }
+
+  /**
+   * TradeAttachment updateMany
+   */
+  export type TradeAttachmentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TradeAttachments.
+     */
+    data: XOR<TradeAttachmentUpdateManyMutationInput, TradeAttachmentUncheckedUpdateManyInput>
+    /**
+     * Filter which TradeAttachments to update
+     */
+    where?: TradeAttachmentWhereInput
+    /**
+     * Limit how many TradeAttachments to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TradeAttachment updateManyAndReturn
+   */
+  export type TradeAttachmentUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TradeAttachment
+     */
+    select?: TradeAttachmentSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TradeAttachment
+     */
+    omit?: TradeAttachmentOmit<ExtArgs> | null
+    /**
+     * The data used to update TradeAttachments.
+     */
+    data: XOR<TradeAttachmentUpdateManyMutationInput, TradeAttachmentUncheckedUpdateManyInput>
+    /**
+     * Filter which TradeAttachments to update
+     */
+    where?: TradeAttachmentWhereInput
+    /**
+     * Limit how many TradeAttachments to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TradeAttachmentIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TradeAttachment upsert
+   */
+  export type TradeAttachmentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TradeAttachment
+     */
+    select?: TradeAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TradeAttachment
+     */
+    omit?: TradeAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TradeAttachmentInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TradeAttachment to update in case it exists.
+     */
+    where: TradeAttachmentWhereUniqueInput
+    /**
+     * In case the TradeAttachment found by the `where` argument doesn't exist, create a new TradeAttachment with this data.
+     */
+    create: XOR<TradeAttachmentCreateInput, TradeAttachmentUncheckedCreateInput>
+    /**
+     * In case the TradeAttachment was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TradeAttachmentUpdateInput, TradeAttachmentUncheckedUpdateInput>
+  }
+
+  /**
+   * TradeAttachment delete
+   */
+  export type TradeAttachmentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TradeAttachment
+     */
+    select?: TradeAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TradeAttachment
+     */
+    omit?: TradeAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TradeAttachmentInclude<ExtArgs> | null
+    /**
+     * Filter which TradeAttachment to delete.
+     */
+    where: TradeAttachmentWhereUniqueInput
+  }
+
+  /**
+   * TradeAttachment deleteMany
+   */
+  export type TradeAttachmentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TradeAttachments to delete
+     */
+    where?: TradeAttachmentWhereInput
+    /**
+     * Limit how many TradeAttachments to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * TradeAttachment without action
+   */
+  export type TradeAttachmentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TradeAttachment
+     */
+    select?: TradeAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TradeAttachment
+     */
+    omit?: TradeAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TradeAttachmentInclude<ExtArgs> | null
   }
 
 
@@ -7361,6 +8612,19 @@ export namespace Prisma {
   export type TradeScalarFieldEnum = (typeof TradeScalarFieldEnum)[keyof typeof TradeScalarFieldEnum]
 
 
+  export const TradeAttachmentScalarFieldEnum: {
+    id: 'id',
+    tradeId: 'tradeId',
+    filename: 'filename',
+    mimeType: 'mimeType',
+    size: 'size',
+    storageKey: 'storageKey',
+    createdAt: 'createdAt'
+  };
+
+  export type TradeAttachmentScalarFieldEnum = (typeof TradeAttachmentScalarFieldEnum)[keyof typeof TradeAttachmentScalarFieldEnum]
+
+
   export const JournalEntryScalarFieldEnum: {
     id: 'id',
     title: 'title',
@@ -7521,6 +8785,20 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
   /**
    * Deep Input Types
@@ -7766,6 +9044,7 @@ export namespace Prisma {
     tradingAccount?: XOR<TradingAccountScalarRelationFilter, TradingAccountWhereInput>
     symbol?: XOR<SymbolScalarRelationFilter, SymbolWhereInput>
     journalEntries?: JournalEntryListRelationFilter
+    attachments?: TradeAttachmentListRelationFilter
   }
 
   export type TradeOrderByWithRelationInput = {
@@ -7790,6 +9069,7 @@ export namespace Prisma {
     tradingAccount?: TradingAccountOrderByWithRelationInput
     symbol?: SymbolOrderByWithRelationInput
     journalEntries?: JournalEntryOrderByRelationAggregateInput
+    attachments?: TradeAttachmentOrderByRelationAggregateInput
   }
 
   export type TradeWhereUniqueInput = Prisma.AtLeast<{
@@ -7817,6 +9097,7 @@ export namespace Prisma {
     tradingAccount?: XOR<TradingAccountScalarRelationFilter, TradingAccountWhereInput>
     symbol?: XOR<SymbolScalarRelationFilter, SymbolWhereInput>
     journalEntries?: JournalEntryListRelationFilter
+    attachments?: TradeAttachmentListRelationFilter
   }, "id">
 
   export type TradeOrderByWithAggregationInput = {
@@ -7865,6 +9146,73 @@ export namespace Prisma {
     symbolId?: StringWithAggregatesFilter<"Trade"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Trade"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Trade"> | Date | string
+  }
+
+  export type TradeAttachmentWhereInput = {
+    AND?: TradeAttachmentWhereInput | TradeAttachmentWhereInput[]
+    OR?: TradeAttachmentWhereInput[]
+    NOT?: TradeAttachmentWhereInput | TradeAttachmentWhereInput[]
+    id?: StringFilter<"TradeAttachment"> | string
+    tradeId?: StringFilter<"TradeAttachment"> | string
+    filename?: StringFilter<"TradeAttachment"> | string
+    mimeType?: StringFilter<"TradeAttachment"> | string
+    size?: IntFilter<"TradeAttachment"> | number
+    storageKey?: StringFilter<"TradeAttachment"> | string
+    createdAt?: DateTimeFilter<"TradeAttachment"> | Date | string
+    trade?: XOR<TradeScalarRelationFilter, TradeWhereInput>
+  }
+
+  export type TradeAttachmentOrderByWithRelationInput = {
+    id?: SortOrder
+    tradeId?: SortOrder
+    filename?: SortOrder
+    mimeType?: SortOrder
+    size?: SortOrder
+    storageKey?: SortOrder
+    createdAt?: SortOrder
+    trade?: TradeOrderByWithRelationInput
+  }
+
+  export type TradeAttachmentWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    storageKey?: string
+    AND?: TradeAttachmentWhereInput | TradeAttachmentWhereInput[]
+    OR?: TradeAttachmentWhereInput[]
+    NOT?: TradeAttachmentWhereInput | TradeAttachmentWhereInput[]
+    tradeId?: StringFilter<"TradeAttachment"> | string
+    filename?: StringFilter<"TradeAttachment"> | string
+    mimeType?: StringFilter<"TradeAttachment"> | string
+    size?: IntFilter<"TradeAttachment"> | number
+    createdAt?: DateTimeFilter<"TradeAttachment"> | Date | string
+    trade?: XOR<TradeScalarRelationFilter, TradeWhereInput>
+  }, "id" | "storageKey">
+
+  export type TradeAttachmentOrderByWithAggregationInput = {
+    id?: SortOrder
+    tradeId?: SortOrder
+    filename?: SortOrder
+    mimeType?: SortOrder
+    size?: SortOrder
+    storageKey?: SortOrder
+    createdAt?: SortOrder
+    _count?: TradeAttachmentCountOrderByAggregateInput
+    _avg?: TradeAttachmentAvgOrderByAggregateInput
+    _max?: TradeAttachmentMaxOrderByAggregateInput
+    _min?: TradeAttachmentMinOrderByAggregateInput
+    _sum?: TradeAttachmentSumOrderByAggregateInput
+  }
+
+  export type TradeAttachmentScalarWhereWithAggregatesInput = {
+    AND?: TradeAttachmentScalarWhereWithAggregatesInput | TradeAttachmentScalarWhereWithAggregatesInput[]
+    OR?: TradeAttachmentScalarWhereWithAggregatesInput[]
+    NOT?: TradeAttachmentScalarWhereWithAggregatesInput | TradeAttachmentScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"TradeAttachment"> | string
+    tradeId?: StringWithAggregatesFilter<"TradeAttachment"> | string
+    filename?: StringWithAggregatesFilter<"TradeAttachment"> | string
+    mimeType?: StringWithAggregatesFilter<"TradeAttachment"> | string
+    size?: IntWithAggregatesFilter<"TradeAttachment"> | number
+    storageKey?: StringWithAggregatesFilter<"TradeAttachment"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"TradeAttachment"> | Date | string
   }
 
   export type JournalEntryWhereInput = {
@@ -8207,6 +9555,7 @@ export namespace Prisma {
     tradingAccount: TradingAccountCreateNestedOneWithoutTradesInput
     symbol: SymbolCreateNestedOneWithoutTradesInput
     journalEntries?: JournalEntryCreateNestedManyWithoutTradeInput
+    attachments?: TradeAttachmentCreateNestedManyWithoutTradeInput
   }
 
   export type TradeUncheckedCreateInput = {
@@ -8228,6 +9577,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     journalEntries?: JournalEntryUncheckedCreateNestedManyWithoutTradeInput
+    attachments?: TradeAttachmentUncheckedCreateNestedManyWithoutTradeInput
   }
 
   export type TradeUpdateInput = {
@@ -8249,6 +9599,7 @@ export namespace Prisma {
     tradingAccount?: TradingAccountUpdateOneRequiredWithoutTradesNestedInput
     symbol?: SymbolUpdateOneRequiredWithoutTradesNestedInput
     journalEntries?: JournalEntryUpdateManyWithoutTradeNestedInput
+    attachments?: TradeAttachmentUpdateManyWithoutTradeNestedInput
   }
 
   export type TradeUncheckedUpdateInput = {
@@ -8270,6 +9621,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     journalEntries?: JournalEntryUncheckedUpdateManyWithoutTradeNestedInput
+    attachments?: TradeAttachmentUncheckedUpdateManyWithoutTradeNestedInput
   }
 
   export type TradeCreateManyInput = {
@@ -8327,6 +9679,75 @@ export namespace Prisma {
     symbolId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TradeAttachmentCreateInput = {
+    id?: string
+    filename: string
+    mimeType: string
+    size: number
+    storageKey: string
+    createdAt?: Date | string
+    trade: TradeCreateNestedOneWithoutAttachmentsInput
+  }
+
+  export type TradeAttachmentUncheckedCreateInput = {
+    id?: string
+    tradeId: string
+    filename: string
+    mimeType: string
+    size: number
+    storageKey: string
+    createdAt?: Date | string
+  }
+
+  export type TradeAttachmentUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    filename?: StringFieldUpdateOperationsInput | string
+    mimeType?: StringFieldUpdateOperationsInput | string
+    size?: IntFieldUpdateOperationsInput | number
+    storageKey?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    trade?: TradeUpdateOneRequiredWithoutAttachmentsNestedInput
+  }
+
+  export type TradeAttachmentUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tradeId?: StringFieldUpdateOperationsInput | string
+    filename?: StringFieldUpdateOperationsInput | string
+    mimeType?: StringFieldUpdateOperationsInput | string
+    size?: IntFieldUpdateOperationsInput | number
+    storageKey?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TradeAttachmentCreateManyInput = {
+    id?: string
+    tradeId: string
+    filename: string
+    mimeType: string
+    size: number
+    storageKey: string
+    createdAt?: Date | string
+  }
+
+  export type TradeAttachmentUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    filename?: StringFieldUpdateOperationsInput | string
+    mimeType?: StringFieldUpdateOperationsInput | string
+    size?: IntFieldUpdateOperationsInput | number
+    storageKey?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TradeAttachmentUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tradeId?: StringFieldUpdateOperationsInput | string
+    filename?: StringFieldUpdateOperationsInput | string
+    mimeType?: StringFieldUpdateOperationsInput | string
+    size?: IntFieldUpdateOperationsInput | number
+    storageKey?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type JournalEntryCreateInput = {
@@ -8742,6 +10163,16 @@ export namespace Prisma {
     isNot?: SymbolWhereInput
   }
 
+  export type TradeAttachmentListRelationFilter = {
+    every?: TradeAttachmentWhereInput
+    some?: TradeAttachmentWhereInput
+    none?: TradeAttachmentWhereInput
+  }
+
+  export type TradeAttachmentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type TradeCountOrderByAggregateInput = {
     id?: SortOrder
     side?: SortOrder
@@ -8880,6 +10311,76 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type TradeScalarRelationFilter = {
+    is?: TradeWhereInput
+    isNot?: TradeWhereInput
+  }
+
+  export type TradeAttachmentCountOrderByAggregateInput = {
+    id?: SortOrder
+    tradeId?: SortOrder
+    filename?: SortOrder
+    mimeType?: SortOrder
+    size?: SortOrder
+    storageKey?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type TradeAttachmentAvgOrderByAggregateInput = {
+    size?: SortOrder
+  }
+
+  export type TradeAttachmentMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tradeId?: SortOrder
+    filename?: SortOrder
+    mimeType?: SortOrder
+    size?: SortOrder
+    storageKey?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type TradeAttachmentMinOrderByAggregateInput = {
+    id?: SortOrder
+    tradeId?: SortOrder
+    filename?: SortOrder
+    mimeType?: SortOrder
+    size?: SortOrder
+    storageKey?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type TradeAttachmentSumOrderByAggregateInput = {
+    size?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type StringNullableListFilter<$PrismaModel = never> = {
@@ -9202,11 +10703,25 @@ export namespace Prisma {
     connect?: JournalEntryWhereUniqueInput | JournalEntryWhereUniqueInput[]
   }
 
+  export type TradeAttachmentCreateNestedManyWithoutTradeInput = {
+    create?: XOR<TradeAttachmentCreateWithoutTradeInput, TradeAttachmentUncheckedCreateWithoutTradeInput> | TradeAttachmentCreateWithoutTradeInput[] | TradeAttachmentUncheckedCreateWithoutTradeInput[]
+    connectOrCreate?: TradeAttachmentCreateOrConnectWithoutTradeInput | TradeAttachmentCreateOrConnectWithoutTradeInput[]
+    createMany?: TradeAttachmentCreateManyTradeInputEnvelope
+    connect?: TradeAttachmentWhereUniqueInput | TradeAttachmentWhereUniqueInput[]
+  }
+
   export type JournalEntryUncheckedCreateNestedManyWithoutTradeInput = {
     create?: XOR<JournalEntryCreateWithoutTradeInput, JournalEntryUncheckedCreateWithoutTradeInput> | JournalEntryCreateWithoutTradeInput[] | JournalEntryUncheckedCreateWithoutTradeInput[]
     connectOrCreate?: JournalEntryCreateOrConnectWithoutTradeInput | JournalEntryCreateOrConnectWithoutTradeInput[]
     createMany?: JournalEntryCreateManyTradeInputEnvelope
     connect?: JournalEntryWhereUniqueInput | JournalEntryWhereUniqueInput[]
+  }
+
+  export type TradeAttachmentUncheckedCreateNestedManyWithoutTradeInput = {
+    create?: XOR<TradeAttachmentCreateWithoutTradeInput, TradeAttachmentUncheckedCreateWithoutTradeInput> | TradeAttachmentCreateWithoutTradeInput[] | TradeAttachmentUncheckedCreateWithoutTradeInput[]
+    connectOrCreate?: TradeAttachmentCreateOrConnectWithoutTradeInput | TradeAttachmentCreateOrConnectWithoutTradeInput[]
+    createMany?: TradeAttachmentCreateManyTradeInputEnvelope
+    connect?: TradeAttachmentWhereUniqueInput | TradeAttachmentWhereUniqueInput[]
   }
 
   export type EnumTradeSideFieldUpdateOperationsInput = {
@@ -9275,6 +10790,20 @@ export namespace Prisma {
     deleteMany?: JournalEntryScalarWhereInput | JournalEntryScalarWhereInput[]
   }
 
+  export type TradeAttachmentUpdateManyWithoutTradeNestedInput = {
+    create?: XOR<TradeAttachmentCreateWithoutTradeInput, TradeAttachmentUncheckedCreateWithoutTradeInput> | TradeAttachmentCreateWithoutTradeInput[] | TradeAttachmentUncheckedCreateWithoutTradeInput[]
+    connectOrCreate?: TradeAttachmentCreateOrConnectWithoutTradeInput | TradeAttachmentCreateOrConnectWithoutTradeInput[]
+    upsert?: TradeAttachmentUpsertWithWhereUniqueWithoutTradeInput | TradeAttachmentUpsertWithWhereUniqueWithoutTradeInput[]
+    createMany?: TradeAttachmentCreateManyTradeInputEnvelope
+    set?: TradeAttachmentWhereUniqueInput | TradeAttachmentWhereUniqueInput[]
+    disconnect?: TradeAttachmentWhereUniqueInput | TradeAttachmentWhereUniqueInput[]
+    delete?: TradeAttachmentWhereUniqueInput | TradeAttachmentWhereUniqueInput[]
+    connect?: TradeAttachmentWhereUniqueInput | TradeAttachmentWhereUniqueInput[]
+    update?: TradeAttachmentUpdateWithWhereUniqueWithoutTradeInput | TradeAttachmentUpdateWithWhereUniqueWithoutTradeInput[]
+    updateMany?: TradeAttachmentUpdateManyWithWhereWithoutTradeInput | TradeAttachmentUpdateManyWithWhereWithoutTradeInput[]
+    deleteMany?: TradeAttachmentScalarWhereInput | TradeAttachmentScalarWhereInput[]
+  }
+
   export type JournalEntryUncheckedUpdateManyWithoutTradeNestedInput = {
     create?: XOR<JournalEntryCreateWithoutTradeInput, JournalEntryUncheckedCreateWithoutTradeInput> | JournalEntryCreateWithoutTradeInput[] | JournalEntryUncheckedCreateWithoutTradeInput[]
     connectOrCreate?: JournalEntryCreateOrConnectWithoutTradeInput | JournalEntryCreateOrConnectWithoutTradeInput[]
@@ -9287,6 +10816,42 @@ export namespace Prisma {
     update?: JournalEntryUpdateWithWhereUniqueWithoutTradeInput | JournalEntryUpdateWithWhereUniqueWithoutTradeInput[]
     updateMany?: JournalEntryUpdateManyWithWhereWithoutTradeInput | JournalEntryUpdateManyWithWhereWithoutTradeInput[]
     deleteMany?: JournalEntryScalarWhereInput | JournalEntryScalarWhereInput[]
+  }
+
+  export type TradeAttachmentUncheckedUpdateManyWithoutTradeNestedInput = {
+    create?: XOR<TradeAttachmentCreateWithoutTradeInput, TradeAttachmentUncheckedCreateWithoutTradeInput> | TradeAttachmentCreateWithoutTradeInput[] | TradeAttachmentUncheckedCreateWithoutTradeInput[]
+    connectOrCreate?: TradeAttachmentCreateOrConnectWithoutTradeInput | TradeAttachmentCreateOrConnectWithoutTradeInput[]
+    upsert?: TradeAttachmentUpsertWithWhereUniqueWithoutTradeInput | TradeAttachmentUpsertWithWhereUniqueWithoutTradeInput[]
+    createMany?: TradeAttachmentCreateManyTradeInputEnvelope
+    set?: TradeAttachmentWhereUniqueInput | TradeAttachmentWhereUniqueInput[]
+    disconnect?: TradeAttachmentWhereUniqueInput | TradeAttachmentWhereUniqueInput[]
+    delete?: TradeAttachmentWhereUniqueInput | TradeAttachmentWhereUniqueInput[]
+    connect?: TradeAttachmentWhereUniqueInput | TradeAttachmentWhereUniqueInput[]
+    update?: TradeAttachmentUpdateWithWhereUniqueWithoutTradeInput | TradeAttachmentUpdateWithWhereUniqueWithoutTradeInput[]
+    updateMany?: TradeAttachmentUpdateManyWithWhereWithoutTradeInput | TradeAttachmentUpdateManyWithWhereWithoutTradeInput[]
+    deleteMany?: TradeAttachmentScalarWhereInput | TradeAttachmentScalarWhereInput[]
+  }
+
+  export type TradeCreateNestedOneWithoutAttachmentsInput = {
+    create?: XOR<TradeCreateWithoutAttachmentsInput, TradeUncheckedCreateWithoutAttachmentsInput>
+    connectOrCreate?: TradeCreateOrConnectWithoutAttachmentsInput
+    connect?: TradeWhereUniqueInput
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type TradeUpdateOneRequiredWithoutAttachmentsNestedInput = {
+    create?: XOR<TradeCreateWithoutAttachmentsInput, TradeUncheckedCreateWithoutAttachmentsInput>
+    connectOrCreate?: TradeCreateOrConnectWithoutAttachmentsInput
+    upsert?: TradeUpsertWithoutAttachmentsInput
+    connect?: TradeWhereUniqueInput
+    update?: XOR<XOR<TradeUpdateToOneWithWhereWithoutAttachmentsInput, TradeUpdateWithoutAttachmentsInput>, TradeUncheckedUpdateWithoutAttachmentsInput>
   }
 
   export type JournalEntryCreatetagsInput = {
@@ -9597,6 +11162,33 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
   export type TradingAccountCreateWithoutUserInput = {
     id?: string
     name: string
@@ -9645,6 +11237,7 @@ export namespace Prisma {
     tradingAccount: TradingAccountCreateNestedOneWithoutTradesInput
     symbol: SymbolCreateNestedOneWithoutTradesInput
     journalEntries?: JournalEntryCreateNestedManyWithoutTradeInput
+    attachments?: TradeAttachmentCreateNestedManyWithoutTradeInput
   }
 
   export type TradeUncheckedCreateWithoutUserInput = {
@@ -9665,6 +11258,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     journalEntries?: JournalEntryUncheckedCreateNestedManyWithoutTradeInput
+    attachments?: TradeAttachmentUncheckedCreateNestedManyWithoutTradeInput
   }
 
   export type TradeCreateOrConnectWithoutUserInput = {
@@ -9857,6 +11451,7 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutTradesInput
     symbol: SymbolCreateNestedOneWithoutTradesInput
     journalEntries?: JournalEntryCreateNestedManyWithoutTradeInput
+    attachments?: TradeAttachmentCreateNestedManyWithoutTradeInput
   }
 
   export type TradeUncheckedCreateWithoutTradingAccountInput = {
@@ -9877,6 +11472,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     journalEntries?: JournalEntryUncheckedCreateNestedManyWithoutTradeInput
+    attachments?: TradeAttachmentUncheckedCreateNestedManyWithoutTradeInput
   }
 
   export type TradeCreateOrConnectWithoutTradingAccountInput = {
@@ -9960,6 +11556,7 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutTradesInput
     tradingAccount: TradingAccountCreateNestedOneWithoutTradesInput
     journalEntries?: JournalEntryCreateNestedManyWithoutTradeInput
+    attachments?: TradeAttachmentCreateNestedManyWithoutTradeInput
   }
 
   export type TradeUncheckedCreateWithoutSymbolInput = {
@@ -9980,6 +11577,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     journalEntries?: JournalEntryUncheckedCreateNestedManyWithoutTradeInput
+    attachments?: TradeAttachmentUncheckedCreateNestedManyWithoutTradeInput
   }
 
   export type TradeCreateOrConnectWithoutSymbolInput = {
@@ -10123,6 +11721,34 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type TradeAttachmentCreateWithoutTradeInput = {
+    id?: string
+    filename: string
+    mimeType: string
+    size: number
+    storageKey: string
+    createdAt?: Date | string
+  }
+
+  export type TradeAttachmentUncheckedCreateWithoutTradeInput = {
+    id?: string
+    filename: string
+    mimeType: string
+    size: number
+    storageKey: string
+    createdAt?: Date | string
+  }
+
+  export type TradeAttachmentCreateOrConnectWithoutTradeInput = {
+    where: TradeAttachmentWhereUniqueInput
+    create: XOR<TradeAttachmentCreateWithoutTradeInput, TradeAttachmentUncheckedCreateWithoutTradeInput>
+  }
+
+  export type TradeAttachmentCreateManyTradeInputEnvelope = {
+    data: TradeAttachmentCreateManyTradeInput | TradeAttachmentCreateManyTradeInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutTradesInput = {
     update: XOR<UserUpdateWithoutTradesInput, UserUncheckedUpdateWithoutTradesInput>
     create: XOR<UserCreateWithoutTradesInput, UserUncheckedCreateWithoutTradesInput>
@@ -10240,6 +11866,135 @@ export namespace Prisma {
     data: XOR<JournalEntryUpdateManyMutationInput, JournalEntryUncheckedUpdateManyWithoutTradeInput>
   }
 
+  export type TradeAttachmentUpsertWithWhereUniqueWithoutTradeInput = {
+    where: TradeAttachmentWhereUniqueInput
+    update: XOR<TradeAttachmentUpdateWithoutTradeInput, TradeAttachmentUncheckedUpdateWithoutTradeInput>
+    create: XOR<TradeAttachmentCreateWithoutTradeInput, TradeAttachmentUncheckedCreateWithoutTradeInput>
+  }
+
+  export type TradeAttachmentUpdateWithWhereUniqueWithoutTradeInput = {
+    where: TradeAttachmentWhereUniqueInput
+    data: XOR<TradeAttachmentUpdateWithoutTradeInput, TradeAttachmentUncheckedUpdateWithoutTradeInput>
+  }
+
+  export type TradeAttachmentUpdateManyWithWhereWithoutTradeInput = {
+    where: TradeAttachmentScalarWhereInput
+    data: XOR<TradeAttachmentUpdateManyMutationInput, TradeAttachmentUncheckedUpdateManyWithoutTradeInput>
+  }
+
+  export type TradeAttachmentScalarWhereInput = {
+    AND?: TradeAttachmentScalarWhereInput | TradeAttachmentScalarWhereInput[]
+    OR?: TradeAttachmentScalarWhereInput[]
+    NOT?: TradeAttachmentScalarWhereInput | TradeAttachmentScalarWhereInput[]
+    id?: StringFilter<"TradeAttachment"> | string
+    tradeId?: StringFilter<"TradeAttachment"> | string
+    filename?: StringFilter<"TradeAttachment"> | string
+    mimeType?: StringFilter<"TradeAttachment"> | string
+    size?: IntFilter<"TradeAttachment"> | number
+    storageKey?: StringFilter<"TradeAttachment"> | string
+    createdAt?: DateTimeFilter<"TradeAttachment"> | Date | string
+  }
+
+  export type TradeCreateWithoutAttachmentsInput = {
+    id?: string
+    side: $Enums.TradeSide
+    status?: $Enums.TradeStatus
+    quantity: Decimal | DecimalJsLike | number | string
+    entryPrice: Decimal | DecimalJsLike | number | string
+    exitPrice?: Decimal | DecimalJsLike | number | string | null
+    pnl?: Decimal | DecimalJsLike | number | string | null
+    openedAt: Date | string
+    closedAt?: Date | string | null
+    notes?: string | null
+    psychology?: string | null
+    lessonsLearned?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutTradesInput
+    tradingAccount: TradingAccountCreateNestedOneWithoutTradesInput
+    symbol: SymbolCreateNestedOneWithoutTradesInput
+    journalEntries?: JournalEntryCreateNestedManyWithoutTradeInput
+  }
+
+  export type TradeUncheckedCreateWithoutAttachmentsInput = {
+    id?: string
+    side: $Enums.TradeSide
+    status?: $Enums.TradeStatus
+    quantity: Decimal | DecimalJsLike | number | string
+    entryPrice: Decimal | DecimalJsLike | number | string
+    exitPrice?: Decimal | DecimalJsLike | number | string | null
+    pnl?: Decimal | DecimalJsLike | number | string | null
+    openedAt: Date | string
+    closedAt?: Date | string | null
+    notes?: string | null
+    psychology?: string | null
+    lessonsLearned?: string | null
+    userId: string
+    tradingAccountId: string
+    symbolId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    journalEntries?: JournalEntryUncheckedCreateNestedManyWithoutTradeInput
+  }
+
+  export type TradeCreateOrConnectWithoutAttachmentsInput = {
+    where: TradeWhereUniqueInput
+    create: XOR<TradeCreateWithoutAttachmentsInput, TradeUncheckedCreateWithoutAttachmentsInput>
+  }
+
+  export type TradeUpsertWithoutAttachmentsInput = {
+    update: XOR<TradeUpdateWithoutAttachmentsInput, TradeUncheckedUpdateWithoutAttachmentsInput>
+    create: XOR<TradeCreateWithoutAttachmentsInput, TradeUncheckedCreateWithoutAttachmentsInput>
+    where?: TradeWhereInput
+  }
+
+  export type TradeUpdateToOneWithWhereWithoutAttachmentsInput = {
+    where?: TradeWhereInput
+    data: XOR<TradeUpdateWithoutAttachmentsInput, TradeUncheckedUpdateWithoutAttachmentsInput>
+  }
+
+  export type TradeUpdateWithoutAttachmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    side?: EnumTradeSideFieldUpdateOperationsInput | $Enums.TradeSide
+    status?: EnumTradeStatusFieldUpdateOperationsInput | $Enums.TradeStatus
+    quantity?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    entryPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    exitPrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    pnl?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    openedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    psychology?: NullableStringFieldUpdateOperationsInput | string | null
+    lessonsLearned?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutTradesNestedInput
+    tradingAccount?: TradingAccountUpdateOneRequiredWithoutTradesNestedInput
+    symbol?: SymbolUpdateOneRequiredWithoutTradesNestedInput
+    journalEntries?: JournalEntryUpdateManyWithoutTradeNestedInput
+  }
+
+  export type TradeUncheckedUpdateWithoutAttachmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    side?: EnumTradeSideFieldUpdateOperationsInput | $Enums.TradeSide
+    status?: EnumTradeStatusFieldUpdateOperationsInput | $Enums.TradeStatus
+    quantity?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    entryPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    exitPrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    pnl?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    openedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    psychology?: NullableStringFieldUpdateOperationsInput | string | null
+    lessonsLearned?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    tradingAccountId?: StringFieldUpdateOperationsInput | string
+    symbolId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    journalEntries?: JournalEntryUncheckedUpdateManyWithoutTradeNestedInput
+  }
+
   export type UserCreateWithoutJournalEntriesInput = {
     id?: string
     email: string
@@ -10289,6 +12044,7 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutTradesInput
     tradingAccount: TradingAccountCreateNestedOneWithoutTradesInput
     symbol: SymbolCreateNestedOneWithoutTradesInput
+    attachments?: TradeAttachmentCreateNestedManyWithoutTradeInput
   }
 
   export type TradeUncheckedCreateWithoutJournalEntriesInput = {
@@ -10309,6 +12065,7 @@ export namespace Prisma {
     symbolId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    attachments?: TradeAttachmentUncheckedCreateNestedManyWithoutTradeInput
   }
 
   export type TradeCreateOrConnectWithoutJournalEntriesInput = {
@@ -10382,6 +12139,7 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutTradesNestedInput
     tradingAccount?: TradingAccountUpdateOneRequiredWithoutTradesNestedInput
     symbol?: SymbolUpdateOneRequiredWithoutTradesNestedInput
+    attachments?: TradeAttachmentUpdateManyWithoutTradeNestedInput
   }
 
   export type TradeUncheckedUpdateWithoutJournalEntriesInput = {
@@ -10402,6 +12160,7 @@ export namespace Prisma {
     symbolId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attachments?: TradeAttachmentUncheckedUpdateManyWithoutTradeNestedInput
   }
 
   export type TradingAccountCreateManyUserInput = {
@@ -10490,6 +12249,7 @@ export namespace Prisma {
     tradingAccount?: TradingAccountUpdateOneRequiredWithoutTradesNestedInput
     symbol?: SymbolUpdateOneRequiredWithoutTradesNestedInput
     journalEntries?: JournalEntryUpdateManyWithoutTradeNestedInput
+    attachments?: TradeAttachmentUpdateManyWithoutTradeNestedInput
   }
 
   export type TradeUncheckedUpdateWithoutUserInput = {
@@ -10510,6 +12270,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     journalEntries?: JournalEntryUncheckedUpdateManyWithoutTradeNestedInput
+    attachments?: TradeAttachmentUncheckedUpdateManyWithoutTradeNestedInput
   }
 
   export type TradeUncheckedUpdateManyWithoutUserInput = {
@@ -10601,6 +12362,7 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutTradesNestedInput
     symbol?: SymbolUpdateOneRequiredWithoutTradesNestedInput
     journalEntries?: JournalEntryUpdateManyWithoutTradeNestedInput
+    attachments?: TradeAttachmentUpdateManyWithoutTradeNestedInput
   }
 
   export type TradeUncheckedUpdateWithoutTradingAccountInput = {
@@ -10621,6 +12383,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     journalEntries?: JournalEntryUncheckedUpdateManyWithoutTradeNestedInput
+    attachments?: TradeAttachmentUncheckedUpdateManyWithoutTradeNestedInput
   }
 
   export type TradeUncheckedUpdateManyWithoutTradingAccountInput = {
@@ -10679,6 +12442,7 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutTradesNestedInput
     tradingAccount?: TradingAccountUpdateOneRequiredWithoutTradesNestedInput
     journalEntries?: JournalEntryUpdateManyWithoutTradeNestedInput
+    attachments?: TradeAttachmentUpdateManyWithoutTradeNestedInput
   }
 
   export type TradeUncheckedUpdateWithoutSymbolInput = {
@@ -10699,6 +12463,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     journalEntries?: JournalEntryUncheckedUpdateManyWithoutTradeNestedInput
+    attachments?: TradeAttachmentUncheckedUpdateManyWithoutTradeNestedInput
   }
 
   export type TradeUncheckedUpdateManyWithoutSymbolInput = {
@@ -10729,6 +12494,15 @@ export namespace Prisma {
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type TradeAttachmentCreateManyTradeInput = {
+    id?: string
+    filename: string
+    mimeType: string
+    size: number
+    storageKey: string
+    createdAt?: Date | string
   }
 
   export type JournalEntryUpdateWithoutTradeInput = {
@@ -10762,6 +12536,33 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TradeAttachmentUpdateWithoutTradeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    filename?: StringFieldUpdateOperationsInput | string
+    mimeType?: StringFieldUpdateOperationsInput | string
+    size?: IntFieldUpdateOperationsInput | number
+    storageKey?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TradeAttachmentUncheckedUpdateWithoutTradeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    filename?: StringFieldUpdateOperationsInput | string
+    mimeType?: StringFieldUpdateOperationsInput | string
+    size?: IntFieldUpdateOperationsInput | number
+    storageKey?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TradeAttachmentUncheckedUpdateManyWithoutTradeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    filename?: StringFieldUpdateOperationsInput | string
+    mimeType?: StringFieldUpdateOperationsInput | string
+    size?: IntFieldUpdateOperationsInput | number
+    storageKey?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

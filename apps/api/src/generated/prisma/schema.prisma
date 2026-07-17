@@ -114,8 +114,9 @@ model Trade {
 
   journalEntries JournalEntry[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  attachments TradeAttachment[]
 
   @@index([userId])
   @@index([tradingAccountId])
@@ -129,6 +130,20 @@ model Trade {
   @@index([userId, status])
   @@index([userId, openedAt])
   @@index([userId, closedAt])
+}
+
+model TradeAttachment {
+  id         String   @id @default(uuid())
+  tradeId    String
+  filename   String
+  mimeType   String
+  size       Int
+  storageKey String   @unique
+  createdAt  DateTime @default(now())
+
+  trade Trade @relation(fields: [tradeId], references: [id], onDelete: Cascade)
+
+  @@index([tradeId])
 }
 
 model JournalEntry {

@@ -120,19 +120,20 @@ export function AttachmentDropzone({
           handleBrowse();
         }
       }}
-      onDragEnter={handleDragEnter}
-      onDragOver={handleDragOver}
-      onDragLeave={handleDragLeave}
-      onDrop={handleDrop}
-      className={[
-        'flex min-h-48 flex-col items-center justify-center rounded-xl border-2 border-dashed px-6 py-8 text-center transition',
+        onDragEnter={handleDragEnter}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+        className={[
+        'flex min-h-40 flex-col items-center justify-center rounded-xl border-2 border-dashed px-4 py-6 text-center transition sm:px-6',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-offset-2',
         disabled
-          ? 'cursor-not-allowed border-slate-200 bg-slate-50 opacity-60'
-          : 'cursor-pointer hover:border-slate-400 hover:bg-slate-50',
+            ? 'cursor-not-allowed border-slate-200 bg-slate-50 opacity-60'
+            : 'cursor-pointer hover:border-slate-400 hover:bg-slate-50',
         isDragging
-          ? 'border-blue-500 bg-blue-50'
-          : 'border-slate-300 bg-white',
-      ].join(' ')}
+            ? 'border-blue-500 bg-blue-50'
+            : 'border-slate-300 bg-slate-50/50',
+        ].join(' ')}
     >
       <input
         ref={inputRef}

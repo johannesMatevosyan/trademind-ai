@@ -52,7 +52,7 @@ export function TradeAttachments({
   );
 
   return (
-    <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+    <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
         <div className="mb-5 flex flex-wrap items-start justify-between gap-3">
             <div>
             <h2 className="text-lg font-semibold text-slate-900">
@@ -78,26 +78,24 @@ export function TradeAttachments({
         <div className="mt-6 border-t border-slate-200 pt-5">
             {attachmentCount === 0 ? (
                 <div className="rounded-xl bg-slate-50 px-4 py-8 text-center">
-                <div
-                    aria-hidden="true"
-                    className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-white text-xl shadow-sm"
-                >
-                    □
-                </div>
 
-                <p className="mt-3 font-medium text-slate-800">
-                    No attachments yet
-                </p>
+                  <div className="flex items-center justify-between gap-3 text-xs text-slate-500">
+                    <span>
+                      No attachments yet. Upload your first trading screenshot.
+                    </span>
 
-                <p className="mt-1 text-sm text-slate-500">
-                    Upload your first trading screenshot.
-                </p>
+                    <span className="shrink-0">
+                      {availableSlots} remaining
+                    </span>
+                  </div>
                 </div>
             ) : (
+              <div className="mt-6 border-t border-slate-200 pt-5">
                 <AttachmentGallery
-                    tradeId={tradeId}
-                    attachments={attachments ?? []}
+                  tradeId={tradeId}
+                  attachments={attachments ?? []}
                 />
+              </div>
             )}
         </div>
     </section>

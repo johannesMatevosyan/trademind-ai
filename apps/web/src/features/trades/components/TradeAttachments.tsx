@@ -3,6 +3,7 @@
 import { useTradeAttachments } from '../hooks/use-trade-attachments';
 import { MAX_TRADE_ATTACHMENTS } from './attachment.constants';
 import { AttachmentUploader } from './AttachmentUploader';
+import { AttachmentGallery } from './trade-attachments/AttachmentGallery';
 
 interface TradeAttachmentsProps {
   tradeId: string;
@@ -52,48 +53,53 @@ export function TradeAttachments({
 
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-      <div className="mb-5 flex flex-wrap items-start justify-between gap-3">
-        <div>
-          <h2 className="text-lg font-semibold text-slate-900">
-            Attachments
-          </h2>
-
-          <p className="mt-1 text-sm text-slate-500">
-            Add charts, broker screenshots, and other
-            visual evidence for this trade.
-          </p>
-        </div>
-
-        <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
-          {attachmentCount} / {MAX_TRADE_ATTACHMENTS}
-        </span>
-      </div>
-
-      <AttachmentUploader
-        tradeId={tradeId}
-        availableSlots={availableSlots}
-      />
-
-      <div className="mt-6 border-t border-slate-200 pt-5">
-        {attachmentCount === 0 ? (
-          <div className="rounded-xl bg-slate-50 px-4 py-6 text-center">
-            <p className="font-medium text-slate-800">
-              No attachments yet
-            </p>
+        <div className="mb-5 flex flex-wrap items-start justify-between gap-3">
+            <div>
+            <h2 className="text-lg font-semibold text-slate-900">
+                Attachments
+            </h2>
 
             <p className="mt-1 text-sm text-slate-500">
-              Upload your first trading screenshot.
+                Add charts, broker screenshots, and other
+                visual evidence for this trade.
             </p>
-          </div>
-        ) : (
-          <p className="text-sm text-slate-600">
-            {attachmentCount} attachment
-            {attachmentCount === 1 ? '' : 's'} uploaded.
-            The image gallery will be added in the next
-            checkpoint.
-          </p>
-        )}
-      </div>
+            </div>
+
+            <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
+            {attachmentCount} / {MAX_TRADE_ATTACHMENTS}
+            </span>
+        </div>
+
+        <AttachmentUploader
+            tradeId={tradeId}
+            availableSlots={availableSlots}
+        />
+
+        <div className="mt-6 border-t border-slate-200 pt-5">
+            {attachmentCount === 0 ? (
+                <div className="rounded-xl bg-slate-50 px-4 py-8 text-center">
+                <div
+                    aria-hidden="true"
+                    className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-white text-xl shadow-sm"
+                >
+                    □
+                </div>
+
+                <p className="mt-3 font-medium text-slate-800">
+                    No attachments yet
+                </p>
+
+                <p className="mt-1 text-sm text-slate-500">
+                    Upload your first trading screenshot.
+                </p>
+                </div>
+            ) : (
+                <AttachmentGallery
+                    tradeId={tradeId}
+                    attachments={attachments ?? []}
+                />
+            )}
+        </div>
     </section>
   );
 }

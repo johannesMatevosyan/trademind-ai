@@ -5,8 +5,8 @@ import { useParams } from 'next/navigation';
 
 import { useAuthRedirect } from '@/features/auth/hooks/use-auth-redirect';
 import { TradeDetailsCard } from '@/features/trades/components/trade-details-card';
+import { TradeAttachments } from '@/features/trades/components/TradeAttachments';
 import { useTradeDetails } from '@/features/trades/hooks/use-trade-details';
-
 export default function TradeDetailsPage() {
   useAuthRedirect();
 
@@ -44,6 +44,8 @@ export default function TradeDetailsPage() {
         {!isLoading && !isError && trade && (
           <>
             <TradeDetailsCard trade={trade} />
+
+            <TradeAttachments tradeId={tradeId} />
           </>
         )}
       </div>

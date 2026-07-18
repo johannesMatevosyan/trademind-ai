@@ -42,7 +42,9 @@ export default function TradeDetailsPage() {
         )}
 
         {!isLoading && !isError && trade && (
-          <TradeDetailsCard trade={trade} />
+          <>
+            <TradeDetailsCard trade={trade} />
+          </>
         )}
       </div>
     </main>

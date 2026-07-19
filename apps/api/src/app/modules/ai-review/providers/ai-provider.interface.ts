@@ -20,10 +20,16 @@ export interface AiTradeReviewInput {
     id: string;
     symbol: string;
     side: string;
+    status?: string | null;
+
     entryPrice?: number | null;
     exitPrice?: number | null;
     quantity?: number | null;
     pnl?: number | null;
+
+    stopLoss?: number | null;
+    takeProfit?: number | null;
+
     openedAt?: Date | null;
     closedAt?: Date | null;
   };
@@ -32,7 +38,7 @@ export interface AiTradeReviewInput {
 
   attachments: AiTradeReviewAttachmentInput[];
 
-  metrics?: {
+  metrics: {
     rewardRiskRatio?: number | null;
     positionSize?: number | null;
   };

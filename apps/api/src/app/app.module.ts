@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrismaModule } from './infrastructure/prisma/prisma.module';
@@ -15,6 +16,9 @@ import { TradingAccountsModule } from './modules/trading-accounts/trading-accoun
     TradingAccountsModule,
     TradesModule,
     AnalyticsModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     AiReviewModule,
   ],
   controllers: [AppController],

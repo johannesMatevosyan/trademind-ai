@@ -4948,6 +4948,7 @@ export namespace Prisma {
     entryPrice: Decimal | null
     exitPrice: Decimal | null
     pnl: Decimal | null
+    aiReviewVersion: number | null
   }
 
   export type TradeSumAggregateOutputType = {
@@ -4955,6 +4956,7 @@ export namespace Prisma {
     entryPrice: Decimal | null
     exitPrice: Decimal | null
     pnl: Decimal | null
+    aiReviewVersion: number | null
   }
 
   export type TradeMinAggregateOutputType = {
@@ -4975,6 +4977,8 @@ export namespace Prisma {
     symbolId: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    aiReviewedAt: Date | null
+    aiReviewVersion: number | null
   }
 
   export type TradeMaxAggregateOutputType = {
@@ -4995,6 +4999,8 @@ export namespace Prisma {
     symbolId: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    aiReviewedAt: Date | null
+    aiReviewVersion: number | null
   }
 
   export type TradeCountAggregateOutputType = {
@@ -5015,6 +5021,9 @@ export namespace Prisma {
     symbolId: number
     createdAt: number
     updatedAt: number
+    aiReview: number
+    aiReviewedAt: number
+    aiReviewVersion: number
     _all: number
   }
 
@@ -5024,6 +5033,7 @@ export namespace Prisma {
     entryPrice?: true
     exitPrice?: true
     pnl?: true
+    aiReviewVersion?: true
   }
 
   export type TradeSumAggregateInputType = {
@@ -5031,6 +5041,7 @@ export namespace Prisma {
     entryPrice?: true
     exitPrice?: true
     pnl?: true
+    aiReviewVersion?: true
   }
 
   export type TradeMinAggregateInputType = {
@@ -5051,6 +5062,8 @@ export namespace Prisma {
     symbolId?: true
     createdAt?: true
     updatedAt?: true
+    aiReviewedAt?: true
+    aiReviewVersion?: true
   }
 
   export type TradeMaxAggregateInputType = {
@@ -5071,6 +5084,8 @@ export namespace Prisma {
     symbolId?: true
     createdAt?: true
     updatedAt?: true
+    aiReviewedAt?: true
+    aiReviewVersion?: true
   }
 
   export type TradeCountAggregateInputType = {
@@ -5091,6 +5106,9 @@ export namespace Prisma {
     symbolId?: true
     createdAt?: true
     updatedAt?: true
+    aiReview?: true
+    aiReviewedAt?: true
+    aiReviewVersion?: true
     _all?: true
   }
 
@@ -5198,6 +5216,9 @@ export namespace Prisma {
     symbolId: string
     createdAt: Date
     updatedAt: Date
+    aiReview: JsonValue | null
+    aiReviewedAt: Date | null
+    aiReviewVersion: number
     _count: TradeCountAggregateOutputType | null
     _avg: TradeAvgAggregateOutputType | null
     _sum: TradeSumAggregateOutputType | null
@@ -5237,6 +5258,9 @@ export namespace Prisma {
     symbolId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    aiReview?: boolean
+    aiReviewedAt?: boolean
+    aiReviewVersion?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     tradingAccount?: boolean | TradingAccountDefaultArgs<ExtArgs>
     symbol?: boolean | SymbolDefaultArgs<ExtArgs>
@@ -5263,6 +5287,9 @@ export namespace Prisma {
     symbolId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    aiReview?: boolean
+    aiReviewedAt?: boolean
+    aiReviewVersion?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     tradingAccount?: boolean | TradingAccountDefaultArgs<ExtArgs>
     symbol?: boolean | SymbolDefaultArgs<ExtArgs>
@@ -5286,6 +5313,9 @@ export namespace Prisma {
     symbolId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    aiReview?: boolean
+    aiReviewedAt?: boolean
+    aiReviewVersion?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     tradingAccount?: boolean | TradingAccountDefaultArgs<ExtArgs>
     symbol?: boolean | SymbolDefaultArgs<ExtArgs>
@@ -5309,9 +5339,12 @@ export namespace Prisma {
     symbolId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    aiReview?: boolean
+    aiReviewedAt?: boolean
+    aiReviewVersion?: boolean
   }
 
-  export type TradeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "side" | "status" | "quantity" | "entryPrice" | "exitPrice" | "pnl" | "openedAt" | "closedAt" | "notes" | "psychology" | "lessonsLearned" | "userId" | "tradingAccountId" | "symbolId" | "createdAt" | "updatedAt", ExtArgs["result"]["trade"]>
+  export type TradeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "side" | "status" | "quantity" | "entryPrice" | "exitPrice" | "pnl" | "openedAt" | "closedAt" | "notes" | "psychology" | "lessonsLearned" | "userId" | "tradingAccountId" | "symbolId" | "createdAt" | "updatedAt" | "aiReview" | "aiReviewedAt" | "aiReviewVersion", ExtArgs["result"]["trade"]>
   export type TradeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     tradingAccount?: boolean | TradingAccountDefaultArgs<ExtArgs>
@@ -5361,6 +5394,9 @@ export namespace Prisma {
       symbolId: string
       createdAt: Date
       updatedAt: Date
+      aiReview: Prisma.JsonValue | null
+      aiReviewedAt: Date | null
+      aiReviewVersion: number
     }, ExtArgs["result"]["trade"]>
     composites: {}
   }
@@ -5806,6 +5842,9 @@ export namespace Prisma {
     readonly symbolId: FieldRef<"Trade", 'String'>
     readonly createdAt: FieldRef<"Trade", 'DateTime'>
     readonly updatedAt: FieldRef<"Trade", 'DateTime'>
+    readonly aiReview: FieldRef<"Trade", 'Json'>
+    readonly aiReviewedAt: FieldRef<"Trade", 'DateTime'>
+    readonly aiReviewVersion: FieldRef<"Trade", 'Int'>
   }
     
 
@@ -8606,7 +8645,10 @@ export namespace Prisma {
     tradingAccountId: 'tradingAccountId',
     symbolId: 'symbolId',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    aiReview: 'aiReview',
+    aiReviewedAt: 'aiReviewedAt',
+    aiReviewVersion: 'aiReviewVersion'
   };
 
   export type TradeScalarFieldEnum = (typeof TradeScalarFieldEnum)[keyof typeof TradeScalarFieldEnum]
@@ -8648,6 +8690,14 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+  export const NullableJsonNullValueInput: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull
+  };
+
+  export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
   export const QueryMode: {
     default: 'default',
     insensitive: 'insensitive'
@@ -8662,6 +8712,15 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -8771,6 +8830,20 @@ export namespace Prisma {
    * Reference to a field of type 'Decimal[]'
    */
   export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -9040,6 +9113,9 @@ export namespace Prisma {
     symbolId?: StringFilter<"Trade"> | string
     createdAt?: DateTimeFilter<"Trade"> | Date | string
     updatedAt?: DateTimeFilter<"Trade"> | Date | string
+    aiReview?: JsonNullableFilter<"Trade">
+    aiReviewedAt?: DateTimeNullableFilter<"Trade"> | Date | string | null
+    aiReviewVersion?: IntFilter<"Trade"> | number
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     tradingAccount?: XOR<TradingAccountScalarRelationFilter, TradingAccountWhereInput>
     symbol?: XOR<SymbolScalarRelationFilter, SymbolWhereInput>
@@ -9065,6 +9141,9 @@ export namespace Prisma {
     symbolId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    aiReview?: SortOrderInput | SortOrder
+    aiReviewedAt?: SortOrderInput | SortOrder
+    aiReviewVersion?: SortOrder
     user?: UserOrderByWithRelationInput
     tradingAccount?: TradingAccountOrderByWithRelationInput
     symbol?: SymbolOrderByWithRelationInput
@@ -9093,6 +9172,9 @@ export namespace Prisma {
     symbolId?: StringFilter<"Trade"> | string
     createdAt?: DateTimeFilter<"Trade"> | Date | string
     updatedAt?: DateTimeFilter<"Trade"> | Date | string
+    aiReview?: JsonNullableFilter<"Trade">
+    aiReviewedAt?: DateTimeNullableFilter<"Trade"> | Date | string | null
+    aiReviewVersion?: IntFilter<"Trade"> | number
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     tradingAccount?: XOR<TradingAccountScalarRelationFilter, TradingAccountWhereInput>
     symbol?: XOR<SymbolScalarRelationFilter, SymbolWhereInput>
@@ -9118,6 +9200,9 @@ export namespace Prisma {
     symbolId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    aiReview?: SortOrderInput | SortOrder
+    aiReviewedAt?: SortOrderInput | SortOrder
+    aiReviewVersion?: SortOrder
     _count?: TradeCountOrderByAggregateInput
     _avg?: TradeAvgOrderByAggregateInput
     _max?: TradeMaxOrderByAggregateInput
@@ -9146,6 +9231,9 @@ export namespace Prisma {
     symbolId?: StringWithAggregatesFilter<"Trade"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Trade"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Trade"> | Date | string
+    aiReview?: JsonNullableWithAggregatesFilter<"Trade">
+    aiReviewedAt?: DateTimeNullableWithAggregatesFilter<"Trade"> | Date | string | null
+    aiReviewVersion?: IntWithAggregatesFilter<"Trade"> | number
   }
 
   export type TradeAttachmentWhereInput = {
@@ -9551,6 +9639,9 @@ export namespace Prisma {
     lessonsLearned?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: Date | string | null
+    aiReviewVersion?: number
     user: UserCreateNestedOneWithoutTradesInput
     tradingAccount: TradingAccountCreateNestedOneWithoutTradesInput
     symbol: SymbolCreateNestedOneWithoutTradesInput
@@ -9576,6 +9667,9 @@ export namespace Prisma {
     symbolId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: Date | string | null
+    aiReviewVersion?: number
     journalEntries?: JournalEntryUncheckedCreateNestedManyWithoutTradeInput
     attachments?: TradeAttachmentUncheckedCreateNestedManyWithoutTradeInput
   }
@@ -9595,6 +9689,9 @@ export namespace Prisma {
     lessonsLearned?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aiReviewVersion?: IntFieldUpdateOperationsInput | number
     user?: UserUpdateOneRequiredWithoutTradesNestedInput
     tradingAccount?: TradingAccountUpdateOneRequiredWithoutTradesNestedInput
     symbol?: SymbolUpdateOneRequiredWithoutTradesNestedInput
@@ -9620,6 +9717,9 @@ export namespace Prisma {
     symbolId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aiReviewVersion?: IntFieldUpdateOperationsInput | number
     journalEntries?: JournalEntryUncheckedUpdateManyWithoutTradeNestedInput
     attachments?: TradeAttachmentUncheckedUpdateManyWithoutTradeNestedInput
   }
@@ -9642,6 +9742,9 @@ export namespace Prisma {
     symbolId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: Date | string | null
+    aiReviewVersion?: number
   }
 
   export type TradeUpdateManyMutationInput = {
@@ -9659,6 +9762,9 @@ export namespace Prisma {
     lessonsLearned?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aiReviewVersion?: IntFieldUpdateOperationsInput | number
   }
 
   export type TradeUncheckedUpdateManyInput = {
@@ -9679,6 +9785,9 @@ export namespace Prisma {
     symbolId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aiReviewVersion?: IntFieldUpdateOperationsInput | number
   }
 
   export type TradeAttachmentCreateInput = {
@@ -10152,6 +10261,40 @@ export namespace Prisma {
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
+  export type JsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
 
   export type TradingAccountScalarRelationFilter = {
     is?: TradingAccountWhereInput
@@ -10191,6 +10334,9 @@ export namespace Prisma {
     symbolId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    aiReview?: SortOrder
+    aiReviewedAt?: SortOrder
+    aiReviewVersion?: SortOrder
   }
 
   export type TradeAvgOrderByAggregateInput = {
@@ -10198,6 +10344,7 @@ export namespace Prisma {
     entryPrice?: SortOrder
     exitPrice?: SortOrder
     pnl?: SortOrder
+    aiReviewVersion?: SortOrder
   }
 
   export type TradeMaxOrderByAggregateInput = {
@@ -10218,6 +10365,8 @@ export namespace Prisma {
     symbolId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    aiReviewedAt?: SortOrder
+    aiReviewVersion?: SortOrder
   }
 
   export type TradeMinOrderByAggregateInput = {
@@ -10238,6 +10387,8 @@ export namespace Prisma {
     symbolId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    aiReviewedAt?: SortOrder
+    aiReviewVersion?: SortOrder
   }
 
   export type TradeSumOrderByAggregateInput = {
@@ -10245,6 +10396,7 @@ export namespace Prisma {
     entryPrice?: SortOrder
     exitPrice?: SortOrder
     pnl?: SortOrder
+    aiReviewVersion?: SortOrder
   }
 
   export type EnumTradeSideWithAggregatesFilter<$PrismaModel = never> = {
@@ -10312,8 +10464,34 @@ export namespace Prisma {
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
+  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
 
-  export type IntFilter<$PrismaModel = never> = {
+  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedJsonNullableFilter<$PrismaModel>
+    _max?: NestedJsonNullableFilter<$PrismaModel>
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
     notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -10321,7 +10499,12 @@ export namespace Prisma {
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type TradeScalarRelationFilter = {
@@ -10365,22 +10548,6 @@ export namespace Prisma {
 
   export type TradeAttachmentSumOrderByAggregateInput = {
     size?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type StringNullableListFilter<$PrismaModel = never> = {
@@ -10752,6 +10919,14 @@ export namespace Prisma {
     set?: Date | string | null
   }
 
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type UserUpdateOneRequiredWithoutTradesNestedInput = {
     create?: XOR<UserCreateWithoutTradesInput, UserUncheckedCreateWithoutTradesInput>
     connectOrCreate?: UserCreateOrConnectWithoutTradesInput
@@ -10836,14 +11011,6 @@ export namespace Prisma {
     create?: XOR<TradeCreateWithoutAttachmentsInput, TradeUncheckedCreateWithoutAttachmentsInput>
     connectOrCreate?: TradeCreateOrConnectWithoutAttachmentsInput
     connect?: TradeWhereUniqueInput
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type TradeUpdateOneRequiredWithoutAttachmentsNestedInput = {
@@ -11161,6 +11328,29 @@ export namespace Prisma {
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
+  export type NestedJsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
@@ -11234,6 +11424,9 @@ export namespace Prisma {
     lessonsLearned?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: Date | string | null
+    aiReviewVersion?: number
     tradingAccount: TradingAccountCreateNestedOneWithoutTradesInput
     symbol: SymbolCreateNestedOneWithoutTradesInput
     journalEntries?: JournalEntryCreateNestedManyWithoutTradeInput
@@ -11257,6 +11450,9 @@ export namespace Prisma {
     symbolId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: Date | string | null
+    aiReviewVersion?: number
     journalEntries?: JournalEntryUncheckedCreateNestedManyWithoutTradeInput
     attachments?: TradeAttachmentUncheckedCreateNestedManyWithoutTradeInput
   }
@@ -11369,6 +11565,9 @@ export namespace Prisma {
     symbolId?: StringFilter<"Trade"> | string
     createdAt?: DateTimeFilter<"Trade"> | Date | string
     updatedAt?: DateTimeFilter<"Trade"> | Date | string
+    aiReview?: JsonNullableFilter<"Trade">
+    aiReviewedAt?: DateTimeNullableFilter<"Trade"> | Date | string | null
+    aiReviewVersion?: IntFilter<"Trade"> | number
   }
 
   export type JournalEntryUpsertWithWhereUniqueWithoutUserInput = {
@@ -11448,6 +11647,9 @@ export namespace Prisma {
     lessonsLearned?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: Date | string | null
+    aiReviewVersion?: number
     user: UserCreateNestedOneWithoutTradesInput
     symbol: SymbolCreateNestedOneWithoutTradesInput
     journalEntries?: JournalEntryCreateNestedManyWithoutTradeInput
@@ -11471,6 +11673,9 @@ export namespace Prisma {
     symbolId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: Date | string | null
+    aiReviewVersion?: number
     journalEntries?: JournalEntryUncheckedCreateNestedManyWithoutTradeInput
     attachments?: TradeAttachmentUncheckedCreateNestedManyWithoutTradeInput
   }
@@ -11553,6 +11758,9 @@ export namespace Prisma {
     lessonsLearned?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: Date | string | null
+    aiReviewVersion?: number
     user: UserCreateNestedOneWithoutTradesInput
     tradingAccount: TradingAccountCreateNestedOneWithoutTradesInput
     journalEntries?: JournalEntryCreateNestedManyWithoutTradeInput
@@ -11576,6 +11784,9 @@ export namespace Prisma {
     tradingAccountId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: Date | string | null
+    aiReviewVersion?: number
     journalEntries?: JournalEntryUncheckedCreateNestedManyWithoutTradeInput
     attachments?: TradeAttachmentUncheckedCreateNestedManyWithoutTradeInput
   }
@@ -11910,6 +12121,9 @@ export namespace Prisma {
     lessonsLearned?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: Date | string | null
+    aiReviewVersion?: number
     user: UserCreateNestedOneWithoutTradesInput
     tradingAccount: TradingAccountCreateNestedOneWithoutTradesInput
     symbol: SymbolCreateNestedOneWithoutTradesInput
@@ -11934,6 +12148,9 @@ export namespace Prisma {
     symbolId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: Date | string | null
+    aiReviewVersion?: number
     journalEntries?: JournalEntryUncheckedCreateNestedManyWithoutTradeInput
   }
 
@@ -11968,6 +12185,9 @@ export namespace Prisma {
     lessonsLearned?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aiReviewVersion?: IntFieldUpdateOperationsInput | number
     user?: UserUpdateOneRequiredWithoutTradesNestedInput
     tradingAccount?: TradingAccountUpdateOneRequiredWithoutTradesNestedInput
     symbol?: SymbolUpdateOneRequiredWithoutTradesNestedInput
@@ -11992,6 +12212,9 @@ export namespace Prisma {
     symbolId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aiReviewVersion?: IntFieldUpdateOperationsInput | number
     journalEntries?: JournalEntryUncheckedUpdateManyWithoutTradeNestedInput
   }
 
@@ -12041,6 +12264,9 @@ export namespace Prisma {
     lessonsLearned?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: Date | string | null
+    aiReviewVersion?: number
     user: UserCreateNestedOneWithoutTradesInput
     tradingAccount: TradingAccountCreateNestedOneWithoutTradesInput
     symbol: SymbolCreateNestedOneWithoutTradesInput
@@ -12065,6 +12291,9 @@ export namespace Prisma {
     symbolId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: Date | string | null
+    aiReviewVersion?: number
     attachments?: TradeAttachmentUncheckedCreateNestedManyWithoutTradeInput
   }
 
@@ -12136,6 +12365,9 @@ export namespace Prisma {
     lessonsLearned?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aiReviewVersion?: IntFieldUpdateOperationsInput | number
     user?: UserUpdateOneRequiredWithoutTradesNestedInput
     tradingAccount?: TradingAccountUpdateOneRequiredWithoutTradesNestedInput
     symbol?: SymbolUpdateOneRequiredWithoutTradesNestedInput
@@ -12160,6 +12392,9 @@ export namespace Prisma {
     symbolId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aiReviewVersion?: IntFieldUpdateOperationsInput | number
     attachments?: TradeAttachmentUncheckedUpdateManyWithoutTradeNestedInput
   }
 
@@ -12189,6 +12424,9 @@ export namespace Prisma {
     symbolId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: Date | string | null
+    aiReviewVersion?: number
   }
 
   export type JournalEntryCreateManyUserInput = {
@@ -12246,6 +12484,9 @@ export namespace Prisma {
     lessonsLearned?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aiReviewVersion?: IntFieldUpdateOperationsInput | number
     tradingAccount?: TradingAccountUpdateOneRequiredWithoutTradesNestedInput
     symbol?: SymbolUpdateOneRequiredWithoutTradesNestedInput
     journalEntries?: JournalEntryUpdateManyWithoutTradeNestedInput
@@ -12269,6 +12510,9 @@ export namespace Prisma {
     symbolId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aiReviewVersion?: IntFieldUpdateOperationsInput | number
     journalEntries?: JournalEntryUncheckedUpdateManyWithoutTradeNestedInput
     attachments?: TradeAttachmentUncheckedUpdateManyWithoutTradeNestedInput
   }
@@ -12290,6 +12534,9 @@ export namespace Prisma {
     symbolId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aiReviewVersion?: IntFieldUpdateOperationsInput | number
   }
 
   export type JournalEntryUpdateWithoutUserInput = {
@@ -12342,6 +12589,9 @@ export namespace Prisma {
     symbolId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: Date | string | null
+    aiReviewVersion?: number
   }
 
   export type TradeUpdateWithoutTradingAccountInput = {
@@ -12359,6 +12609,9 @@ export namespace Prisma {
     lessonsLearned?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aiReviewVersion?: IntFieldUpdateOperationsInput | number
     user?: UserUpdateOneRequiredWithoutTradesNestedInput
     symbol?: SymbolUpdateOneRequiredWithoutTradesNestedInput
     journalEntries?: JournalEntryUpdateManyWithoutTradeNestedInput
@@ -12382,6 +12635,9 @@ export namespace Prisma {
     symbolId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aiReviewVersion?: IntFieldUpdateOperationsInput | number
     journalEntries?: JournalEntryUncheckedUpdateManyWithoutTradeNestedInput
     attachments?: TradeAttachmentUncheckedUpdateManyWithoutTradeNestedInput
   }
@@ -12403,6 +12659,9 @@ export namespace Prisma {
     symbolId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aiReviewVersion?: IntFieldUpdateOperationsInput | number
   }
 
   export type TradeCreateManySymbolInput = {
@@ -12422,6 +12681,9 @@ export namespace Prisma {
     tradingAccountId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: Date | string | null
+    aiReviewVersion?: number
   }
 
   export type TradeUpdateWithoutSymbolInput = {
@@ -12439,6 +12701,9 @@ export namespace Prisma {
     lessonsLearned?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aiReviewVersion?: IntFieldUpdateOperationsInput | number
     user?: UserUpdateOneRequiredWithoutTradesNestedInput
     tradingAccount?: TradingAccountUpdateOneRequiredWithoutTradesNestedInput
     journalEntries?: JournalEntryUpdateManyWithoutTradeNestedInput
@@ -12462,6 +12727,9 @@ export namespace Prisma {
     tradingAccountId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aiReviewVersion?: IntFieldUpdateOperationsInput | number
     journalEntries?: JournalEntryUncheckedUpdateManyWithoutTradeNestedInput
     attachments?: TradeAttachmentUncheckedUpdateManyWithoutTradeNestedInput
   }
@@ -12483,6 +12751,9 @@ export namespace Prisma {
     tradingAccountId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    aiReview?: NullableJsonNullValueInput | InputJsonValue
+    aiReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aiReviewVersion?: IntFieldUpdateOperationsInput | number
   }
 
   export type JournalEntryCreateManyTradeInput = {

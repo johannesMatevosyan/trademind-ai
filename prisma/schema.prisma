@@ -118,6 +118,10 @@ model Trade {
   updatedAt DateTime @updatedAt
   attachments TradeAttachment[]
 
+  aiReview        Json?
+  aiReviewedAt    DateTime?
+  aiReviewVersion Int       @default(1)
+
   @@index([userId])
   @@index([tradingAccountId])
   @@index([symbolId])
